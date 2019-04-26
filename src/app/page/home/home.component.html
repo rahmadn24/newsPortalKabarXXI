@@ -1,0 +1,68 @@
+<nz-layout class="layout">
+  <app-header></app-header>
+  <nz-content style="padding:0 50px;margin-top:64px;">
+    <div class="container content-3">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h5>Berita Utama</h5>
+        </div>
+      </div>
+      <mat-grid-list cols="5" rowHeight="3:2">
+        <mat-grid-tile *ngFor="let item of headlineNewsData" class="berita-utama">
+          {{item.id}}
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="container content-4">
+      <div class="img-main-ads" style="height:120px"></div>
+    </div>
+    <div class="container main-content">
+      <div class="row">
+        <div class="col-md-3">
+            <div nz-row class="section-heading">
+                <div (click)="mostPopular = true" nz-col nzSpan="12" class="tabMenu" style="border-right:1px solid white">Post</div>
+                <div (click)="mostPopular = false" nz-col nzSpan="12" class="tabMenu">Comment</div>
+              </div>
+          <mat-grid-list cols="1" rowHeight="3:1">
+            <mat-grid-tile *ngFor="let item of headlineNewsData" class="berita-utama">
+              <div class="row">
+                <div class="col-2 post-tumb">
+                  <img src="" alt="">
+                </div>
+                <div class="col-10 post-data">
+                  <span class="subJudul" style="font-size:13px">Kecelakaan Beruntun Menewaskan 3 orang</span>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <div class="col-md-5">
+          <div class="section-heading">
+            <h5>News Feed</h5>
+          </div>
+          <mat-grid-list cols="1" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let item of headlineNewsData" class="berita-utama">
+              <div class="row">
+                <div class="col-4 post-tumb">
+                  <img [src]="item.image" alt="">
+                </div>
+                <div class="col-8 post-data">
+                  <span class="titlePostLabel">Admin | Jumat, 24 Mar 2019 00:30 WIB</span>
+                  <span (click)="detailBerita(item.id)" class="subJudul">Kecelakaan Beruntun Menewaskan 3 orang</span>
+                  <hr>
+                  <span (click)="detailBerita(item.id)" class="readMore">Selengkapnya</span>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <div class="col-md-4">
+          <div class="section-heading">
+            <h5>Advertiser</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </nz-content>
+</nz-layout>

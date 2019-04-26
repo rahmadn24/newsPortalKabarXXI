@@ -1,0 +1,63 @@
+<nz-layout class="layout">
+  <app-header></app-header>
+  <nz-content style="padding:0 50px;margin-top:10px;">
+    <div class="container main-content">
+      <div class="row">
+        <div class="col-md-8 content-berita">
+          <div nz-row>
+            <div nz-col nzSpan="12">
+              <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                  Home
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                  <a>Application List</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                  An Application
+                </nz-breadcrumb-item>
+              </nz-breadcrumb>
+            </div>
+            <div nz-col nzSpan="12">
+              <span class="social-media-icon">Ikuti Kami di</span>
+            </div>
+          </div>
+          <br><br>
+          <div class="col-md-12 detail-berita">
+            <span>Jumat 26 April 2019, 10:51 WIB</span>
+            <h3>
+              Kasudin Penddikan Wilayah II Jakarta Barat Gelar Try Out dan Pembinaan Guru di SDN Jelambar 08
+            </h3>
+            <span>Admin - KabarXXi</span>
+            <div class="sosmed">
+              <i nz-icon nzType="facebook" nzTheme="outline"></i>
+            </div>
+            <div class="image-berita">
+              <img style="width:100%" src="../../../assets/img/pilpres.jpg" alt="">
+            </div>
+            <div class="pokok-berita">
+              <div [innerHTML]="pokokBerita"></div>
+            </div>
+            <hr>
+            <div class="komentar">
+              <div class="title-komentar">
+                KOMENTAR
+              </div>
+              <div class="komen-box">
+                <form action="" method="post">
+                    <input nz-input style="height:200px;width:100%"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="section-heading">
+            <h5>Advertiser</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </nz-content>
+</nz-layout>
