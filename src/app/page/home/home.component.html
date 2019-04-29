@@ -19,10 +19,13 @@
     <div class="container main-content">
       <div class="row">
         <div class="col-md-3">
-            <div nz-row class="section-heading">
-                <div (click)="mostPopular = true" nz-col nzSpan="12" class="tabMenu" style="border-right:1px solid white">Post</div>
-                <div (click)="mostPopular = false" nz-col nzSpan="12" class="tabMenu">Comment</div>
-              </div>
+          <div class="section-heading">
+            <h5>News Feed</h5>
+          </div>
+          <div nz-row class="section-heading">
+            <div (click)="mostPopular = true" nz-col nzSpan="12" class="tabMenu" style="border-right:1px solid white">Post</div>
+            <div (click)="mostPopular = false" nz-col nzSpan="12" class="tabMenu">Comment</div>
+          </div>
           <mat-grid-list cols="1" rowHeight="3:1">
             <mat-grid-tile *ngFor="let item of headlineNewsData" class="berita-utama">
               <div class="row">

@@ -12,11 +12,20 @@ export class LamanBeritaService {
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
 
+    public createComment(bodyRequest: any){
+      return this.commonApi.post("public/v1/newsComment", bodyRequest);
+    }
+
+    public getRelatedNews(keyword){
+      return this.commonApi.get(`public/v1/news/related/${keyword}`);
+    }
+
     public requestDataFromMultipleSources(paramId): Observable<any[]> {
 
       let getDetailNews = this.commonApi.get(`public/v1/news/detail/${paramId}`);
-  
-      return forkJoin([getDetailNews]);
+      let getCommentNews = this.commonApi.get(`public/v1/newsComment/getByNewsId/${paramId}`);
+      let getAdvertiser = this.commonApi.get('public/v1/advertiser');
+      return forkJoin([getDetailNews, getCommentNews, getAdvertiser]);
   
     }
 }

@@ -30,20 +30,18 @@
 }
 .post-data{
   padding: 2px;
+  cursor: pointer;
   .titlePostLabel {
     display: block;
     color: #959595;
     font-size: 13px;
   }
-  a{
-    text-decoration: none;
     .subJudul {
       font-size: 30px;
       font-weight: bold;
       line-height: 100%;
       color: #fff;
       text-decoration: none;
-    }
   }
   .readMore {
     display: block;
@@ -57,5 +55,38 @@
     padding: 5px;
     width: 140px;
     height: 140px;
+  }
+}
+
+.section-heading {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;;
+  h5 {
+      font-size: 16px;
+      margin-bottom: 0;
+      line-height: 45px;
+      height: 45px;
+      min-width: 140px;
+      padding: 0 30px;
+      background-color: #20409a;
+      color: #fff;
+      font-weight: 700;
+      display: inline-block;
+      text-align: center;
+  }
+  .tabMenu {
+      font-size: 16px;
+      margin-bottom: 0;
+      line-height: 45px;
+      height: 45px;
+      padding: 0 30px;
+      background-color: #20409a;
+      color: #fff;
+      font-weight: 700;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
   }
 }

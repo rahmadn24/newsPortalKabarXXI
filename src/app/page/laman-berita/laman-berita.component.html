@@ -4,7 +4,7 @@
     <div class="container main-content">
       <div class="row">
         <div class="col-md-8 content-berita">
-          <div nz-row>
+          <div nz-row style="margin-top: 2%">
             <div nz-col nzSpan="12">
               <nz-breadcrumb>
                 <nz-breadcrumb-item>
@@ -39,14 +39,54 @@
               <div [innerHTML]="pokokBerita"></div>
             </div>
             <hr>
+            <div class="related-post">
+              <h4>Related Post</h4>
+              <nz-list [nzDataSource]="headlineNewsData" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
+                [nzLoading]="loading">
+                <ng-template #item let-item>
+                  <nz-list-item>
+                    <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                      nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team">
+                      <ng-template #nzTitle>
+                        <a href="https://ng.ant.design">{{ item.title }}</a>
+                      </ng-template>
+                    </nz-list-item-meta>
+                  </nz-list-item>
+                </ng-template>
+              </nz-list>
+            </div>
+            <hr>
             <div class="komentar">
               <div class="title-komentar">
                 KOMENTAR
               </div>
-              <div class="komen-box">
-                <form action="" method="post">
-                    <input nz-input style="height:200px;width:100%"/>
-                </form>
+              <nz-comment>
+                <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                <nz-comment-content>
+                  <nz-form-item>
+                    <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+                      Add Comment
+                    </button>
+                  </nz-form-item>
+                </nz-comment-content>
+              </nz-comment>
+              <span>{{komentarData.length}} Komentar</span>
+              <nz-list *ngIf="komentarData.length" [nzDataSource]="komentarData" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                <ng-template #item let-item>
+                  <nz-comment [nzAuthor]="item.author" [nzDatetime]="item.displayTime">
+                    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                    <nz-comment-content>
+                      <p>{{ item.content }}</p>
+                    </nz-comment-content>
+                  </nz-comment>
+                </ng-template>
+              </nz-list>
+              <hr>
+              <div class="section-heading">
+                  <h5>Berita Terbaru</h5>
               </div>
             </div>
           </div>
