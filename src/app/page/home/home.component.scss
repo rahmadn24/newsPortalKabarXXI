@@ -1,12 +1,32 @@
-ul {
-    background-color: #20409a;
-    color: white;
-    border-bottom: 1px solid black;
-    li {
-        padding: 0px 20px;
-        border-left: 1px solid #e0e5ea;
-    }
-}
 .berita-utama {
-    border: 1px solid black;
+  padding: 12px 10px;
+  margin: 0;
+  border-bottom: solid 1px #13265b;
+  border-top: solid 1px #2346a8;
+}
+
+.berita-optional {
+  padding: 12px 10px;
+  margin: 0;
+  border-top: solid 1px #fe8917;
+}
+
+.berita-kecil-sider {
+  padding: 12px 10px;
+  margin: 0;
+  border-top: solid 1px #fe8917;
+  .post-thumb-kecil {
+    img {
+      padding: 5px;
+      width: 84px;
+      height: 63px;
+    }
+  }
+  .post-data-kecil{
+    cursor: pointer;
+  }
+}
+
+.post-catagory {
+    color: #007bff;
 }

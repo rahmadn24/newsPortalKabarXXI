@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonApiService } from '../common-api/common-api.service';
-import { forkJoin, Observable } from 'rxjs';
-import { Cacheable } from 'ngx-cacheable';
+import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class HomeService {
+export class NewsByCategoryService {
 
   constructor(
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
 
-    public requestDataFromMultipleSources(): Observable<any[]> {
+    public requestDataFromMultipleSources(param): Observable<any[]> {
 
-      let getMainNews = this.commonApi.get("public/v1/news/main");
+      let getNewsByCategory = this.commonApi.get(`public/v1/news/newsByCategory/${param}`);
       let getVideo = this.commonApi.get("public/v1/video");
       let getLatestNews = this.commonApi.get("public/v1/news/main");
       let getPopularNews = this.commonApi.get("public/v1/news/popular");
   
-      return forkJoin([getMainNews, getVideo, getLatestNews, getPopularNews]);
+      return forkJoin([getNewsByCategory, getVideo, getLatestNews, getPopularNews]);
   
     }
 }

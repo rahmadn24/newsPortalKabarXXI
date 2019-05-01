@@ -1,3 +1,19 @@
+.laman-link {
+    padding: 5px;
+    color: white;
+    text-align: center;
+    a{
+        font-size: 1rem;
+        padding: 5px;
+        // border-right: 1px solid #e6e2e2;
+        color: white;
+        text-decoration: none;
+    }
+    a :hover{
+        background: white;
+        animation-delay: 2s;
+    }
+}
 .copiright{
     text-align: center;
     background-color: #1b3682;
@@ -6,4 +22,4 @@
     font-size: 12px;
 }.logo-playstore img{
     float: right;
-} 
+}

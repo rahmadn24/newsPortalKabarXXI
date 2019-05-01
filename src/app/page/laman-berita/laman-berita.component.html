@@ -1,22 +1,12 @@
 <nz-layout class="layout">
   <app-header></app-header>
-  <nz-content style="padding:0 50px;margin-top:10px;">
+  <nz-content>
     <div class="container main-content">
       <div class="row">
         <div class="col-md-8 content-berita">
           <div nz-row style="margin-top: 2%">
-            <div nz-col nzSpan="12">
-              <nz-breadcrumb>
-                <nz-breadcrumb-item>
-                  Home
-                </nz-breadcrumb-item>
-                <nz-breadcrumb-item>
-                  <a>Application List</a>
-                </nz-breadcrumb-item>
-                <nz-breadcrumb-item>
-                  An Application
-                </nz-breadcrumb-item>
-              </nz-breadcrumb>
+            <div nz-col nzSpan="12" class="breadcumb">
+              KabarXXI / Berita / {{category}}
             </div>
             <div nz-col nzSpan="12">
               <span class="social-media-icon">Ikuti Kami di</span>
@@ -24,24 +14,24 @@
           </div>
           <br><br>
           <div class="col-md-12 detail-berita">
-            <span>Jumat 26 April 2019, 10:51 WIB</span>
+            <span>{{releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}</span>
             <h3>
-              Kasudin Penddikan Wilayah II Jakarta Barat Gelar Try Out dan Pembinaan Guru di SDN Jelambar 08
+              {{titleBerita}}
             </h3>
-            <span>Admin - KabarXXi</span>
+            <span>{{createdBy}}</span>
             <div class="sosmed">
               <i nz-icon nzType="facebook" nzTheme="outline"></i>
             </div>
             <div class="image-berita">
-              <img style="width:100%" src="../../../assets/img/pilpres.jpg" alt="">
+              <img style="width:100%" [src]="imageBerita" alt="">
             </div>
             <div class="pokok-berita">
-              <div [innerHTML]="pokokBerita"></div>
+              <div [innerHTML]="description"></div>
             </div>
             <hr>
             <div class="related-post">
               <h4>Related Post</h4>
-              <nz-list [nzDataSource]="headlineNewsData" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
+              <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
                 [nzLoading]="loading">
                 <ng-template #item let-item>
                   <nz-list-item>

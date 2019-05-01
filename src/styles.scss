@@ -19,50 +19,46 @@
 }
 .img-main-ads {
   padding: 5%;
-  width: 970px;
+  width: 90%;
   height: 250px;
-  border: 1px solid black;
   margin: 1% auto;
 }
 
-.mat-grid-list {
-  background-color: #20409a;
-}
 .post-data{
+  float: right;
   padding: 2px;
   cursor: pointer;
-  .titlePostLabel {
-    display: block;
-    color: #959595;
-    font-size: 13px;
-  }
-    .subJudul {
-      font-size: 30px;
-      font-weight: bold;
-      line-height: 100%;
-      color: #fff;
-      text-decoration: none;
-  }
-  .readMore {
-    display: block;
-    color:white;
-    font-size: 13px;
-  }
 }
 
-.post-tumb {
+.post-thumb {
   img {
     padding: 5px;
     width: 140px;
     height: 140px;
+  }
+  video {
+    padding: 5px;
+    width: 100%;
+    height: 140px;
+  }
+}
+
+.post-date {
+  font-size: 14px;
+  color: #959595;
+}
+
+.post-meta {
+  h6 {
+    color: white;
   }
 }
 
 .section-heading {
   position: relative;
   z-index: 1;
-  margin-bottom: 10px;
-  border-bottom: 1px solid black;;
+  border-bottom: solid 4px #fe8917;
+  background-color: #274cb3;
   h5 {
       font-size: 16px;
       margin-bottom: 0;
@@ -70,23 +66,21 @@
       height: 45px;
       min-width: 140px;
       padding: 0 30px;
-      background-color: #20409a;
       color: #fff;
       font-weight: 700;
       display: inline-block;
       text-align: center;
   }
-  .tabMenu {
-      font-size: 16px;
-      margin-bottom: 0;
-      line-height: 45px;
-      height: 45px;
-      padding: 0 30px;
-      background-color: #20409a;
-      color: #fff;
-      font-weight: 700;
-      display: inline-block;
-      text-align: center;
-      cursor: pointer;
+}
+
+.advertiser-sider {
+  margin-bottom: 2%;
+  img{
+    width: 100%
   }
+}
+
+.content-1 {
+  background-color: #fff;
+  margin-bottom: 2%;
 }

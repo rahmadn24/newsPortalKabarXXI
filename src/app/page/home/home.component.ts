@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/providers/page/home.service';
-import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
 import { Router } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { Config } from 'src/app/config/config';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +10,15 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class HomeComponent implements OnInit {
 
-  headlineNewsData = [
-    {id : '1', image: '../../../assets/img/logoKabarxxi.png'},
-    {id : '2', image: '../../../assets/img/logoKabarxxi.png'},
-    {id : '3', image: '../../../assets/img/logoKabarxxi.png'},
-    {id : '4', image: '../../../assets/img/logoKabarxxi.png'},
-    {id : '5', image: '../../../assets/img/logoKabarxxi.png'}
-  ]
   mostPopular = true;
+  mainNewsData: any;
+  videoData: any;
+  latestNewsData: any;
+  popularNewsData: any;
   constructor(
     private homeService : HomeService,
-    private router : Router
+    private router : Router,
+    private config : Config
   ) { }
 
   ngOnInit() {
@@ -30,13 +27,22 @@ export class HomeComponent implements OnInit {
 
   getData(){
     this.homeService.requestDataFromMultipleSources().subscribe(responseList => {
-      console.log(responseList[0]);
+      console.log(responseList[0].data);
+      this.mainNewsData = responseList[0].data;
+      this.videoData = responseList[1].data;
+      this.latestNewsData = responseList[2].data;
+      this.popularNewsData = responseList[3].data;
     })
   }
 
-  detailBerita(data){
-    this.router.navigate(['laman-berita']);
-    console.log(data);
+  detailBerita(id, title){
+    let titleDone = title.replace(/ /g, "-");
+    this.router.navigate([`laman-berita/${id}/${titleDone}`]);
+    console.log(id, title);
+  }
+
+  newsCategori(kategori){
+    this.router.navigate([`kategori/${kategori}`]);
   }
 
 }

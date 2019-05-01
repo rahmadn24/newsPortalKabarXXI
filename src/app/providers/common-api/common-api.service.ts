@@ -52,7 +52,7 @@ export class CommonApiService {
 
       }
 
-      reqOpts.withCredentials = true
+      // reqOpts.withCredentials = true
 
       let test = this.http.get<any>(this.BASE_URL + url, reqOpts)
         .pipe(
