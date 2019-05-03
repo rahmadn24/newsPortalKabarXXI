@@ -12,54 +12,170 @@
         <i nz-icon type="search"></i>
       </ng-template>
     </div>
-    <div class="col-md-3 header-items" style="border-left:1px solid #e0e5ea;float: left;">
-      <button nz-button nzType="primary" nzShape="round" style="margin-right:5px">Daftar KabarXXI</button>
-      <button nz-button nzType="default" nzShape="round">Login</button>
+    <div *ngIf="profile != true" class="col-md-3 header-items" style="border-left:1px solid #e0e5ea;float: left;">
+      <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar KabarXXI</button>
+      <button nz-button (click)="showModalLogin()" nzType="default" nzShape="round">Login</button>
+    </div>
+    <div *ngIf="profile == true" class="col-md-3 header-items" style="border-left:1px solid #e0e5ea;float: left;">
+      <nz-dropdown [nzPlacement]="'bottomLeft'">
+          <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
+          <ul nz-menu>
+            <li nz-menu-item>
+              <a>{{username}}</a>
+            </li>
+            <li nz-menu-item>
+              <a>{{email}}</a>
+            </li>
+            <li nz-menu-item>
+              <a>{{no_hp}}</a>
+            </li>
+            <li nz-menu-item>
+                <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
+            </li>
+          </ul>
+        </nz-dropdown>
     </div>
   </div>
 </nz-affix>
 <div class="container" style="padding:0;">
-    <div class="col-md-12 justify-content-between">
-        <div class="row">
-          <div class="col-md-4">
-            <img (click)="imageBannerClick()" class="logoHeader" src="../../../../assets/img/logoKabarxxi.png" alt="">
-          </div>
-          <div class="col-md-8" style="padding:0%">
-            <div class="ads-header">
-              728 X 90
-            </div>
-          </div>
+  <div class="col-md-12 justify-content-between">
+    <div class="row">
+      <div class="col-md-4">
+        <img (click)="imageBannerClick()" class="logoHeader" src="../../../../assets/img/logoKabarxxi.png" alt="">
+      </div>
+      <div class="col-md-8" style="padding:0%">
+        <div class="ads-header">
+          728 X 90
         </div>
       </div>
-</div>
-<div class="container" style="padding:0;">
-    <div class="classy-navbar justify-content-between">
-      <ul nz-menu [nzMode]="'horizontal'" class="menu-list">
-        <li nz-menu-item>Nasional</li>
-        <li nz-submenu>
-          <span title>Daerah</span>
-          <ul>
-            <li nz-menu-item>MEGAPOLITAN</li>
-            <li nz-menu-item>HUKRIM</li>
-            <li nz-menu-item>PERISTIWA</li>
-            <li nz-menu-item>PENDIDIKAN</li>
-            <li nz-menu-item>EKONOMI</li>
-            <li nz-menu-item>POLITIK</li>
-            <li nz-menu-item>INFO DAN TIPS</li>
-            <li nz-menu-item>OPINI</li>
-          </ul>
-        </li>
-        <li nz-menu-item>MEGAPOLITAN</li>
-        <li nz-menu-item>HUKRIM</li>
-        <li nz-menu-item>PERISTIWA</li>
-        <li nz-menu-item>PENDIDIKAN</li>
-        <li nz-menu-item>EKONOMI</li>
-        <li nz-menu-item>POLITIK</li>
-        <li nz-menu-item>INFO DAN TIPS</li>
-        <li nz-menu-item>OPINI</li>
-      </ul>
     </div>
   </div>
-  <div class="container content-2"  style="padding:0;">
-    <div class="img-main-ads responsive" style="background-image: url('../../../../assets/img/banner-advertiser.jpg')"></div>
 </div>
+<div class="container" style="padding:0;">
+  <div class="classy-navbar justify-content-between">
+    <ul nz-menu [nzMode]="'horizontal'" class="menu-list">
+      <li nz-menu-item>Nasional</li>
+      <li nz-submenu>
+        <span title>Daerah</span>
+        <ul>
+          <li nz-menu-item>MEGAPOLITAN</li>
+          <li nz-menu-item>HUKRIM</li>
+          <li nz-menu-item>PERISTIWA</li>
+          <li nz-menu-item>PENDIDIKAN</li>
+          <li nz-menu-item>EKONOMI</li>
+          <li nz-menu-item>POLITIK</li>
+          <li nz-menu-item>INFO DAN TIPS</li>
+          <li nz-menu-item>OPINI</li>
+        </ul>
+      </li>
+      <li nz-menu-item>MEGAPOLITAN</li>
+      <li nz-menu-item>HUKRIM</li>
+      <li nz-menu-item>PERISTIWA</li>
+      <li nz-menu-item>PENDIDIKAN</li>
+      <li nz-menu-item>EKONOMI</li>
+      <li nz-menu-item>POLITIK</li>
+      <li nz-menu-item>INFO DAN TIPS</li>
+      <li nz-menu-item>OPINI</li>
+    </ul>
+  </div>
+</div>
+<div class="container content-2" style="padding:0;">
+  <div class="img-main-ads responsive" style="background-image: url('../../../../assets/img/banner-advertiser.jpg')"></div>
+</div>
+
+<!-- Login Modal -->
+<nz-modal [(nzVisible)]="isVisibleLogin" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel()">
+  <ng-template style="text-align:center" #modalTitle>
+    Form Login
+  </ng-template>
+  <ng-template #modalContent>
+    <form nz-form [formGroup]="validateFormLogin" class="login-form" (ngSubmit)="submitFormLogin()">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixUser">
+            <input type="text" nz-input formControlName="userName" [(ngModel)]="username" placeholder="Username" />
+          </nz-input-group>
+          <nz-form-explain>Please input your username!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group [nzPrefix]="prefixLock">
+            <input type="password" nz-input formControlName="password" [(ngModel)]="password" placeholder="Password" />
+          </nz-input-group>
+          <nz-form-explain>Please input your Password!</nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox formControlName="remember">
+            <span>Remember me</span>
+          </label>
+          <a class="login-form-forgot" style="float:right">Forgot password</a>
+          <button nz-button style="width:100%" [nzLoading]="isConfirmLoading" [nzType]="'primary'">Log in</button>
+          Or
+          <a (click)="showModalRegister()" href="#">register now!</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+    <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+  </ng-template>
+</nz-modal>
+
+<!-- Register Modal -->
+<nz-modal [(nzVisible)]="isVisibleRegister" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister" (nzOnCancel)="handleCancel()">
+  <ng-template style="text-align:center" #modalTitleRegister>
+    Form Register
+  </ng-template>
+  <ng-template #modalContentRegister>
+    <form nz-form [formGroup]="validateFormRegister" (ngSubmit)="submitFormRegister($event)">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input [(ngModel)]="username" formControlName="userName"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input [(ngModel)]="email" formControlName="email" placeholder="email" type="email" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzRequired>No Handphone</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="number"/>
+          </nz-form-control>
+        </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
+        <div>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input type="password" [(ngModel)]="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
+            <nz-form-explain *ngIf="validateFormRegister.get('password')?.dirty && validateFormRegister.get('password')?.hasError('required')">Please input your password!</nz-form-explain>
+          </nz-form-control>
+        </div>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
+          <nz-form-explain *ngIf="validateFormRegister.get('confirm')?.dirty && validateFormRegister.get('confirm')?.errors">
+            <ng-container *ngIf="validateFormRegister.get('confirm')?.hasError('required')">
+              Please confirm your password!
+            </ng-container>
+            <ng-container *ngIf="validateFormRegister.get('confirm')?.hasError('confirm')">
+              Password is inconsistent!
+            </ng-container>
+          </nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateFormRegister.valid">Submit</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-template>
+</nz-modal>

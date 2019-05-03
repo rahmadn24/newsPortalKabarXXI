@@ -22,14 +22,10 @@ export class CommonApiService {
     this.BASE_URL = config.BASE_URL;
   }
 
-  // getHeaders() {
-
-  //   console.log(this.localStorage.getItem("token"));
-  //   // this.headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"));
-  //   // this.headers = new HttpHeaders().set("Cookies", "token=" + localStorage.getItem("token"));
-  //   return this.headers;
-
-  // }
+  getHeaders() {
+    this.headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("gen_token"));
+    return this.headers;
+  }
 
 
   get(url: string, params?: any, reqOpts?: any): Observable<any> {
@@ -51,10 +47,11 @@ export class CommonApiService {
         }
 
       }
+      if (localStorage.getItem("gen_token")) {
+        reqOpts.headers = this.getHeaders();
+      }
 
-      // reqOpts.withCredentials = true
-
-      let test = this.http.get<any>(this.BASE_URL + url, reqOpts)
+      return this.http.get<any>(this.BASE_URL + url, reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {
@@ -63,7 +60,7 @@ export class CommonApiService {
             }
           ),
         );
-      return test;
+
     } else {
       return null;
     }
@@ -74,9 +71,11 @@ export class CommonApiService {
 
     if (this.checkConnection()) {
 
-      reqOpts = {
-        withCredentials: true
-      };
+      if (localStorage.getItem("gen_token")) {
+        reqOpts = {
+          headers: this.getHeaders()
+        };
+      }
 
       return this.http.post<any>(this.BASE_URL + url, body, reqOpts)
         .pipe(
@@ -89,7 +88,7 @@ export class CommonApiService {
         );
 
     } else {
-      //this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
+      // this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
       return null;
     }
 
@@ -164,10 +163,11 @@ export class CommonApiService {
 
       const authHeaders = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" })
         .set("Content-Type", "application/x-www-form-urlencoded")
-        .set("Authorization", "Basic " + btoa("client:password"));
+        .set("Authorization", "Basic " + btoa("kabarxxi-client-portal:VlVjNWVXUkhSbk5WZWs1cVkycE9NRWt3Um5waFJFVjVUVlJWTVUxcVdUSk5lbXQ1VFVSVk1VNW5QVDA9VlVjNWVXUkhSbk5WZWs1cVkycE9NRQ=="));
       reqOpts = { headers: authHeaders };
       let bodyUrl = new URLSearchParams()
       bodyUrl.set("username", body.username)
+      bodyUrl.set("password", body.password)
       bodyUrl.set("grant_type", body.grant_type);
       return this.http.post<any>(this.BASE_URL + url, bodyUrl.toString(), reqOpts)
         .pipe(

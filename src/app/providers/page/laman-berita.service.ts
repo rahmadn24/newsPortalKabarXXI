@@ -13,7 +13,7 @@ export class LamanBeritaService {
     private commonApi: CommonApiService) { }
 
     public createComment(bodyRequest: any){
-      return this.commonApi.post("public/v1/newsComment", bodyRequest);
+      return this.commonApi.post("auth/v1/newsComment", bodyRequest);
     }
 
     public getRelatedNews(keyword){
@@ -24,8 +24,9 @@ export class LamanBeritaService {
 
       let getDetailNews = this.commonApi.get(`public/v1/news/detail/${paramId}`);
       let getCommentNews = this.commonApi.get(`public/v1/newsComment/getByNewsId/${paramId}`);
+      let getLastNews = this.commonApi.get("public/v1/news/main");
       let getAdvertiser = this.commonApi.get('public/v1/advertiser');
-      return forkJoin([getDetailNews, getCommentNews, getAdvertiser]);
+      return forkJoin([getDetailNews, getCommentNews, getLastNews, getAdvertiser]);
   
     }
 }

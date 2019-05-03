@@ -84,3 +84,20 @@
   background-color: #fff;
   margin-bottom: 2%;
 }
+
+// Berita kanan
+.berita-kecil-sider {
+  padding: 12px 10px;
+  margin: 0;
+  border-top: solid 1px #fe8917;
+  .post-thumb-kecil {
+    img {
+      padding: 5px;
+      width: 84px;
+      height: 63px;
+    }
+  }
+  .post-data-kecil{
+    cursor: pointer;
+  }
+}
