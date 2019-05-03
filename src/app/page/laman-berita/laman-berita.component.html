@@ -4,90 +4,108 @@
     <div class="container main-content">
       <div class="row">
         <div class="col-md-8" style="padding:0">
-            <div class="content-berita">
-                <div nz-row style="margin-top: 2%">
-                  <div nz-col nzSpan="12" class="breadcumb">
-                    KabarXXI / Berita / {{category}}
-                  </div>
-                  <div nz-col nzSpan="12">
-                    <span class="social-media-icon">Ikuti Kami di</span>
-                  </div>
+          <div class="content-berita">
+            <div nz-row style="margin-top: 2%">
+              <div nz-col nzSpan="17" class="breadcumb">
+                KabarXXI / Berita / {{category}}
+              </div>
+              <div nz-col nzSpan="7" class="social-media-icon">
+                <span style="margin-right: 2%;">Ikuti Kami di</span>
+                <a href="https://www.facebook.com/" target="_blank" class="fb">
+                  <img src="https://cdn.detik.net.id/news/images/icon_fb.png" alt="">
+                </a>
+                <a href="https://twitter.com/" target="_blank" class="tw">
+                  <img src="https://cdn.detik.net.id/news/images/icon_tw.png" alt="">
+                </a>
+                <a href="https://instagram.com/" target="_blank" class="insta">
+                  <img src="https://cdn.detik.net.id/news/images/icon_insta.png" alt="">
+                </a>
+              </div>
+            </div>
+            <br><br>
+            <div class="col-md-12 detail-berita">
+              <span>{{releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}</span>
+              <h3>
+                {{titleBerita}}
+              </h3>
+              <span>{{createdBy}}</span>
+              <hr>
+              <div class="image-berita">
+                <img style="width:100%" [src]="imageBerita" alt="">
+              </div>
+              <div class="pokok-berita">
+                <div [innerHTML]="description"></div>
+              </div>
+              <hr>
+              <div class="related-post">
+                <h4>Related Post</h4>
+                <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+                  <ng-template #item let-item>
+                    <nz-list-item>
+                      <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+                        <ng-template #nzTitle>
+                          <a (click)="detailBeritaGo(item.id, item.title)">{{ item.title }}</a>
+                        </ng-template>
+                      </nz-list-item-meta>
+                    </nz-list-item>
+                  </ng-template>
+                </nz-list>
+              </div>
+              <hr>
+              <div class="komentar">
+                <div class="title-komentar">
+                  KOMENTAR
                 </div>
-                <br><br>
-                <div class="col-md-12 detail-berita">
-                  <span>{{releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}</span>
-                  <h3>
-                    {{titleBerita}}
-                  </h3>
-                  <span>{{createdBy}}</span>
-                  <div class="sosmed">
-                    <i nz-icon nzType="facebook" nzTheme="outline"></i>
-                  </div>
-                  <div class="image-berita">
-                    <img style="width:100%" [src]="imageBerita" alt="">
-                  </div>
-                  <div class="pokok-berita">
-                    <div [innerHTML]="description"></div>
-                  </div>
-                  <hr>
-                  <div class="related-post">
-                    <h4>Related Post</h4>
-                    <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
-                      [nzLoading]="loading">
-                      <ng-template #item let-item>
-                        <nz-list-item>
-                          <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team">
-                            <ng-template #nzTitle>
-                              <a href="https://ng.ant.design">{{ item.title }}</a>
-                            </ng-template>
-                          </nz-list-item-meta>
-                        </nz-list-item>
-                      </ng-template>
-                    </nz-list>
-                  </div>
-                  <hr>
-                  <div class="komentar">
-                    <div class="title-komentar">
-                      KOMENTAR
-                    </div>
-                    <nz-comment>
-                      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                <nz-comment>
+                  <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                  <nz-comment-content>
+                    <nz-form-item>
+                      <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                        (click)="submitComent()">
+                        Add Comment
+                      </button>
+                      <div *ngIf="profile != true">
+                        <p>* Sebelum Comment harap login atau register terlebih dahulu</p>
+                      </div>
+                    </nz-form-item>
+                  </nz-comment-content>
+                </nz-comment>
+                <span>{{komentarBerita.length}} Komentar</span>
+                <nz-list *ngIf="komentarBerita.length" [nzDataSource]="komentarBerita" [nzRenderItem]="item"
+                  [nzItemLayout]="'horizontal'">
+                  <ng-template #item let-item>
+                    <!-- [nzDatetime]="item.displayTime" -->
+                    <nz-comment [nzAuthor]="item.users.username">
+                      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
                       <nz-comment-content>
-                        <nz-form-item>
-                          <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
-                        </nz-form-item>
-                        <nz-form-item>
-                          <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="submitComent()">
-                            Add Comment
-                          </button>
-                          <button *ngIf="profile != true" nz-button nzType="primary" [nzLoading]="submitting" (click)="handleSubmit()">
-                            Login
-                          </button>
-                        </nz-form-item>
+                        <p>{{ item.description }}</p>
                       </nz-comment-content>
                     </nz-comment>
-                    <span>{{komentarBerita.length}} Komentar</span>
-                    <nz-list *ngIf="komentarBerita.length" [nzDataSource]="komentarBerita" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
-                      <ng-template #item let-item>
-                          <!-- [nzDatetime]="item.displayTime" -->
-                        <nz-comment [nzAuthor]="item.users.username" >
-                          <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
-                          <nz-comment-content>
-                            <p>{{ item.description }}</p>
-                          </nz-comment-content>
-                        </nz-comment>
-                      </ng-template>
-                    </nz-list>
-                    <hr>
-                    <div class="section-heading">
-                        <h5>Berita Terbaru</h5>
+                  </ng-template>
+                </nz-list>
+                <hr>
+                <div class="section-heading">
+                  <h5>Berita Terbaru</h5>
+                </div>
+                <div *ngFor="let item of mainNewsData" class="d-flex berita-utama" style="border-top: solid 1px #fe8917;">
+                  <div class="post-thumb">
+                    <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                  </div>
+                  <div class="post-data" (click)="detailBerita(item.id, item.title)">
+                    <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">{{item.category.categoryName}}</div>
+                    <div class="post-meta">
+                      <h6 style="color:black">{{item.title}}</h6>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4" style="padding-right: 0;">
+        <div class="col-md-4 side-laman-berita">
           <div class="advertiser-sider">
             <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
           </div>
@@ -99,7 +117,7 @@
               <div class="post-thumb-kecil">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
               </div>
-              <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
+              <div class="post-data-kecil" (click)="detailBeritaGo(item.id, item.title)">
                 <div class="post-meta-kecil">
                   <p>{{item.title}}</p>
                 </div>

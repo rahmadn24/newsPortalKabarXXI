@@ -27,6 +27,15 @@ export class NewsByCategoryComponent implements OnInit {
     this.getData();
   }
 
+  ngDoCheck(){
+    if(this.kategori){
+      if(this.kategori !== this.activeRoute.snapshot.paramMap.get('kategori')){
+        this.kategori = this.activeRoute.snapshot.paramMap.get('kategori');
+        this.getData();
+      }
+    }
+  }
+
   getData(){
     this.newsByCategoryService.requestDataFromMultipleSources(this.kategori).subscribe(responseList => {
       this.categoriNewsData = responseList[0].data;

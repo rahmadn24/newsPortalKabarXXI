@@ -1,7 +1,10 @@
-<nz-affix>
+<nz-affix class="header-fix">
   <div class="row">
-    <div class="col-md-3 header-items" style="border-right:1px solid #e0e5ea;">
-      Ryan
+    <div class="col-md-3 button-menu">
+      <div class="button-click-menu">
+        <button nz-button nzType="primary" (click)="openMenuDrawer()" [nzSize]="size" nzShape="circle"><i nz-icon type="bars"></i></button>
+        Menu
+      </div>
     </div>
     <div class="col-md-6 header-items" style="text-align:center">
       <form action="search()"></form>
@@ -12,28 +15,29 @@
         <i nz-icon type="search"></i>
       </ng-template>
     </div>
-    <div *ngIf="profile != true" class="col-md-3 header-items" style="border-left:1px solid #e0e5ea;float: left;">
-      <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar KabarXXI</button>
+    <div *ngIf="profile != true" class="col-md-3 header-items profile" style="border-left:1px solid #e0e5ea;float: left;">
+      <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar
+        KabarXXI</button>
       <button nz-button (click)="showModalLogin()" nzType="default" nzShape="round">Login</button>
     </div>
-    <div *ngIf="profile == true" class="col-md-3 header-items" style="border-left:1px solid #e0e5ea;float: left;">
+    <div *ngIf="profile == true" class="col-md-3 header-items profile" style="border-left:1px solid #e0e5ea;float: left;">
       <nz-dropdown [nzPlacement]="'bottomLeft'">
-          <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
-          <ul nz-menu>
-            <li nz-menu-item>
-              <a>{{username}}</a>
-            </li>
-            <li nz-menu-item>
-              <a>{{email}}</a>
-            </li>
-            <li nz-menu-item>
-              <a>{{no_hp}}</a>
-            </li>
-            <li nz-menu-item>
-                <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
-            </li>
-          </ul>
-        </nz-dropdown>
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a>{{username}}</a>
+          </li>
+          <li nz-menu-item>
+            <a>{{email}}</a>
+          </li>
+          <li nz-menu-item>
+            <a>{{no_hp}}</a>
+          </li>
+          <li nz-menu-item>
+            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
+          </li>
+        </ul>
+      </nz-dropdown>
     </div>
   </div>
 </nz-affix>
@@ -51,31 +55,37 @@
     </div>
   </div>
 </div>
-<div class="container" style="padding:0;">
+<div class="container menu-header" style="padding:0;">
   <div class="classy-navbar justify-content-between">
     <ul nz-menu [nzMode]="'horizontal'" class="menu-list">
-      <li nz-menu-item>Nasional</li>
+      <li nz-menu-item (click)="newsCategori('Nasional')">Nasional</li>
       <li nz-submenu>
         <span title>Daerah</span>
         <ul>
-          <li nz-menu-item>MEGAPOLITAN</li>
-          <li nz-menu-item>HUKRIM</li>
-          <li nz-menu-item>PERISTIWA</li>
-          <li nz-menu-item>PENDIDIKAN</li>
-          <li nz-menu-item>EKONOMI</li>
-          <li nz-menu-item>POLITIK</li>
-          <li nz-menu-item>INFO DAN TIPS</li>
-          <li nz-menu-item>OPINI</li>
+          <li nz-menu-item (click)="newsCategori('Aceh')">Aceh</li>
+          <li nz-menu-item (click)="newsCategori('Bandung')">Bandung</li>
+          <li nz-menu-item (click)="newsCategori('Banten')">Banten</li>
+          <li nz-menu-item (click)="newsCategori('Batam')">Batam</li>
+          <li nz-menu-item (click)="newsCategori('Bekasi')">Bekasi</li>
+          <li nz-menu-item (click)="newsCategori('Jambi')">Jambi</li>
+          <li nz-menu-item (click)="newsCategori('Kepri')">Kepri</li>
+          <li nz-menu-item (click)="newsCategori('Lampung')">Lampung</li>
+          <li nz-menu-item (click)="newsCategori('NTT')">NTT</li>
+          <li nz-menu-item (click)="newsCategori('Papua')">Papua</li>
+          <li nz-menu-item (click)="newsCategori('Riau')">Riau</li>
+          <li nz-menu-item (click)="newsCategori('SumateraBarat')">Sumatera Barat</li>
+          <li nz-menu-item (click)="newsCategori('SumateraSelatan')">Sumatera Selatan</li>
+          <li nz-menu-item (click)="newsCategori('SumateraUtara')">Sumatera Utara</li>
         </ul>
       </li>
-      <li nz-menu-item>MEGAPOLITAN</li>
-      <li nz-menu-item>HUKRIM</li>
-      <li nz-menu-item>PERISTIWA</li>
-      <li nz-menu-item>PENDIDIKAN</li>
-      <li nz-menu-item>EKONOMI</li>
-      <li nz-menu-item>POLITIK</li>
-      <li nz-menu-item>INFO DAN TIPS</li>
-      <li nz-menu-item>OPINI</li>
+      <li nz-menu-item (click)="newsCategori('Megapolitan')">MEGAPOLITAN</li>
+      <li nz-menu-item (click)="newsCategori('Hukrim')">HUKRIM</li>
+      <li nz-menu-item (click)="newsCategori('Peristiwa')">PERISTIWA</li>
+      <li nz-menu-item (click)="newsCategori('Pendidikan')">PENDIDIKAN</li>
+      <li nz-menu-item (click)="newsCategori('Ekonomi')">EKONOMI</li>
+      <li nz-menu-item (click)="newsCategori('Politik')">POLITIK</li>
+      <li nz-menu-item (click)="newsCategori('InfoDanTips')">INFO DAN TIPS</li>
+      <li nz-menu-item (click)="newsCategori('Opini')">OPINI</li>
     </ul>
   </div>
 </div>
@@ -124,7 +134,8 @@
 </nz-modal>
 
 <!-- Register Modal -->
-<nz-modal [(nzVisible)]="isVisibleRegister" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisibleRegister" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister"
+  (nzOnCancel)="handleCancel()">
   <ng-template style="text-align:center" #modalTitleRegister>
     Form Register
   </ng-template>
@@ -133,7 +144,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input [(ngModel)]="username" formControlName="userName"/>
+          <input nz-input [(ngModel)]="username" formControlName="userName" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -143,17 +154,18 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-          <nz-form-label [nzSpan]="7" nzRequired>No Handphone</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="number"/>
-          </nz-form-control>
-        </nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>No Handphone</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="number" />
+        </nz-form-control>
+      </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
         <div>
           <nz-form-control [nzSpan]="12" nzHasFeedback>
             <input nz-input type="password" [(ngModel)]="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
-            <nz-form-explain *ngIf="validateFormRegister.get('password')?.dirty && validateFormRegister.get('password')?.hasError('required')">Please input your password!</nz-form-explain>
+            <nz-form-explain *ngIf="validateFormRegister.get('password')?.dirty && validateFormRegister.get('password')?.hasError('required')">Please
+              input your password!</nz-form-explain>
           </nz-form-control>
         </div>
       </nz-form-item>
@@ -179,3 +191,72 @@
     </form>
   </ng-template>
 </nz-modal>
+
+<!-- Drawer Menu -->
+<nz-drawer [nzClosable]="false" [nzVisible]="isVisibleDrawerMenu" nzPlacement="left" nzTitle="titleDrawer" (nzOnClose)="closeDrawerMenu()">
+  <div class="row profile-sider">
+    <div *ngIf="profile != true" class="col-md-12 menu-sider">
+      <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar
+        KabarXXI</button>
+      <button nz-button (click)="showModalLogin()" nzType="default" nzShape="round">Login</button>
+    </div>
+    <div *ngIf="profile == true" class="col-md-12 menu-sider">
+      <nz-dropdown [nzPlacement]="'bottomLeft'">
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
+        <ul nz-menu>
+          <li nz-menu-item>
+            <a>{{username}}</a>
+          </li>
+          <li nz-menu-item>
+            <a>{{email}}</a>
+          </li>
+          <li nz-menu-item>
+            <a>{{no_hp}}</a>
+          </li>
+          <li nz-menu-item>
+            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
+          </li>
+        </ul>
+      </nz-dropdown>
+      <div style="margin:5px 5%">
+        {{username}}
+      </div>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+  <h6>Kategori</h6>
+  <div class="categori">
+    <ul nz-menu [nzMode]="'inline'" style="border:none">
+      <li nz-menu-item (click)="newsCategori('Nasional')">Nasional</li>
+      <li nz-submenu>
+        <span title>Daerah</span>
+        <ul>
+          <li nz-menu-item (click)="newsCategori('Aceh')">Aceh</li>
+          <li nz-menu-item (click)="newsCategori('Bandung')">Bandung</li>
+          <li nz-menu-item (click)="newsCategori('Banten')">Banten</li>
+          <li nz-menu-item (click)="newsCategori('Batam')">Batam</li>
+          <li nz-menu-item (click)="newsCategori('Bekasi')">Bekasi</li>
+          <li nz-menu-item (click)="newsCategori('Jambi')">Jambi</li>
+          <li nz-menu-item (click)="newsCategori('Kepri')">Kepri</li>
+          <li nz-menu-item (click)="newsCategori('Lampung')">Lampung</li>
+          <li nz-menu-item (click)="newsCategori('NTT')">NTT</li>
+          <li nz-menu-item (click)="newsCategori('Papua')">Papua</li>
+          <li nz-menu-item (click)="newsCategori('Riau')">Riau</li>
+          <li nz-menu-item (click)="newsCategori('SumateraBarat')">Sumatera Barat</li>
+          <li nz-menu-item (click)="newsCategori('SumateraSelatan')">Sumatera Selatan</li>
+          <li nz-menu-item (click)="newsCategori('SumateraUtara')">Sumatera Utara</li>
+        </ul>
+      </li>
+      <li nz-menu-item (click)="newsCategori('Megapolitan')">MEGAPOLITAN</li>
+      <li nz-menu-item (click)="newsCategori('Hukrim')">HUKRIM</li>
+      <li nz-menu-item (click)="newsCategori('Peristiwa')">PERISTIWA</li>
+      <li nz-menu-item (click)="newsCategori('Pendidikan')">PENDIDIKAN</li>
+      <li nz-menu-item (click)="newsCategori('Ekonomi')">EKONOMI</li>
+      <li nz-menu-item (click)="newsCategori('Politik')">POLITIK</li>
+      <li nz-menu-item (click)="newsCategori('InfoDanTips')">INFO DAN TIPS</li>
+      <li nz-menu-item (click)="newsCategori('Opini')">OPINI</li>
+    </ul>
+  </div>
+</nz-drawer>

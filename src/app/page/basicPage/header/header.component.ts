@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   isVisibleLogin = false;
   isVisibleRegister = false;
+  isVisibleDrawerMenu = false;
   isConfirmLoading = false;
 
   //auth
@@ -89,6 +90,14 @@ export class HeaderComponent implements OnInit {
     this.getProfile();
   }
 
+  openMenuDrawer(){
+    this.isVisibleDrawerMenu = true;
+  }
+
+  closeDrawerMenu(){
+    this.isVisibleDrawerMenu = false;
+  }
+
   imageBannerClick(){
     this.router.navigate(['']);
   }
@@ -96,20 +105,18 @@ export class HeaderComponent implements OnInit {
   showModalLogin(){
     this.isVisibleLogin = true;
     this.isVisibleRegister = false;
+    this.isVisibleDrawerMenu = false;
   }
 
   showModalRegister(){
     this.isVisibleLogin = false;
     this.isVisibleRegister = true;
+    this.isVisibleDrawerMenu = false;
   }
 
   handleCancel(){
     this.isVisibleLogin = false;
     this.isVisibleRegister = false;
-  }
-
-  search(){
-    console.log('done');
   }
 
   submitFormLogin(){
@@ -135,6 +142,12 @@ export class HeaderComponent implements OnInit {
         this.message.create('success', res.message);
       }
     })
+  }
+
+  newsCategori(kategori){
+    console.log(kategori)
+    this.isVisibleDrawerMenu = false;
+    this.router.navigate([`kategori/${kategori}`]);
   }
 
   validateConfirmPassword(): void {

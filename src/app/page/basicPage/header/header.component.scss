@@ -4,8 +4,8 @@
   border-bottom: 1px solid black;
   margin-top: 1%;
   li {
-      padding: 0px 20px;
-      border-left: 1px solid #e0e5ea;
+    padding: 0px 20px;
+    border-left: 1px solid #e0e5ea;
   }
 }
 .logoHeader {
@@ -16,4 +16,50 @@
 }
 .header-items {
   padding: 10px;
+  @media screen and (max-width: 425px) {
+    position: absolute;
+    margin-left: 15px;
+    display: inherit;
+    width: 80%;
+  }
+}
+
+.profile {
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+}
+
+.button-menu {
+  padding: 10px;
+  border-right: 1px solid #e0e5ea;
+  @media screen and (max-width: 425px) {
+    border: none;
+  }
+}
+
+.button-click-menu {
+  float: right;
+  @media screen and (max-width: 425px) {
+    margin-right: 10px;
+  }
+}
+
+.menu-header {
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+}
+
+.menu-sider {
+  @media screen and (max-width: 425px) {
+    display: inherit;
+    padding: 0 5px;
+  }
+}
+
+.profile-sider {
+  @media screen and (min-width: 426px) {
+    display: none;
+  }
 }
