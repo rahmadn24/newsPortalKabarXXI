@@ -45,7 +45,7 @@
               <div class="section-heading">
                   <h5>News Feed</h5>
                 </div>
-                <div *ngFor="let item of mainNewsData" class="d-flex berita-utama">
+                <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 10, currentPage: p }" class="d-flex berita-utama">
                   <div class="post-thumb">
                     <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
                   </div>
@@ -59,7 +59,7 @@
                   </div>
                 </div>
           </div>
-          <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
         <div class="col-md-4" style="padding-right: 0;">
           <div class="advertiser-sider">

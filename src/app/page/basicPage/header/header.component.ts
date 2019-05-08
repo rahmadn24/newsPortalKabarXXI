@@ -45,9 +45,8 @@ export class HeaderComponent implements OnInit {
     this.validateFormRegister = this.fb.group({
       userName: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
-      noHp: ['', [Validators.required, Validators.maxLength(13),Validators.minLength(9)]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      confirm: ['', [this.confirmValidator]]
+      noHp: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 

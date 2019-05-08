@@ -90,7 +90,7 @@
                 <div class="section-heading">
                   <h5>Berita Terbaru</h5>
                 </div>
-                <div *ngFor="let item of mainNewsData" class="d-flex berita-utama" style="border-top: solid 1px #fe8917;">
+                <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 10, currentPage: p }" class="d-flex berita-utama" style="border-top: solid 1px #fe8917;">
                   <div class="post-thumb">
                     <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
                   </div>
@@ -101,6 +101,7 @@
                     </div>
                   </div>
                 </div>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
               </div>
             </div>
           </div>

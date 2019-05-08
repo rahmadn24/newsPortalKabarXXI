@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-3 button-menu">
       <div class="button-click-menu">
-        <button nz-button nzType="primary" (click)="openMenuDrawer()" [nzSize]="size" nzShape="circle"><i nz-icon type="bars"></i></button>
-        Menu
+        <button (click)="openMenuDrawer()" nz-button nzType="primary" [nzSize]="large" nzShape="circle"><i nz-icon type="bars" style="margin-bottom: 6px;"></i></button>
+        <div style="float: right;margin-top: 5px;margin-left: 5px;"> Menu</div>
       </div>
     </div>
     <div class="col-md-6 header-items" style="text-align:center">
@@ -22,7 +22,7 @@
     </div>
     <div *ngIf="profile == true" class="col-md-3 header-items profile" style="border-left:1px solid #e0e5ea;float: left;">
       <nz-dropdown [nzPlacement]="'bottomLeft'">
-        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline" style="margin-bottom: 6px;"></i></button>
         <ul nz-menu>
           <li nz-menu-item>
             <a>{{username}}</a>
@@ -84,7 +84,7 @@
       <li nz-menu-item (click)="newsCategori('Pendidikan')">PENDIDIKAN</li>
       <li nz-menu-item (click)="newsCategori('Ekonomi')">EKONOMI</li>
       <li nz-menu-item (click)="newsCategori('Politik')">POLITIK</li>
-      <li nz-menu-item (click)="newsCategori('InfoDanTips')">INFO DAN TIPS</li>
+      <li nz-menu-item (click)="newsCategori('Info Dan Tips')">INFO DAN TIPS</li>
       <li nz-menu-item (click)="newsCategori('Opini')">OPINI</li>
     </ul>
   </div>
@@ -94,7 +94,7 @@
 </div>
 
 <!-- Login Modal -->
-<nz-modal [(nzVisible)]="isVisibleLogin" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisibleLogin" [nzFooter]="null" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel()">
   <ng-template style="text-align:center" #modalTitle>
     Form Login
   </ng-template>
@@ -118,10 +118,6 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <label nz-checkbox formControlName="remember">
-            <span>Remember me</span>
-          </label>
-          <a class="login-form-forgot" style="float:right">Forgot password</a>
           <button nz-button style="width:100%" [nzLoading]="isConfirmLoading" [nzType]="'primary'">Log in</button>
           Or
           <a (click)="showModalRegister()" href="#">register now!</a>
@@ -134,7 +130,7 @@
 </nz-modal>
 
 <!-- Register Modal -->
-<nz-modal [(nzVisible)]="isVisibleRegister" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister"
+<nz-modal [(nzVisible)]="isVisibleRegister" [nzFooter]="null" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister"
   (nzOnCancel)="handleCancel()">
   <ng-template style="text-align:center" #modalTitleRegister>
     Form Register
@@ -156,7 +152,7 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>No Handphone</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="number" />
+          <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="text" maxlength="13"/>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -193,7 +189,7 @@
 </nz-modal>
 
 <!-- Drawer Menu -->
-<nz-drawer [nzClosable]="false" [nzVisible]="isVisibleDrawerMenu" nzPlacement="left" nzTitle="titleDrawer" (nzOnClose)="closeDrawerMenu()">
+<nz-drawer [nzClosable]="false" [nzVisible]="isVisibleDrawerMenu" nzPlacement="left" nzTitle="KabarXXI" (nzOnClose)="closeDrawerMenu()">
   <div class="row profile-sider">
     <div *ngIf="profile != true" class="col-md-12 menu-sider">
       <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar
@@ -202,7 +198,7 @@
     </div>
     <div *ngIf="profile == true" class="col-md-12 menu-sider">
       <nz-dropdown [nzPlacement]="'bottomLeft'">
-        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"></i></button>
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline" style="margin-bottom: 6px;"></i></button>
         <ul nz-menu>
           <li nz-menu-item>
             <a>{{username}}</a>
@@ -255,7 +251,7 @@
       <li nz-menu-item (click)="newsCategori('Pendidikan')">PENDIDIKAN</li>
       <li nz-menu-item (click)="newsCategori('Ekonomi')">EKONOMI</li>
       <li nz-menu-item (click)="newsCategori('Politik')">POLITIK</li>
-      <li nz-menu-item (click)="newsCategori('InfoDanTips')">INFO DAN TIPS</li>
+      <li nz-menu-item (click)="newsCategori('Info Dan Tips')">INFO DAN TIPS</li>
       <li nz-menu-item (click)="newsCategori('Opini')">OPINI</li>
     </ul>
   </div>

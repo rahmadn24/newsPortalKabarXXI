@@ -29,6 +29,7 @@
     "jquery": "^3.4.0",
     "ng-zorro-antd": "^7.3.2",
     "ngx-cacheable": "^1.2.2",
+    "ngx-pagination": "^3.2.1",
     "ngx-spinner": "^7.1.4",
     "ngx-ui-loader": "^7.2.2",
     "popper": "^1.0.1",

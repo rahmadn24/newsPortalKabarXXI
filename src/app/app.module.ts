@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,12 +22,7 @@ import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { FooterComponent } from './page/basicPage/footer/footer.component';
 import { LamanBeritaComponent } from './page/laman-berita/laman-berita.component';
 import { NewsByCategoryComponent } from './page/news-by-category/news-by-category.component';
-import { SyaratDanKetentuanComponent } from './page/other/syarat-dan-ketentuan/syarat-dan-ketentuan.component';
-import { AboutComponent } from './page/other/about/about.component';
-import { ContactComponent } from './page/other/contact/contact.component';
-import { RedaksiComponent } from './page/other/redaksi/redaksi.component';
-import { PedomanMediaSiberComponent } from './page/other/pedoman-media-siber/pedoman-media-siber.component';
-import { KontributorBeritaComponent } from './page/other/kontributor-berita/kontributor-berita.component';
+import { LamanComponent } from './page/laman/laman.component';
 
 registerLocaleData(en);
 
@@ -43,12 +39,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     FooterComponent,
     LamanBeritaComponent,
     NewsByCategoryComponent,
-    SyaratDanKetentuanComponent,
-    AboutComponent,
-    ContactComponent,
-    RedaksiComponent,
-    PedomanMediaSiberComponent,
-    KontributorBeritaComponent
+    LamanComponent
   ],
   imports: [
     NgxUiLoaderModule,
@@ -64,7 +55,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     MatGridListModule,
     MatTabsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US },  { provide: NZ_ICONS, useValue: icons },
   HomeService,

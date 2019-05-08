@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   videoData: any;
   latestNewsData: any;
   popularNewsData: any;
+
+  collection = [];
   constructor(
     private homeService : HomeService,
     private router : Router,

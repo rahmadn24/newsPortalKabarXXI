@@ -8,17 +8,19 @@
     </div>
     <div class="col-md-12 laman-link">
       <hr>
-      <a [routerLink]="['/syarat-dan-ketentuan']" class="btn primary min">Syarat Dan Ketentuan</a>
+      <a (click)="laman('Syarat Dan Ketentuan')" class="btn primary min">Syarat Dan Ketentuan</a>
       .
-      <a [routerLink]="['/about']" class="btn primary min">About</a>
+      <a (click)="laman('About')" class="btn primary min">About</a>
       .
-      <a [routerLink]="['/contact']" class="btn primary min">Contact</a>
+      <a (click)="laman('Contact')" class="btn primary min">Contact</a>
       .
-      <a [routerLink]="['/redaksi']" class="btn primary min">Redaksi</a>
+      <a (click)="laman('Redaksi')" class="btn primary min">Redaksi</a>
       .
-      <a [routerLink]="['/pedoman-media-siber']" class="btn primary min">Pedoman Media Siber</a>
+      <a (click)="laman('Pedoman Media Siber')" class="btn primary min">Pedoman Media Siber</a>
       .
-      <a [routerLink]="['/kontributor-berita']" class="btn primary min">Kontributor Berita</a>
+      <a (click)="laman('Kontributor Berita')" class="btn primary min">Kontributor Berita</a>
+      .
+      <a (click)="laman('Kebijakan Privasi')" class="btn primary min">Kebijakan Privasi</a>
     </div>
     <div class="col-md-12 copiright">
       Copyright © 2019 KabarXXI.Com. All rights reserved

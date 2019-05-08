@@ -10,7 +10,8 @@ export class LamanBeritaService {
 
   constructor(
     private http: HttpClient, 
-    private commonApi: CommonApiService) { }
+    private commonApi: CommonApiService
+  ) { }
 
     public createComment(bodyRequest: any){
       return this.commonApi.post("auth/v1/newsComment", bodyRequest);

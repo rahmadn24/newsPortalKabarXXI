@@ -15,13 +15,6 @@ export class LamanBeritaComponent implements OnInit {
   loading: Boolean = false;
   detailBerita;
   relatedPost;
-  headlineNewsData = [
-    {id : '1', image: '../../../assets/img/logoKabarxxi.png', title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sequi fuga inventore et non alias odit, aperiam veniam itaque deserunt nisi animi tempore tenetur quaerat reprehenderit similique ab voluptas quis!'},
-    {id : '2', image: '../../../assets/img/logoKabarxxi.png', title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sequi fuga inventore et non alias odit, aperiam veniam itaque deserunt nisi animi tempore tenetur quaerat reprehenderit similique ab voluptas quis!'},
-    {id : '3', image: '../../../assets/img/logoKabarxxi.png', title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sequi fuga inventore et non alias odit, aperiam veniam itaque deserunt nisi animi tempore tenetur quaerat reprehenderit similique ab voluptas quis!'},
-    {id : '4', image: '../../../assets/img/logoKabarxxi.png', title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sequi fuga inventore et non alias odit, aperiam veniam itaque deserunt nisi animi tempore tenetur quaerat reprehenderit similique ab voluptas quis!'},
-    {id : '5', image: '../../../assets/img/logoKabarxxi.png', title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sequi fuga inventore et non alias odit, aperiam veniam itaque deserunt nisi animi tempore tenetur quaerat reprehenderit similique ab voluptas quis!'}
-  ];
 
   //komen
   inputValue: '';
