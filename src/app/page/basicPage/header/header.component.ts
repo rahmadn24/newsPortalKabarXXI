@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   searchValue: any;
 
   constructor(
-    private router : Router,
+    private router: Router,
     private fb: FormBuilder,
     private message: NzMessageService,
     private authService: AuthService
@@ -51,10 +51,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  authentication(){
-      localStorage.removeItem("gen_token");
-      localStorage.removeItem("gen_loginId");
-      this.authService.auth({ username: this.username, password: this.password, grant_type: "password" }).subscribe(response => {
+  authentication() {
+    localStorage.removeItem("gen_token");
+    localStorage.removeItem("gen_loginId");
+    this.authService.auth({ username: this.username, password: this.password, grant_type: "password" }).subscribe(response => {
+      if (response) {
         localStorage.setItem("gen_token", response.access_token);
         localStorage.setItem("gen_loginId", btoa(this.username));
         this.isConfirmLoading = false;
@@ -62,11 +63,16 @@ export class HeaderComponent implements OnInit {
         this.getProfile();
         this.handleCancel();
         this.message.create('success', `Login Sukses`);
-      });
+      }
+    });
+    if(!localStorage.getItem("gen_token")){
+      this.isConfirmLoading = false;
+      this.message.create('failed', `Login Gagal`);
+    }
   }
 
-  getProfile(){
-    if(localStorage.getItem("gen_token") && localStorage.getItem("gen_loginId")){
+  getProfile() {
+    if (localStorage.getItem("gen_token") && localStorage.getItem("gen_loginId")) {
       this.authService.getProfile(atob(localStorage.getItem("gen_loginId"))).subscribe(res => {
         console.log(res.data);
         this.dataProfile = res.data;
@@ -75,7 +81,7 @@ export class HeaderComponent implements OnInit {
         this.email = this.dataProfile.email;
         this.profile = true;
       })
-    }else{
+    } else {
       this.profile = false;
       this.dataProfile = [];
       this.username = "";
@@ -84,49 +90,49 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem("gen_token");
     localStorage.removeItem("gen_loginId");
     this.getProfile();
   }
 
-  openMenuDrawer(){
+  openMenuDrawer() {
     this.isVisibleDrawerMenu = true;
   }
 
-  closeDrawerMenu(){
+  closeDrawerMenu() {
     this.isVisibleDrawerMenu = false;
   }
 
-  imageBannerClick(){
+  imageBannerClick() {
     this.router.navigate(['']);
   }
 
-  showModalLogin(){
+  showModalLogin() {
     this.isVisibleLogin = true;
     this.isVisibleRegister = false;
     this.isVisibleDrawerMenu = false;
   }
 
-  showModalRegister(){
+  showModalRegister() {
     this.isVisibleLogin = false;
     this.isVisibleRegister = true;
     this.isVisibleDrawerMenu = false;
   }
 
-  handleCancel(){
+  handleCancel() {
     this.isVisibleLogin = false;
     this.isVisibleRegister = false;
   }
 
-  submitFormLogin(){
+  submitFormLogin() {
     this.isConfirmLoading = true;
     this.authentication();
   }
 
-  submitFormRegister(data){
+  submitFormRegister(data) {
     this.isConfirmLoading = true;
-    let register = 
+    let register =
     {
       email: this.email,
       password: this.password,
@@ -136,7 +142,7 @@ export class HeaderComponent implements OnInit {
     };
 
     this.authService.register(register).subscribe(res => {
-      if(res){
+      if (res) {
         this.isConfirmLoading = false;
         this.showModalLogin();
         this.message.create('success', res.message);
@@ -144,7 +150,7 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  newsCategori(kategori){
+  newsCategori(kategori) {
     console.log(kategori)
     this.isVisibleDrawerMenu = false;
     this.router.navigate([`kategori/${kategori}`]);
@@ -163,8 +169,8 @@ export class HeaderComponent implements OnInit {
     return {};
   };
 
-  onKeyDown(){
-    if(this.searchValue){
+  onKeyDown() {
+    if (this.searchValue) {
       this.router.navigate([`laman-berita/${this.searchValue}`]);
     }
   }

@@ -51,7 +51,6 @@ export class ResultSearchComponent implements OnInit {
   detailVideo(id, title){
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
-    titleDone = titleDone.replace(/\//g, "-");
     for (let i = 0; i < this.videoData.length; i++) {
       if(this.videoData[i].id == id){
         this.homeService.videoData = this.videoData[i];
