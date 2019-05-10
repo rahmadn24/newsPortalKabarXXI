@@ -1,3 +1,13 @@
+<div class="container adv" style="padding:0">
+  <div nz-row>
+    <div class="section-heading">
+      <h5>Advertiser</h5>
+    </div>
+    <div class="advertiser" *ngFor="let item of dataBerita" nz-col nzSpan="6">
+      <img [src]="config.fileSaverImage+item.base64Image" alt="">
+    </div>
+  </div>
+</div>
 <div class="container footer" style="background-color:#222222;margin-top: 1%">
   <div class="row">
     <div class="col-md-6 logo-footer">

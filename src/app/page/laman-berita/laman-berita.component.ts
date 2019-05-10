@@ -4,6 +4,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Config } from 'src/app/config/config';
 import { AuthService } from 'src/app/providers/auth/auth.service';
+import { HomeService } from 'src/app/providers/page/home.service';
 
 @Component({
   selector: 'app-laman-berita',
@@ -56,6 +57,8 @@ export class LamanBeritaComponent implements OnInit {
   no_hp: any;
   email: any;
   mainNewsData: any;
+  titleBeritaRoute: string;
+  type: string;
 
   constructor(
     private lamanBeritaService : LamanBeritaService,
@@ -63,13 +66,22 @@ export class LamanBeritaComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private config: Config,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private homeService : HomeService
   ) { }
 
   ngOnInit() {
-    this.titleBerita = this.activeRoute.snapshot.paramMap.get('title');
-    this.getProfile();
-    this.getData();
+    if(this.activeRoute.snapshot.paramMap.get('type') == 'berita'){
+      this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
+      this.type = 'berita';
+      this.getProfile();
+      this.getData();
+    }else{
+      this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
+      this.type = 'video';
+      this.getProfile();
+      this.getData2();
+    }
   }
 
   ngDoCheck(){
@@ -79,6 +91,13 @@ export class LamanBeritaComponent implements OnInit {
       }
     }else{
       this.profile = false;
+    }
+
+    if(this.titleBeritaRoute){
+      if(this.titleBeritaRoute !== this.activeRoute.snapshot.paramMap.get('title')){
+        this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title')
+        this.getData();
+      }
     }
   }
 
@@ -119,6 +138,20 @@ export class LamanBeritaComponent implements OnInit {
     })
   }
 
+  getData2() {
+    this.homeService.requestDataFromMultipleSources().subscribe(response => {
+      this.detailBerita = this.homeService.videoData;
+      console.log(this.detailBerita);
+      this.releaseDate = this.detailBerita.createdDate;
+      this.titleBerita = this.detailBerita.title;
+      this.description = this.detailBerita.description;
+      this.category = this.detailBerita.title;
+      this.imageBerita = this.config.fileSaverVideo+this.detailBerita.base64Video;
+      this.latestNewsData = response[2].data;
+      this.mainNewsData = response[0].data;
+    })
+  }
+
   submitComent(){
     this.submitting = true;
     let data = {
@@ -136,8 +169,8 @@ export class LamanBeritaComponent implements OnInit {
 
   detailBeritaGo(id, title){
     let titleDone = title.replace(/ /g, "-");
-    this.router.navigate([`laman-berita/${id}/${titleDone}`]);
-    console.log(id, title);
+    this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
+    // this.getData();
   }
 
 }

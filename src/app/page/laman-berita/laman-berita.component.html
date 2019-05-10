@@ -28,16 +28,20 @@
               <h3>
                 {{titleBerita}}
               </h3>
-              <span>{{createdBy}}</span>
+              <span *ngIf="type == 'berita'">{{createdBy}}</span>
               <hr>
-              <div class="image-berita">
+              <div *ngIf="type == 'berita'" class="image-berita">
                 <img style="width:100%" [src]="imageBerita" alt="">
+              </div>
+              <div *ngIf="type == 'video'" class="image-berita">
+                <video style="width:100%" [src]="imageBerita" controls>
+                </video>
               </div>
               <div class="pokok-berita">
                 <div [innerHTML]="description"></div>
               </div>
               <hr>
-              <div class="related-post">
+              <div *ngIf="type == 'berita'" class="related-post">
                 <h4>Related Post</h4>
                 <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
                   <ng-template #item let-item>
@@ -50,9 +54,9 @@
                     </nz-list-item>
                   </ng-template>
                 </nz-list>
+                <hr>
               </div>
-              <hr>
-              <div class="komentar">
+              <div *ngIf="type == 'berita'" class="komentar">
                 <div class="title-komentar">
                   KOMENTAR
                 </div>
@@ -87,14 +91,17 @@
                   </ng-template>
                 </nz-list>
                 <hr>
+              </div>
+              <div class="main-berita-data">
                 <div class="section-heading">
                   <h5>Berita Terbaru</h5>
                 </div>
-                <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 10, currentPage: p }" class="d-flex berita-utama" style="border-top: solid 1px #fe8917;">
+                <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 10, currentPage: p }" class="d-flex berita-utama"
+                  style="border-top: solid 1px #fe8917;">
                   <div class="post-thumb">
                     <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
                   </div>
-                  <div class="post-data" (click)="detailBerita(item.id, item.title)">
+                  <div class="post-data" (click)="detailBeritaGo(item.id, item.title)">
                     <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">{{item.category.categoryName}}</div>
                     <div class="post-meta">
                       <h6 style="color:black">{{item.title}}</h6>

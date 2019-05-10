@@ -7,7 +7,7 @@ import { LamanComponent } from './page/laman/laman.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'kategori/:kategori', component: NewsByCategoryComponent},
-  { path: 'laman-berita/:id/:title', component: LamanBeritaComponent},
+  { path: 'laman-berita/:type/:id/:title', component: LamanBeritaComponent},
   { path: 'laman/:tag', component: LamanComponent}
 ];
 

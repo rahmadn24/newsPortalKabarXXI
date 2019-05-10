@@ -10,6 +10,8 @@ import { Cacheable } from 'ngx-cacheable';
 
 export class HomeService {
 
+  videoData;
+
   constructor(
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
