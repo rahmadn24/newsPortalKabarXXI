@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   no_hp: any;
   email: any;
   dataProfile: any;
+  searchValue: any;
 
   constructor(
     private router : Router,
@@ -161,5 +162,11 @@ export class HeaderComponent implements OnInit {
     }
     return {};
   };
+
+  onKeyDown(){
+    if(this.searchValue){
+      this.router.navigate([`laman-berita/${this.searchValue}`]);
+    }
+  }
 
 }

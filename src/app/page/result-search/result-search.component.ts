@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/providers/page/home.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Config } from 'src/app/config/config';
-import { toNumber } from 'ng-zorro-antd';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-result-search',
+  templateUrl: './result-search.component.html',
+  styleUrls: ['./result-search.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ResultSearchComponent implements OnInit {
 
   mostPopular = true;
   mainNewsData: any;
@@ -21,17 +20,20 @@ export class HomeComponent implements OnInit {
   constructor(
     private homeService : HomeService,
     private router : Router,
-    private config : Config
+    private config : Config,
+    private activeRoute : ActivatedRoute
   ) { }
 
   ngOnInit() {
+
+    this.homeService.searchResult(this.activeRoute.snapshot.paramMap.get('search')).subscribe(res => {
+      this.mainNewsData = res.data;
+    })
     this.getData();
   }
 
   getData(){
     this.homeService.requestDataFromMultipleSources().subscribe(responseList => {
-      console.log(responseList[0].data);
-      this.mainNewsData = responseList[0].data;
       this.videoData = responseList[1].data;
       console.log(this.videoData[0]);
       this.latestNewsData = responseList[2].data;
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
 
   detailVideo(id, title){
     let titleDone = title.replace(/ /g, "-");
+    titleDone = titleDone.replace(/\//g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     for (let i = 0; i < this.videoData.length; i++) {
       if(this.videoData[i].id == id){

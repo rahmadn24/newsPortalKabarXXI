@@ -23,6 +23,7 @@ import { FooterComponent } from './page/basicPage/footer/footer.component';
 import { LamanBeritaComponent } from './page/laman-berita/laman-berita.component';
 import { NewsByCategoryComponent } from './page/news-by-category/news-by-category.component';
 import { LamanComponent } from './page/laman/laman.component';
+import { ResultSearchComponent } from './page/result-search/result-search.component';
 
 registerLocaleData(en);
 
@@ -39,7 +40,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     FooterComponent,
     LamanBeritaComponent,
     NewsByCategoryComponent,
-    LamanComponent
+    LamanComponent,
+    ResultSearchComponent
   ],
   imports: [
     NgxUiLoaderModule,

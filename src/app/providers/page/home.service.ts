@@ -16,6 +16,10 @@ export class HomeService {
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
 
+    public searchResult(param) {
+      return this.commonApi.get(`public/v1/news/searchNews/${param}/kabarxxi`)
+    }
+
     public requestDataFromMultipleSources(): Observable<any[]> {
 
       let getMainNews = this.commonApi.get("public/v1/news/main");

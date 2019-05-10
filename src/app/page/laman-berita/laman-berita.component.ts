@@ -169,6 +169,7 @@ export class LamanBeritaComponent implements OnInit {
 
   detailBeritaGo(id, title){
     let titleDone = title.replace(/ /g, "-");
+    titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     // this.getData();
   }

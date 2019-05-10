@@ -47,6 +47,7 @@ export class NewsByCategoryComponent implements OnInit {
 
   detailBerita(id, title){
     let titleDone = title.replace(/ /g, "-");
+    titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     console.log(id, title);
   }

@@ -46,7 +46,7 @@
                 <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
                   <ng-template #item let-item>
                     <nz-list-item>
-                      <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+                      <nz-list-item-meta [nzTitle]="nzTitle">
                         <ng-template #nzTitle>
                           <a (click)="detailBeritaGo(item.id, item.title)">{{ item.title }}</a>
                         </ng-template>
