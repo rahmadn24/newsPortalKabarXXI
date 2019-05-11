@@ -9,7 +9,6 @@ import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HeaderComponent } from './page/basicPage/header/header.component';
 import { HomeComponent } from './page/home/home.component';
@@ -24,8 +23,10 @@ import { LamanBeritaComponent } from './page/laman-berita/laman-berita.component
 import { NewsByCategoryComponent } from './page/news-by-category/news-by-category.component';
 import { LamanComponent } from './page/laman/laman.component';
 import { ResultSearchComponent } from './page/result-search/result-search.component';
+import { registerLocaleData } from '@angular/common';
+import localeId from '@angular/common/locales/id';
 
-registerLocaleData(en);
+registerLocaleData(localeId, 'id');
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;

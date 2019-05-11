@@ -10,8 +10,9 @@
             </div>
             <div *ngFor="let item of videoData" class="berita-optional">
               <div class="post-thumb" (click)="detailVideo(item.id, item.title)">
-                <video [src]="config.fileSaverVideo+item.base64Video">
-                </video>
+                <!-- <video [src]="config.fileSaverVideo+item.base64Video">
+                </video> -->
+                <img [src]="config.fileSaverVideo+item.base64Video" [alt]="item.title">
               </div>
               <div class="post-data" style="float:none" (click)="detailVideo(item.id, item.title)">
                 <div class="post-meta">
@@ -20,9 +21,9 @@
               </div>
             </div>
           </div>
-          <div class="advertiser-sider">
+          <!-- <div class="advertiser-sider">
             <img src="../../../assets/img/advertiser2.jpeg" alt="">
-          </div>
+          </div> -->
           <div class="content-1">
             <div class="section-heading">
               <h5>Most Popular</h5>
