@@ -30,7 +30,7 @@
             </div>
             <div *ngFor="let item of popularNewsData" class="d-flex berita-kecil-sider">
               <div class="post-thumb-kecil">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
               </div>
               <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
                 <div class="post-meta-kecil">
@@ -45,9 +45,10 @@
             <div class="section-heading">
               <h5>{{kategori}}</h5>
             </div>
-            <div *ngFor="let item of categoriNewsData | paginate: { itemsPerPage: 10, currentPage: p }" class="d-flex berita-utama">
+            <div *ngFor="let item of categoriNewsData | paginate: { itemsPerPage: 10, currentPage: p }"
+              class="d-flex berita-utama">
               <div class="post-thumb">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
               </div>
               <div class="post-data" (click)="detailBerita(item.id, item.title)">
                 <a href="#" class="post-catagory">{{item.category.categoryName}}</a>
@@ -71,7 +72,7 @@
             </div>
             <div *ngFor="let item of latestNewsData" class="d-flex berita-kecil-sider">
               <div class="post-thumb-kecil">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
               </div>
               <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
                 <div class="post-meta-kecil">

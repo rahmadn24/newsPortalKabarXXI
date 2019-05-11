@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS} from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,10 +60,10 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ReactiveFormsModule,
     NgxPaginationModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },  { provide: NZ_ICONS, useValue: icons },
-  HomeService,
-  CommonApiService
-],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
+    HomeService,
+    CommonApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

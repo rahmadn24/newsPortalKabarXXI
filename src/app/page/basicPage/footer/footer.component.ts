@@ -13,9 +13,9 @@ export class FooterComponent implements OnInit {
   image: any;
 
   constructor(
-    private router : Router,
-    private foooterService : FooterService,
-    private config : Config
+    private router: Router,
+    private foooterService: FooterService,
+    private config: Config
   ) { }
 
   ngOnInit() {

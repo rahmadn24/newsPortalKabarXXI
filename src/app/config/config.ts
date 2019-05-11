@@ -15,8 +15,8 @@ export class Config {
   public readonly UAT_ENV = this.uat_server;
   public readonly PROD_ENV = this.prod_server;
   public BASE_URL = this.DEV_ENV;
-  public fileSaverImage = "http://localhost:1234/kabarxxi-uploads/data/image/";
-  public fileSaverVideo = "http://localhost:1234/kabarxxi-uploads/data/video/";
+  public fileSaverImage = "http://localhost:8089/image/";
+  public fileSaverVideo = "http://localhost:8089/video/";
 
   constructor() {
   }
