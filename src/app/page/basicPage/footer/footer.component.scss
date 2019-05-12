@@ -49,3 +49,10 @@ img.socmed-icon {
   width: 80%;
   cursor: pointer;
 }
+
+.logo-footer {
+  @media screen and (max-width: 426px) {
+    text-align: center;
+    justify-content: center;
+  }
+}
