@@ -1,91 +1,91 @@
 <nz-layout class="layout">
-  <app-header></app-header>
-  <nz-content>
-    <div class="container main-content">
-      <div class="row">
-        <div class="col-md-3" style="padding-left: 0;">
-          <div class="content-1">
-            <div class="section-heading">
-              <h5>Video</h5>
-            </div>
-            <div *ngFor="let item of videoData" class="berita-optional">
-              <div class="post-thumb" (click)="detailVideo(item.id, item.title)">
-                <!-- <video [src]="config.fileSaverVideo+item.base64Video">
-                </video> -->
-                <img [src]="config.fileSaverVideo+item.base64Video" [alt]="item.title">
-              </div>
-              <div class="post-data" style="float:none" (click)="detailVideo(item.id, item.title)">
-                <div class="post-meta">
-                  <p>{{item.title}}</p>
+    <app-header></app-header>
+    <nz-content>
+        <div class="container main-content">
+            <div class="row">
+                <div class="col-md-3" style="padding-left: 0;">
+                    <div class="content-1">
+                        <div class="section-heading">
+                            <h5>Video</h5>
+                        </div>
+                        <div *ngFor="let item of videoData" class="berita-optional">
+                            <div class="video-thumb" (click)="detailVideo(item.id, item.title)">
+                                <!-- <video [src]="config.fileSaverVideo+item.base64Video">
+                  </video> -->
+                                <img [src]="config.fileSaverImage+item.base64Thumbnail" [alt]="item.title">
+                                <button class="btn-thumb"></button>
+                            </div>
+                            <div class="post-data" style="float:none" (click)="detailVideo(item.id, item.title)">
+                                <div class="post-meta">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="advertiser-sider">
+              <img src="../../../assets/img/advertiser2.jpeg" alt="">
+            </div> -->
+                    <div class="content-1">
+                        <div class="section-heading">
+                            <h5>Most Popular</h5>
+                            <!-- <div (click)="mostPopular = true" nz-col nzSpan="12" class="tabMenu">Most<br>Popular</div> -->
+                        </div>
+                        <div *ngFor="let item of popularNewsData" class="d-flex berita-kecil-sider">
+                            <div class="post-thumb-kecil">
+                                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
+                            </div>
+                            <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
+                                <div class="post-meta-kecil">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="advertiser-sider">
-            <img src="../../../assets/img/advertiser2.jpeg" alt="">
-          </div> -->
-          <div class="content-1">
-            <div class="section-heading">
-              <h5>Most Popular</h5>
-              <!-- <div (click)="mostPopular = true" nz-col nzSpan="12" class="tabMenu">Most<br>Popular</div> -->
-            </div>
-            <div *ngFor="let item of popularNewsData" class="d-flex berita-kecil-sider">
-              <div class="post-thumb-kecil">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
-              </div>
-              <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
-                <div class="post-meta-kecil">
-                  <p>{{item.title}}</p>
+                <div class="col-md-5" style="padding: 0;">
+                    <div class="content-1" style="background-color: #1b3682">
+                        <div class="section-heading">
+                            <h5>News Feed</h5>
+                        </div>
+                        <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 30, currentPage: p }" class="d-flex berita-utama">
+                            <div class="post-thumb">
+                                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
+                            </div>
+                            <div class="post-data" (click)="detailBerita(item.id, item.title)">
+                                <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
+                                    {{item.category.categoryName}}</div>
+                                <div class="post-meta">
+                                    <h6>{{item.title}}</h6>
+                                    <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-md-4" style="padding-right: 0;">
+                    <div class="advertiser-sider">
+                        <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
+                    </div>
+                    <div class="content-1">
+                        <div class="section-heading">
+                            <h5>Latest News</h5>
+                        </div>
+                        <div *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }" class="d-flex berita-kecil-sider">
+                            <div class="post-thumb-kecil">
+                                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
+                            </div>
+                            <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
+                                <div class="post-meta-kecil">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-5" style="padding: 0;">
-          <div class="content-1" style="background-color: #1b3682">
-            <div class="section-heading">
-              <h5>News Feed</h5>
-            </div>
-            <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 30, currentPage: p }"
-              class="d-flex berita-utama">
-              <div class="post-thumb">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
-              </div>
-              <div class="post-data" (click)="detailBerita(item.id, item.title)">
-                <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
-                  {{item.category.categoryName}}</div>
-                <div class="post-meta">
-                  <h6>{{item.title}}</h6>
-                  <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d, y,
-                          h:mm:ss'}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" style="padding-right: 0;">
-          <div class="advertiser-sider">
-            <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
-          </div>
-          <div class="content-1">
-            <div class="section-heading">
-              <h5>Latest News</h5>
-            </div>
-            <div *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }" class="d-flex berita-kecil-sider">
-              <div class="post-thumb-kecil">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
-              </div>
-              <div class="post-data-kecil" (click)="detailBerita(item.id, item.title)">
-                <div class="post-meta-kecil">
-                  <p>{{item.title}}</p>
-                </div>
-              </div>
-            </div>
-            <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
-          </div>
-        </div>
-      </div>
-    </div>
-    <app-footer></app-footer>
-  </nz-content>
+        <app-footer></app-footer>
+    </nz-content>
 </nz-layout>
