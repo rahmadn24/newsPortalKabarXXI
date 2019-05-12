@@ -28,4 +28,17 @@ export class FooterComponent implements OnInit {
   laman(data) {
     this.router.navigate([`laman/${data}`]);
   }
+
+  getAt(data){
+    console.log(data);
+    if(data == 'play'){
+        setTimeout(() => {
+          window.open(this.config.linkPlayStore, '_blank');
+        }, 100);
+    }else if(data == 'app'){
+      setTimeout(() => {
+        window.open(this.config.linkAppStore, '_blank');
+      }, 100);
+  }
+  }
 }

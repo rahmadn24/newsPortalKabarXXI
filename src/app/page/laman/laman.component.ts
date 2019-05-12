@@ -23,12 +23,19 @@ export class LamanComponent implements OnInit {
 
   ngOnInit() {
     this.tag = this.activeRoute.snapshot.paramMap.get('tag');
+    console.log(this.tag);
     this.lamanService.getLamanTag(this.tag).subscribe(result => {
       console.log(result);
       this.tagData = result.data[0];
       this.image = this.config.fileSaverImage+this.tagData.base64Image;
       this.description = this.tagData.description;
     })
+  }
+
+  ngDoCheck(){
+    if(this.tag !== this.activeRoute.snapshot.paramMap.get('tag')){
+      this.ngOnInit();
+    }
   }
 
 }

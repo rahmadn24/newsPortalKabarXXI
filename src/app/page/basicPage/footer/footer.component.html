@@ -3,8 +3,10 @@
     <div class="section-heading">
       <h5>Advertiser</h5>
     </div>
-    <div class="advertiser" *ngFor="let item of dataBerita" nz-col nzSpan="6">
-      <img [src]="config.fileSaverImage+item.base64Image" alt="">
+    <div class="row">
+      <div class="col-md-3 advertiser" *ngFor="let item of dataBerita">
+        <img [src]="config.fileSaverImage+item.base64Image" alt="">
+      </div>
     </div>
   </div>
 </div>
@@ -18,13 +20,13 @@
         <span>KabarXXI App Available At</span>
       </div>
       <div class="col-md-12 logo-playstore">
-        <img href="https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180" class="imageGetAt" src="../../../../assets/icon/playstore.png">
-        <img href="https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180" class="imageGetAt" src="../../../../assets/icon/app-store.png">
+        <img (click)="getAt('play')" class="imageGetAt" src="../../../../assets/icon/playstore.png">
+        <img (click)="getAt('app')" class="imageGetAt" src="../../../../assets/icon/app-store.png">
       </div>
     </div>
     <div class="col-md-12 laman-link">
       <hr>
-      <a (click)="laman('Syarat Dan Ketentuan')" class="btn primary min">Syarat Dan Ketentuan</a>
+      <a (click)="laman('Syarat dan Ketentuan')" class="btn primary min">Syarat Dan Ketentuan</a>
       .
       <a (click)="laman('About')" class="btn primary min">About</a>
       .
