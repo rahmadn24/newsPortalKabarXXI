@@ -39,6 +39,18 @@ export class FooterComponent implements OnInit {
       setTimeout(() => {
         window.open(this.config.linkAppStore, '_blank');
       }, 100);
+    }
   }
+
+  follow(data){
+    if(data == 'facebook'){
+      window.open(this.config.facebook, '_blank');
+    }else if(data == 'twitter'){
+      window.open(this.config.twitter, '_blank');
+    }else if(data == 'youtube'){
+      window.open(this.config.youtube, '_blank');
+    }else if(data == 'instagram'){
+      window.open(this.config.instagram, '_blank');
+    }
   }
 }

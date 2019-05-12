@@ -17,8 +17,16 @@ export class Config {
   public BASE_URL = this.DEV_ENV;
   public fileSaverImage = "http://localhost:1234/kabarxxi-uploads/data/image/";
   public fileSaverVideo = "http://localhost:1234/kabarxxi-uploads/data/video/";
+  
+  //PlayStore & AppStore
   public linkPlayStore = "https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180";
   public linkAppStore = "https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180";
+
+  //Sosial Media
+  public facebook = "http://facebook.com";
+  public instagram = "http://facebook.com";
+  public youtube = "http://facebook.com";
+  public twitter = "http://facebook.com";
 
   constructor() {
   }
