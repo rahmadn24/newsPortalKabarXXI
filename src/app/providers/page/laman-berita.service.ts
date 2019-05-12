@@ -25,10 +25,7 @@ export class LamanBeritaService {
 
       let getDetailNews = this.commonApi.get(`public/v1/news/detail/${paramId}`);
       let getCommentNews = this.commonApi.get(`public/v1/newsComment/getByNewsId/${paramId}`);
-      let getLastNews = this.commonApi.get("public/v1/news/latest");
-      let getMainNews = this.commonApi.get("public/v1/news/main");
-      let getAdvertiser = this.commonApi.get('public/v1/advertiser');
-      return forkJoin([getDetailNews, getCommentNews, getLastNews, getMainNews ,getAdvertiser]);
+      return forkJoin([getDetailNews, getCommentNews]);
   
     }
 }

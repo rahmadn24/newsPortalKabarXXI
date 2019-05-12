@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NewsByCategoryService } from 'src/app/providers/page/news-by-category.service';
 import { Config } from 'src/app/config/config';
+import { HomeService } from 'src/app/providers/page/home.service';
 
 @Component({
   selector: 'app-news-by-category',
@@ -15,11 +16,16 @@ export class NewsByCategoryComponent implements OnInit {
   popularNewsData: any;
   categoriNewsData: any;
   kategori: string;
+  dataValue: any;
+  dataValueLatest: any;
+  pageMain: any;
+  pageLatest: any;
   constructor(
     private newsByCategoryService : NewsByCategoryService,
     private router : Router,
     private config : Config,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private homeService: HomeService
   ) { }
 
   ngOnInit() {
@@ -37,11 +43,41 @@ export class NewsByCategoryComponent implements OnInit {
   }
 
   getData(){
-    this.newsByCategoryService.requestDataFromMultipleSources(this.kategori).subscribe(responseList => {
-      this.categoriNewsData = responseList[0].data;
-      this.videoData = responseList[1].data;
-      this.latestNewsData = responseList[2].data;
-      this.popularNewsData = responseList[3].data;
+    this.newsByCategoryService.requestDataFromMultipleSources().subscribe(responseList => {
+      this.videoData = responseList[0].data;
+      this.popularNewsData = responseList[1].data;
+    })
+    this.pageMain = 0;
+    this.pageLatest = 0;
+    this.getMainNews(0);
+    this.getLatestNews(0);
+  }
+
+  getMainNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.newsByCategoryService.getNewsByCategory(this.kategori, data).subscribe(res => {
+      this.categoriNewsData = res.data;
+      if(!this.dataValue){
+        this.dataValue = res.count;
+      }
+    })
+  }
+
+  getLatestNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.newsByCategoryService.getLatestNews(data).subscribe(res => {
+      this.latestNewsData = res.data;
+      if(!this.dataValueLatest){
+        this.dataValueLatest = res.count;
+      }
     })
   }
 
@@ -50,6 +86,27 @@ export class NewsByCategoryComponent implements OnInit {
     titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     console.log(id, title);
+  }
+
+  detailVideo(id, title){
+    let titleDone = title.replace(/ /g, "-");
+    titleDone = titleDone.replace(/\//g, "-");
+    for (let i = 0; i < this.videoData.length; i++) {
+      if(this.videoData[i].id == id){
+        this.homeService.videoData = this.videoData[i];
+      };
+    };
+    this.router.navigate([`laman-berita/video/${id}/${titleDone}`]);
+  }
+
+  pageChangeMain(data){
+    this.pageMain = data;
+    this.getMainNews( data - 1 );
+  }
+
+  pageChangeLatest(data){
+    this.pageLatest = data;
+    this.getLatestNews( data - 1 );
   }
 
 }
