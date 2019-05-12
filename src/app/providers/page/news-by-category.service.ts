@@ -12,14 +12,19 @@ export class NewsByCategoryService {
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
 
-    public requestDataFromMultipleSources(param): Observable<any[]> {
+    public getNewsByCategory(param, param2: any){
+      return this.commonApi.get(`public/v1/news/newsByCategory/${param}`, param2);
+    }
 
-      let getNewsByCategory = this.commonApi.get(`public/v1/news/newsByCategory/${param}`);
+    public getLatestNews(param: any) {
+      return this.commonApi.get("public/v1/news/latest", param);
+    }
+
+    public requestDataFromMultipleSources(): Observable<any[]> {
       let getVideo = this.commonApi.get("public/v1/video");
-      let getLatestNews = this.commonApi.get("public/v1/news/main");
       let getPopularNews = this.commonApi.get("public/v1/news/popular");
   
-      return forkJoin([getNewsByCategory, getVideo, getLatestNews, getPopularNews]);
+      return forkJoin([getVideo, getPopularNews]);
   
     }
 }

@@ -59,6 +59,10 @@ export class LamanBeritaComponent implements OnInit {
   mainNewsData: any;
   titleBeritaRoute: string;
   type: string;
+  dataValue: any;
+  dataValueLatest: any;
+  pageMain: any;
+  pageLatest: any;
 
   constructor(
     private lamanBeritaService : LamanBeritaService,
@@ -82,6 +86,9 @@ export class LamanBeritaComponent implements OnInit {
       this.getProfile();
       this.getData2();
     }
+
+    this.getMainNews(0);
+    this.getLatestNews(0);
   }
 
   ngDoCheck(){
@@ -133,8 +140,6 @@ export class LamanBeritaComponent implements OnInit {
         this.relatedPost = res.data;
       })
       this.komentarBerita = response[1].data;
-      this.latestNewsData = response[2].data;
-      this.mainNewsData = response[3].data;
     })
   }
 
@@ -147,8 +152,34 @@ export class LamanBeritaComponent implements OnInit {
       this.description = this.detailBerita.description;
       this.category = this.detailBerita.title;
       this.imageBerita = this.config.fileSaverVideo+this.detailBerita.base64Video;
-      this.latestNewsData = response[2].data;
-      this.mainNewsData = response[0].data;
+    })
+  }
+
+  getMainNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.homeService.getMainNews(data).subscribe(res => {
+      this.mainNewsData = res.data;
+      if(!this.dataValue){
+        this.dataValue = res.count;
+      }
+    })
+  }
+
+  getLatestNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.homeService.getLatestNews(data).subscribe(res => {
+      this.latestNewsData = res.data;
+      if(!this.dataValueLatest){
+        this.dataValueLatest = res.count;
+      }
     })
   }
 
@@ -172,6 +203,16 @@ export class LamanBeritaComponent implements OnInit {
     titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     // this.getData();
+  }
+
+  pageChangeMain(data){
+    this.pageMain = data;
+    this.getMainNews( data - 1 );
+  }
+
+  pageChangeLatest(data){
+    this.pageLatest = data;
+    this.getLatestNews( data - 1 );
   }
 
 }

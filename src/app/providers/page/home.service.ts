@@ -16,18 +16,24 @@ export class HomeService {
     private http: HttpClient, 
     private commonApi: CommonApiService) { }
 
-    public searchResult(param) {
-      return this.commonApi.get(`public/v1/news/searchNews/${param}/kabarxxi`)
+    public searchResult(param, param2 : any) {
+      return this.commonApi.get(`public/v1/news/searchNews/${param}/kabarxxi`, param2)
+    }
+
+    public getMainNews(param: any) {
+      return this.commonApi.get("public/v1/news/main", param);
+    }
+
+    public getLatestNews(param: any) {
+      return this.commonApi.get("public/v1/news/latest", param);
     }
 
     public requestDataFromMultipleSources(): Observable<any[]> {
 
-      let getMainNews = this.commonApi.get("public/v1/news/main");
       let getVideo = this.commonApi.get("public/v1/video");
-      let getLatestNews = this.commonApi.get("public/v1/news/main");
       let getPopularNews = this.commonApi.get("public/v1/news/popular");
   
-      return forkJoin([getMainNews, getVideo, getLatestNews, getPopularNews]);
+      return forkJoin([getVideo, getPopularNews]);
   
     }
 }

@@ -46,7 +46,7 @@
             <div class="section-heading">
               <h5>News Feed</h5>
             </div>
-            <div *ngFor="let item of mainNewsData | paginate: { itemsPerPage: 10, currentPage: p }"
+            <div *ngFor="let item of mainNewsData | paginate: {id: 'main', itemsPerPage: 10 , currentPage: pageMain, totalItems: dataValue }"
               class="d-flex berita-utama">
               <div class="post-thumb">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <pagination-controls id='main' (pageChange)="pageChangeMain($event)"></pagination-controls>
         </div>
         <div class="col-md-4" style="padding-right: 0;">
           <!-- <div class="advertiser-sider">
@@ -72,7 +72,7 @@
             <div class="section-heading">
               <h5>Latest News</h5>
             </div>
-            <div *ngFor="let item of latestNewsData" class="d-flex berita-kecil-sider">
+            <div *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }" class="d-flex berita-kecil-sider">
               <div class="post-thumb-kecil">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
               </div>
@@ -82,6 +82,7 @@
                 </div>
               </div>
             </div>
+            <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
           </div>
         </div>
       </div>

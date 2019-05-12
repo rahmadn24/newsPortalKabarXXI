@@ -18,6 +18,10 @@ export class HomeComponent implements OnInit {
   popularNewsData: any;
 
   collection = [];
+  dataValue: any;
+  dataValueLatest: any;
+  pageLatest: number = 0;
+  pageMain: number = 0;
   constructor(
     private homeService : HomeService,
     private router : Router,
@@ -30,12 +34,38 @@ export class HomeComponent implements OnInit {
 
   getData(){
     this.homeService.requestDataFromMultipleSources().subscribe(responseList => {
-      console.log(responseList[0].data);
-      this.mainNewsData = responseList[0].data;
-      this.videoData = responseList[1].data;
-      console.log(this.videoData[0]);
-      this.latestNewsData = responseList[2].data;
-      this.popularNewsData = responseList[3].data;
+      this.videoData = responseList[0].data;
+      this.popularNewsData = responseList[1].data;
+    })
+    this.getMainNews(0);
+    this.getLatestNews(0);
+  }
+
+  getMainNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.homeService.getMainNews(data).subscribe(res => {
+      this.mainNewsData = res.data;
+      if(!this.dataValue){
+        this.dataValue = res.count;
+      }
+    })
+  }
+
+  getLatestNews(param){
+    let data = {
+      page : param,
+      size : 10,
+      sort : 'CreatedDate,DESC'
+    }
+    this.homeService.getLatestNews(data).subscribe(res => {
+      this.latestNewsData = res.data;
+      if(!this.dataValueLatest){
+        this.dataValueLatest = res.count;
+      }
     })
   }
 
@@ -59,6 +89,16 @@ export class HomeComponent implements OnInit {
 
   newsCategori(kategori){
     this.router.navigate([`kategori/${kategori}`]);
+  }
+
+  pageChangeMain(data){
+    this.pageMain = data;
+    this.getMainNews( data - 1 );
+  }
+
+  pageChangeLatest(data){
+    this.pageLatest = data;
+    this.getLatestNews( data - 1 );
   }
 
 }
