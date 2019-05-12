@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/providers/page/home.service';
 import { Router } from '@angular/router';
 import { Config } from 'src/app/config/config';
-import { toNumber } from 'ng-zorro-antd';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

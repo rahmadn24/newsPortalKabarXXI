@@ -29,6 +29,9 @@
                 {{titleBerita}}
               </h3>
               <span *ngIf="type == 'berita'">{{createdBy}}</span>
+              <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline" 
+              style="position: absolute;padding: 5px 0px;
+                margin-left: -25px;"></i> {{views}}</div>
               <hr>
               <div *ngIf="type == 'berita'" class="image-berita">
                 <img style="width:100%" [src]="imageBerita" alt="">
