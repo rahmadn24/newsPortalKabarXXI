@@ -26,6 +26,7 @@ export class FooterComponent implements OnInit {
   }
 
   laman(data) {
+    window.scroll(0,0);
     this.router.navigate([`laman/${data}`]);
   }
 

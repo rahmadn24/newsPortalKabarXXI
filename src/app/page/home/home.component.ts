@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
   }
 
   detailBerita(id, title){
+    window.scroll(0,0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
@@ -77,6 +78,7 @@ export class HomeComponent implements OnInit {
   }
 
   detailVideo(id, title){
+    window.scroll(0,0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     for (let i = 0; i < this.videoData.length; i++) {
