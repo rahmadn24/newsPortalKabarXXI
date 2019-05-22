@@ -14,7 +14,7 @@
     width: 1583px;
     height: fit-content;
     background-color: white;
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 540px) {
         height: 55px;
     }
 }
@@ -146,7 +146,7 @@
     background-color: #fff;
     .social-media-icon {
         display: flex;
-        @media screen and (max-width: 426px) {
+        @media screen and (max-width: 540px) {
             display: block;
         }
         a {
@@ -196,7 +196,7 @@
 }
 
 .side-laman-berita {
-    @media screen and (min-width: 426px) {
+    @media screen and (min-width: 540px) {
         padding-right: 0;
     }
 }

@@ -223,4 +223,16 @@ export class LamanBeritaComponent implements OnInit {
     this.getLatestNews( data - 1 );
   }
 
+  follow(data){
+    if(data == 'facebook'){
+      window.open(this.config.facebook, '_blank');
+    }else if(data == 'twitter'){
+      window.open(this.config.twitter, '_blank');
+    }else if(data == 'youtube'){
+      window.open(this.config.youtube, '_blank');
+    }else if(data == 'instagram'){
+      window.open(this.config.instagram, '_blank');
+    }
+  }
+
 }

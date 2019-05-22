@@ -24,9 +24,9 @@ export class Config {
 
   //Sosial Media
   public facebook = "http://facebook.com";
-  public instagram = "http://facebook.com";
-  public youtube = "http://facebook.com";
-  public twitter = "http://facebook.com";
+  public instagram = "http://instagram.com";
+  public youtube = "http://youtube.com";
+  public twitter = "http://twitter.com";
 
   constructor() {
   }

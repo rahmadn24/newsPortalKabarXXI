@@ -44,6 +44,7 @@ export class FooterComponent implements OnInit {
   }
 
   follow(data){
+    console.log(data);
     if(data == 'facebook'){
       window.open(this.config.facebook, '_blank');
     }else if(data == 'twitter'){

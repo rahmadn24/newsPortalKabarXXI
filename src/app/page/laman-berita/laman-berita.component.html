@@ -6,20 +6,25 @@
         <div class="col-md-8" style="padding:0">
           <div class="content-berita">
             <div nz-row style="margin-top: 2%">
-              <div nz-col nzSpan="17" class="breadcumb">
+              <div nz-col nzSpan="16" class="breadcumb">
                 KabarXXI / Berita / {{category}}
               </div>
-              <div nz-col nzSpan="7" class="social-media-icon">
-                <span style="margin-right: 2%;">Ikuti Kami di</span>
-                <a href="https://www.facebook.com/" target="_blank" class="fb">
-                  <img src="https://cdn.detik.net.id/news/images/icon_fb.png" alt="">
-                </a>
-                <a href="https://twitter.com/" target="_blank" class="tw">
-                  <img src="https://cdn.detik.net.id/news/images/icon_tw.png" alt="">
-                </a>
-                <a href="https://instagram.com/" target="_blank" class="insta">
-                  <img src="https://cdn.detik.net.id/news/images/icon_insta.png" alt="">
-                </a>
+              <div nz-col nzSpan="8" class="social-media-icon">
+                <span style="margin-right: 5%;">Ikuti Kami di</span>
+                <div nz-row nzType="flex">
+                  <div nz-col nzSpan="6">
+                    <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png" alt="">
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png" alt="">
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
+                  </div>
+                </div>
               </div>
             </div>
             <br><br>
