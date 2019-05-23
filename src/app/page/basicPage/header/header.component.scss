@@ -13,7 +13,7 @@
   float: right;
   margin-top: 5px;
   margin-left: 5px;
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     display: none;
   }
 }
@@ -25,7 +25,7 @@
 }
 .header-items {
   padding: 10px;
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     position: absolute;
     margin-left: 15px;
     display: inherit;
@@ -34,7 +34,7 @@
 }
 
 .profile {
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     display: none;
   }
 }
@@ -42,33 +42,33 @@
 .button-menu {
   padding: 10px;
   border-right: 1px solid #e0e5ea;
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     border: none;
   }
 }
 
 .button-click-menu {
   float: right;
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     margin-right: 10px;
   }
 }
 
 .menu-header {
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     display: none;
   }
 }
 
 .menu-sider {
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 540px) {
     display: inherit;
     padding: 0 5px;
   }
 }
 
 .profile-sider {
-  @media screen and (min-width: 426px) {
+  @media screen and (min-width: 540px) {
     display: none;
   }
 }

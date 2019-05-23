@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Config } from 'src/app/config/config';
 import { AuthService } from 'src/app/providers/auth/auth.service';
 import { HomeService } from 'src/app/providers/page/home.service';
+import { NewsService } from 'src/app/providers/page/news.service';
 
 @Component({
   selector: 'app-laman-berita',
@@ -63,15 +64,16 @@ export class LamanBeritaComponent implements OnInit {
   dataValueLatest: any;
   pageMain: any;
   pageLatest: any;
+  views: any;
 
   constructor(
     private lamanBeritaService : LamanBeritaService,
-    private ngxLoader: NgxUiLoaderService,
     private activeRoute: ActivatedRoute,
     private config: Config,
     private authService: AuthService,
     private router: Router,
-    private homeService : HomeService
+    private homeService : HomeService,
+    private newsService : NewsService
   ) { }
 
   ngOnInit() {
@@ -80,6 +82,9 @@ export class LamanBeritaComponent implements OnInit {
       this.type = 'berita';
       this.getProfile();
       this.getData();
+      this.newsService.addViews(this.activeRoute.snapshot.paramMap.get('id')).subscribe(res => {
+        console.log(res);
+      })
     }else{
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'video';
@@ -103,7 +108,7 @@ export class LamanBeritaComponent implements OnInit {
     if(this.titleBeritaRoute){
       if(this.titleBeritaRoute !== this.activeRoute.snapshot.paramMap.get('title')){
         this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title')
-        this.getData();
+        this.ngOnInit();
       }
     }
   }
@@ -135,6 +140,7 @@ export class LamanBeritaComponent implements OnInit {
       this.createdBy = this.detailBerita.createdBy;
       this.description = this.detailBerita.description;
       this.category = this.detailBerita.category.categoryName;
+      this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverImage+this.detailBerita.base64Image;
       this.lamanBeritaService.getRelatedNews(this.detailBerita.keyword).subscribe(res => {
         this.relatedPost = res.data;
@@ -151,6 +157,7 @@ export class LamanBeritaComponent implements OnInit {
       this.titleBerita = this.detailBerita.title;
       this.description = this.detailBerita.description;
       this.category = this.detailBerita.title;
+      this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo+this.detailBerita.base64Video;
     })
   }
@@ -214,6 +221,18 @@ export class LamanBeritaComponent implements OnInit {
   pageChangeLatest(data){
     this.pageLatest = data;
     this.getLatestNews( data - 1 );
+  }
+
+  follow(data){
+    if(data == 'facebook'){
+      window.open(this.config.facebook, '_blank');
+    }else if(data == 'twitter'){
+      window.open(this.config.twitter, '_blank');
+    }else if(data == 'youtube'){
+      window.open(this.config.youtube, '_blank');
+    }else if(data == 'instagram'){
+      window.open(this.config.instagram, '_blank');
+    }
   }
 
 }

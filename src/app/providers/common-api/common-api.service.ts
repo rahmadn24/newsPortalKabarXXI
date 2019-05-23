@@ -94,68 +94,68 @@ export class CommonApiService {
 
   }
 
-  // put(url: string, body: any, reqOpts?: any): Observable<any> {
+  put(url: string, body: any,  params?: any , reqOpts?: any): Observable<any> {
 
-  //   if (this.checkConnection()) {
+    if (this.checkConnection()) {
 
-  //     if (!reqOpts) {
-  //       reqOpts = {
-  //         params: new HttpParams()
-  //       };
-  //     }
+      if (!reqOpts) {
+        reqOpts = {
+          params: new HttpParams()
+        };
+      }
 
-  //     if (this.localStorage.getItem("token")) {
-  //       reqOpts.headers = this.getHeaders();
-  //     }
+      if (this.localStorage.getItem("token")) {
+        reqOpts.headers = this.getHeaders();
+      }
 
-  //     return this.http.put<any>(this.BASE_URL + url, body, reqOpts)
-  //       .pipe(
-  //         catchError(
-  //           (error: any, caught: Observable<HttpEvent<any>>) => {
-  //             this.handlerResponseService.failedResponse(error);
-  //             throw error;
-  //           }
-  //         ),
-  //       );
+      return this.http.put<any>(this.BASE_URL + url, body, reqOpts)
+        .pipe(
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              this.handlerResponseService.failedResponse(error);
+              throw error;
+            }
+          ),
+        );
 
-  //   } else {
-  //     //this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
-  //     return null;
-  //   }
+    } else {
+      //this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
+      return null;
+    }
 
-  // }
+  }
 
-  // delete(url: string, body?: any): Observable<any> {
+  delete(url: string, body?: any): Observable<any> {
 
-  //   if (this.checkConnection()) {
+    if (this.checkConnection()) {
 
-  //     let reqOpts: any;
+      let reqOpts: any;
 
-  //     if (this.localStorage.getItem("token")) {
-  //       reqOpts = {
-  //         body: body,
-  //         headers: this.getHeaders()
-  //       }
-  //     }
+      if (this.localStorage.getItem("token")) {
+        reqOpts = {
+          body: body,
+          headers: this.getHeaders()
+        }
+      }
 
-  //     console.log(reqOpts);
+      console.log(reqOpts);
 
-  //     return this.http.delete<any>(this.BASE_URL + url, reqOpts)
-  //       .pipe(
-  //         catchError(
-  //           (error: any, caught: Observable<HttpEvent<any>>) => {
-  //             this.handlerResponseService.failedResponse(error);
-  //             throw error;
-  //           }
-  //         ),
-  //       );
+      return this.http.delete<any>(this.BASE_URL + url, reqOpts)
+        .pipe(
+          catchError(
+            (error: any, caught: Observable<HttpEvent<any>>) => {
+              this.handlerResponseService.failedResponse(error);
+              throw error;
+            }
+          ),
+        );
 
-  //   } else {
-  //     //this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
-  //     return null;
-  //   }
+    } else {
+      //this.message.create("error", "Anda tidak terhubung internet. Silahkan periksa koneksi anda");
+      return null;
+    }
 
-  // }
+  }
 
   validate(url: string, body: any, reqOpts?: any): Observable<any> {
 
