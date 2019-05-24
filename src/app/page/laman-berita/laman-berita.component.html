@@ -110,11 +110,14 @@
                     <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
                   </div>
                   <div class="post-data" (click)="detailBeritaGo(item.id, item.title)">
-                    <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">{{item.category.categoryName}}</div>
+                    <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
+                        {{item.category.categoryName}}</div>
                     <div class="post-meta">
-                      <h6 style="color:black">{{item.title}}</h6>
+                        <h6>{{item.title}}</h6>
+                        <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}
+                        </p>
                     </div>
-                  </div>
+                </div>
                 </div>
                 <pagination-controls id='main' (pageChange)="pageChangeMain($event)"></pagination-controls>
               </div>

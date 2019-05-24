@@ -213,6 +213,10 @@ export class LamanBeritaComponent implements OnInit {
     // this.getData();
   }
 
+  newsCategori(kategori){
+    this.router.navigate([`kategori/${kategori}`]);
+  }
+
   pageChangeMain(data){
     this.pageMain = data;
     this.getMainNews( data - 1 );
