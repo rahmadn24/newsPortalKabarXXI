@@ -13,16 +13,20 @@
                 <span style="margin-right: 5%;">Ikuti Kami di</span>
                 <div nz-row nzType="flex">
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png" alt="">
+                    <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png"
+                      alt="">
                   </div>
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png" alt="">
+                    <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png"
+                      alt="">
                   </div>
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
+                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png"
+                      alt="">
                   </div>
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
+                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png"
+                      alt="">
                   </div>
                 </div>
               </div>
@@ -34,8 +38,8 @@
                 {{titleBerita}}
               </h3>
               <span *ngIf="type == 'berita'">{{createdBy}}</span>
-              <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline" 
-              style="position: absolute;padding: 5px 0px;
+              <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline"
+                  style="position: absolute;padding: 5px 0px;
                 margin-left: -25px;"></i> {{views}}</div>
               <hr>
               <div *ngIf="type == 'berita'" class="image-berita">
@@ -115,13 +119,13 @@
                     <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
                       {{item.category.categoryName}}</div>
                     <div class="post-meta">
-                        <h2>{{item.title}}</h2>
-                        <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d, y, h:mm:ss'}}
-                        </p>
+                      <h2>{{item.title}}</h2>
+                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB
+                      </p>
                     </div>
+                  </div>
                 </div>
-                </div>
-                <pagination-controls id='main' (pageChange)="pageChangeMain($event)"></pagination-controls>
+                <pagination-controls id='main' (pageChange)="pageChangeMain($event)" maxSize="5"></pagination-controls>
               </div>
             </div>
           </div>
