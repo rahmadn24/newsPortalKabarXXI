@@ -6,3 +6,22 @@ img.socmed-icon {
 .post-catagory {
   color: #007bff;
 }
+
+.post-thumb {
+  img {
+    padding: 5px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+  }
+}
+.post-meta {
+  h2 {
+    color: #000000;
+    font-weight: 600;
+  }
+
+  h2:hover {
+    color: #bb071c;
+  }
+}
