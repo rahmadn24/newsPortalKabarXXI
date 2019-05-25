@@ -2,27 +2,32 @@
   <div class="row">
     <div class="col-md-3 button-menu">
       <div class="button-click-menu">
-        <button (click)="openMenuDrawer()" nz-button nzType="primary" [nzSize]="large" nzShape="circle"><i nz-icon type="bars" style="margin-bottom: 6px;"></i></button>
+        <button (click)="openMenuDrawer()" nz-button nzType="primary" [nzSize]="'large'" nzShape="circle"><i nz-icon
+            type="bars" style="margin-bottom: 6px;"></i></button>
         <div class="menu-text"> Menu</div>
       </div>
     </div>
     <div class="col-md-6 header-items" style="text-align:center">
       <form action="search()"></form>
       <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 40%;">
-        <input (keydown.enter)="onKeyDown()" [(ngModel)]="searchValue" style="border-radius: 50px;" type="text" nz-input placeholder="Cari Berita" />
+        <input (keydown.enter)="onKeyDown()" [(ngModel)]="searchValue" style="border-radius: 50px;" type="text" nz-input
+          placeholder="Cari Berita" />
       </nz-input-group>
       <ng-template #suffixIconSearch>
         <i nz-icon type="search"></i>
       </ng-template>
     </div>
-    <div *ngIf="profile != true" class="col-md-3 header-items profile" style="border-left:1px solid #e0e5ea;float: left;">
+    <div *ngIf="profile != true" class="col-md-3 header-items profile"
+      style="border-left:1px solid #e0e5ea;float: left;">
       <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar
         KabarXXI</button>
       <button nz-button (click)="showModalLogin()" nzType="default" nzShape="round">Login</button>
     </div>
-    <div *ngIf="profile == true" class="col-md-3 header-items profile" style="border-left:1px solid #e0e5ea;float: left;">
+    <div *ngIf="profile == true" class="col-md-3 header-items profile"
+      style="border-left:1px solid #e0e5ea;float: left;">
       <nz-dropdown [nzPlacement]="'bottomLeft'">
-        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline" style="margin-bottom: 6px;"></i></button>
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"
+            style="margin-bottom: 6px;"></i></button>
         <ul nz-menu>
           <li nz-menu-item>
             <a>{{username}}</a>
@@ -34,7 +39,8 @@
             <a>{{no_hp}}</a>
           </li>
           <li nz-menu-item>
-            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
+            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout"
+                nzTheme="outline"></i>Logout</button>
           </li>
         </ul>
       </nz-dropdown>
@@ -90,11 +96,13 @@
   </div>
 </div>
 <div class="container content-2" style="padding:0;">
-  <div class="img-main-ads responsive" style="background-image: url('../../../../assets/img/banner-advertiser.jpg')"></div>
+  <div class="img-main-ads responsive" style="background-image: url('../../../../assets/img/banner-advertiser.jpg')">
+  </div>
 </div>
 
 <!-- Login Modal -->
-<nz-modal [(nzVisible)]="isVisibleLogin" [nzFooter]="null" [nzTitle]="modalTitle" [nzContent]="modalContent" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisibleLogin" [nzFooter]="null" [nzTitle]="modalTitle" [nzContent]="modalContent"
+  (nzOnCancel)="handleCancel()">
   <ng-template style="text-align:center" #modalTitle>
     Form Login
   </ng-template>
@@ -130,8 +138,8 @@
 </nz-modal>
 
 <!-- Register Modal -->
-<nz-modal [(nzVisible)]="isVisibleRegister" [nzFooter]="null" [nzTitle]="modalTitleRegister" [nzContent]="modalContentRegister"
-  (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisibleRegister" [nzFooter]="null" [nzTitle]="modalTitleRegister"
+  [nzContent]="modalContentRegister" (nzOnCancel)="handleCancel()">
   <ng-template style="text-align:center" #modalTitleRegister>
     Form Register
   </ng-template>
@@ -152,15 +160,19 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>No Handphone</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
-          <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="text" maxlength="13"/>
+          <input nz-input [(ngModel)]="no_hp" formControlName="noHp" placeholder="no handphone" type="text"
+            maxlength="13" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
         <div>
           <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <input nz-input type="password" [(ngModel)]="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
-            <nz-form-explain *ngIf="validateFormRegister.get('password')?.dirty && validateFormRegister.get('password')?.hasError('required')">Please
+            <input nz-input type="password" [(ngModel)]="password" formControlName="password"
+              (ngModelChange)="validateConfirmPassword()" />
+            <nz-form-explain
+              *ngIf="validateFormRegister.get('password')?.dirty && validateFormRegister.get('password')?.hasError('required')">
+              Please
               input your password!</nz-form-explain>
           </nz-form-control>
         </div>
@@ -169,7 +181,8 @@
         <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
         <nz-form-control [nzSpan]="12" nzHasFeedback>
           <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
-          <nz-form-explain *ngIf="validateFormRegister.get('confirm')?.dirty && validateFormRegister.get('confirm')?.errors">
+          <nz-form-explain
+            *ngIf="validateFormRegister.get('confirm')?.dirty && validateFormRegister.get('confirm')?.errors">
             <ng-container *ngIf="validateFormRegister.get('confirm')?.hasError('required')">
               Please confirm your password!
             </ng-container>
@@ -189,7 +202,8 @@
 </nz-modal>
 
 <!-- Drawer Menu -->
-<nz-drawer [nzClosable]="false" [nzVisible]="isVisibleDrawerMenu" nzPlacement="left" nzTitle="KabarXXI" (nzOnClose)="closeDrawerMenu()">
+<nz-drawer [nzClosable]="false" [nzVisible]="isVisibleDrawerMenu" nzPlacement="left" nzTitle="KabarXXI"
+  (nzOnClose)="closeDrawerMenu()">
   <div class="row profile-sider">
     <div *ngIf="profile != true" class="col-md-12 menu-sider">
       <button nz-button (click)="showModalRegister()" nzType="primary" nzShape="round" style="margin-right:5px">Daftar
@@ -198,7 +212,8 @@
     </div>
     <div *ngIf="profile == true" class="col-md-12 menu-sider">
       <nz-dropdown [nzPlacement]="'bottomLeft'">
-        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline" style="margin-bottom: 6px;"></i></button>
+        <button nz-button nzShape="circle" nz-dropdown><i nz-icon nzType="user" nzTheme="outline"
+            style="margin-bottom: 6px;"></i></button>
         <ul nz-menu>
           <li nz-menu-item>
             <a>{{username}}</a>
@@ -210,7 +225,8 @@
             <a>{{no_hp}}</a>
           </li>
           <li nz-menu-item>
-            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout" nzTheme="outline"></i>Logout</button>
+            <button (click)="logout()" nz-button nzType="danger"><i nz-icon nzType="logout"
+                nzTheme="outline"></i>Logout</button>
           </li>
         </ul>
       </nz-dropdown>

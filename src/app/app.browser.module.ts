@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -23,9 +23,9 @@ import { LamanBeritaComponent } from './page/laman-berita/laman-berita.component
 import { NewsByCategoryComponent } from './page/news-by-category/news-by-category.component';
 import { LamanComponent } from './page/laman/laman.component';
 import { ResultSearchComponent } from './page/result-search/result-search.component';
-import { registerLocaleData, CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import localeId from '@angular/common/locales/id';
-import { TransferHttpCacheModule } from '@nguniversal/common';
+import { AppModule } from './app.module';
 
 registerLocaleData(localeId, 'id');
 
@@ -35,19 +35,9 @@ const antDesignIcons = AllIcons as {
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    FooterComponent,
-    LamanBeritaComponent,
-    NewsByCategoryComponent,
-    LamanComponent,
-    ResultSearchComponent
-  ],
   imports: [
     NgxUiLoaderModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    
     AppRoutingModule,
     NgZorroAntdModule,
     FormsModule,
@@ -61,8 +51,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    CommonModule,
-    TransferHttpCacheModule
+    AppModule,
+    BrowserTransferStateModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
     HomeService,
@@ -70,4 +60,4 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppBrowserModule { }

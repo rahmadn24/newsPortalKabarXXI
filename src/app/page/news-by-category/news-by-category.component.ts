@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NewsByCategoryService } from 'src/app/providers/page/news-by-category.service';
-import { Config } from 'src/app/config/config';
-import { HomeService } from 'src/app/providers/page/home.service';
+import { WINDOW } from '@ng-toolkit/universal';
+import { NewsByCategoryService } from '../../providers/page/news-by-category.service';
+import { Config } from '../../config/config';
+import { HomeService } from '../../providers/page/home.service';
 
 @Component({
   selector: 'app-news-by-category',
@@ -20,10 +21,10 @@ export class NewsByCategoryComponent implements OnInit {
   dataValueLatest: any;
   pageMain: any;
   pageLatest: any;
-  constructor(
-    private newsByCategoryService : NewsByCategoryService,
-    private router : Router,
-    private config : Config,
+  constructor(@Inject(WINDOW) private window: Window,
+    private newsByCategoryService: NewsByCategoryService,
+    private router: Router,
+    private config: Config,
     private activeRoute: ActivatedRoute,
     private homeService: HomeService
   ) { }
@@ -33,16 +34,16 @@ export class NewsByCategoryComponent implements OnInit {
     this.getData();
   }
 
-  ngDoCheck(){
-    if(this.kategori){
-      if(this.kategori !== this.activeRoute.snapshot.paramMap.get('kategori')){
+  ngDoCheck() {
+    if (this.kategori) {
+      if (this.kategori !== this.activeRoute.snapshot.paramMap.get('kategori')) {
         this.kategori = this.activeRoute.snapshot.paramMap.get('kategori');
         this.getData();
       }
     }
   }
 
-  getData(){
+  getData() {
     this.newsByCategoryService.requestDataFromMultipleSources().subscribe(responseList => {
       this.videoData = responseList[0].data;
       this.popularNewsData = responseList[1].data;
@@ -53,62 +54,62 @@ export class NewsByCategoryComponent implements OnInit {
     this.getLatestNews(0);
   }
 
-  getMainNews(param){
+  getMainNews(param) {
     let data = {
-      page : param,
-      size : 10,
-      sort : 'CreatedDate,DESC'
+      page: param,
+      size: 10,
+      sort: 'CreatedDate,DESC'
     }
     this.newsByCategoryService.getNewsByCategory(this.kategori, data).subscribe(res => {
       this.categoriNewsData = res.data;
-      if(!this.dataValue){
+      if (!this.dataValue) {
         this.dataValue = res.count;
       }
     })
   }
 
-  getLatestNews(param){
+  getLatestNews(param) {
     let data = {
-      page : param,
-      size : 10,
-      sort : 'CreatedDate,DESC'
+      page: param,
+      size: 10,
+      sort: 'CreatedDate,DESC'
     }
     this.newsByCategoryService.getLatestNews(data).subscribe(res => {
       this.latestNewsData = res.data;
-      if(!this.dataValueLatest){
+      if (!this.dataValueLatest) {
         this.dataValueLatest = res.count;
       }
     })
   }
 
-  detailBerita(id, title){
-    window.scroll(0,0);
+  detailBerita(id, title) {
+    this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     console.log(id, title);
   }
 
-  detailVideo(id, title){
-    window.scroll(0,0);
+  detailVideo(id, title) {
+    this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     for (let i = 0; i < this.videoData.length; i++) {
-      if(this.videoData[i].id == id){
+      if (this.videoData[i].id == id) {
         this.homeService.videoData = this.videoData[i];
       };
     };
     this.router.navigate([`laman-berita/video/${id}/${titleDone}`]);
   }
 
-  pageChangeMain(data){
+  pageChangeMain(data) {
     this.pageMain = data;
-    this.getMainNews( data - 1 );
+    this.getMainNews(data - 1);
   }
 
-  pageChangeLatest(data){
+  pageChangeLatest(data) {
     this.pageLatest = data;
-    this.getLatestNews( data - 1 );
+    this.getLatestNews(data - 1);
   }
 
 }

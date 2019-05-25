@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LamanService } from 'src/app/providers/page/laman.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Config } from 'src/app/config/config';
+import { LamanService } from '../../providers/page/laman.service';
+import { Config } from '../../config/config';
 
 @Component({
   selector: 'app-laman',
@@ -15,10 +15,10 @@ export class LamanComponent implements OnInit {
   image: any;
 
   constructor(
-    private lamanService : LamanService,
-    private activeRoute : ActivatedRoute,
-    private config : Config,
-    private router : Router
+    private lamanService: LamanService,
+    private activeRoute: ActivatedRoute,
+    private config: Config,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,13 +27,13 @@ export class LamanComponent implements OnInit {
     this.lamanService.getLamanTag(this.tag).subscribe(result => {
       console.log(result);
       this.tagData = result.data[0];
-      this.image = this.config.fileSaverImage+this.tagData.base64Image;
+      this.image = this.config.fileSaverImage + this.tagData.base64Image;
       this.description = this.tagData.description;
     })
   }
 
-  ngDoCheck(){
-    if(this.tag !== this.activeRoute.snapshot.paramMap.get('tag')){
+  ngDoCheck() {
+    if (this.tag !== this.activeRoute.snapshot.paramMap.get('tag')) {
       this.ngOnInit();
     }
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FooterService } from 'src/app/providers/page/footer.service';
-import { Config } from 'src/app/config/config';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Config } from '../../../config/config';
+import { FooterService } from '../../../providers/page/footer.service';
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +13,7 @@ export class FooterComponent implements OnInit {
   dataBerita: any;
   image: any;
 
-  constructor(
+  constructor(@Inject(WINDOW) private window: Window,
     private router: Router,
     private foooterService: FooterService,
     private config: Config
@@ -26,33 +27,33 @@ export class FooterComponent implements OnInit {
   }
 
   laman(data) {
-    window.scroll(0,0);
+    this.window.scroll(0, 0);
     this.router.navigate([`laman/${data}`]);
   }
 
-  getAt(data){
+  getAt(data) {
     console.log(data);
-    if(data == 'play'){
-        setTimeout(() => {
-          window.open(this.config.linkPlayStore, '_blank');
-        }, 100);
-    }else if(data == 'app'){
+    if (data == 'play') {
       setTimeout(() => {
-        window.open(this.config.linkAppStore, '_blank');
+        this.window.open(this.config.linkPlayStore, '_blank');
+      }, 100);
+    } else if (data == 'app') {
+      setTimeout(() => {
+        this.window.open(this.config.linkAppStore, '_blank');
       }, 100);
     }
   }
 
-  follow(data){
+  follow(data) {
     console.log(data);
-    if(data == 'facebook'){
-      window.open(this.config.facebook, '_blank');
-    }else if(data == 'twitter'){
-      window.open(this.config.twitter, '_blank');
-    }else if(data == 'youtube'){
-      window.open(this.config.youtube, '_blank');
-    }else if(data == 'instagram'){
-      window.open(this.config.instagram, '_blank');
+    if (data == 'facebook') {
+      this.window.open(this.config.facebook, '_blank');
+    } else if (data == 'twitter') {
+      this.window.open(this.config.twitter, '_blank');
+    } else if (data == 'youtube') {
+      this.window.open(this.config.youtube, '_blank');
+    } else if (data == 'instagram') {
+      this.window.open(this.config.instagram, '_blank');
     }
   }
 }

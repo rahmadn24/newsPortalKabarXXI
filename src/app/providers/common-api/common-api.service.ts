@@ -19,11 +19,11 @@ export class CommonApiService {
 
 
   constructor(@Inject(LOCAL_STORAGE) private localStorage: any, private http: HttpClient, private config: Config, private handlerResponseService: HandlerResponseService) {
-    this.BASE_URL = config.BASE_URL;
+    // this.BASE_URL = config.BASE_URL;
   }
 
   getHeaders() {
-    this.headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("gen_token"));
+    this.headers = new HttpHeaders().set("Authorization", "Bearer " + this.localStorage.getItem("gen_token"));
     return this.headers;
   }
 
@@ -47,11 +47,11 @@ export class CommonApiService {
         }
 
       }
-      if (localStorage.getItem("gen_token")) {
+      if (this.localStorage.getItem("gen_token")) {
         reqOpts.headers = this.getHeaders();
       }
 
-      return this.http.get<any>(this.BASE_URL + url, reqOpts)
+      return this.http.get<any>(this.config.CONTEXT_PATH + url, reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {
@@ -71,13 +71,13 @@ export class CommonApiService {
 
     if (this.checkConnection()) {
 
-      if (localStorage.getItem("gen_token")) {
+      if (this.localStorage.getItem("gen_token")) {
         reqOpts = {
           headers: this.getHeaders()
         };
       }
 
-      return this.http.post<any>(this.BASE_URL + url, body, reqOpts)
+      return this.http.post<any>(this.config.CONTEXT_PATH + url, body, reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {
@@ -94,7 +94,7 @@ export class CommonApiService {
 
   }
 
-  put(url: string, body: any,  params?: any , reqOpts?: any): Observable<any> {
+  put(url: string, body: any, params?: any, reqOpts?: any): Observable<any> {
 
     if (this.checkConnection()) {
 
@@ -108,7 +108,7 @@ export class CommonApiService {
         reqOpts.headers = this.getHeaders();
       }
 
-      return this.http.put<any>(this.BASE_URL + url, body, reqOpts)
+      return this.http.put<any>(this.config.CONTEXT_PATH + url, body, reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {
@@ -140,7 +140,7 @@ export class CommonApiService {
 
       console.log(reqOpts);
 
-      return this.http.delete<any>(this.BASE_URL + url, reqOpts)
+      return this.http.delete<any>(this.config.CONTEXT_PATH + url, reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {
@@ -169,7 +169,7 @@ export class CommonApiService {
       bodyUrl.set("username", body.username)
       bodyUrl.set("password", body.password)
       bodyUrl.set("grant_type", body.grant_type);
-      return this.http.post<any>(this.BASE_URL + url, bodyUrl.toString(), reqOpts)
+      return this.http.post<any>(this.config.CONTEXT_PATH + url, bodyUrl.toString(), reqOpts)
         .pipe(
           catchError(
             (error: any, caught: Observable<HttpEvent<any>>) => {

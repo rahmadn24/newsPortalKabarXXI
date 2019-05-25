@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { LamanBeritaService } from 'src/app/providers/page/laman-berita.service';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Config } from 'src/app/config/config';
-import { AuthService } from 'src/app/providers/auth/auth.service';
-import { HomeService } from 'src/app/providers/page/home.service';
-import { NewsService } from 'src/app/providers/page/news.service';
+import { LOCAL_STORAGE, WINDOW } from '@ng-toolkit/universal';
+import { LamanBeritaService } from '../../providers/page/laman-berita.service';
+import { Config } from '../../config/config';
+import { AuthService } from '../../providers/auth/auth.service';
+import { HomeService } from '../../providers/page/home.service';
+import { NewsService } from '../../providers/page/news.service';
 
 @Component({
   selector: 'app-laman-berita',
@@ -20,7 +20,7 @@ export class LamanBeritaComponent implements OnInit {
 
   //komen
   inputValue: '';
-  submitting : boolean = false;
+  submitting: boolean = false;
   user = {
     author: 'Han Solo',
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
@@ -48,7 +48,7 @@ export class LamanBeritaComponent implements OnInit {
   titleBerita: any;
   createdBy: any;
   description: any;
-  komentarBerita =  [];
+  komentarBerita = [];
   imageBerita: any;
   category: any;
   latestNewsData: any;
@@ -66,18 +66,18 @@ export class LamanBeritaComponent implements OnInit {
   pageLatest: any;
   views: any;
 
-  constructor(
-    private lamanBeritaService : LamanBeritaService,
+  constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any,
+    private lamanBeritaService: LamanBeritaService,
     private activeRoute: ActivatedRoute,
     private config: Config,
     private authService: AuthService,
     private router: Router,
-    private homeService : HomeService,
-    private newsService : NewsService
+    private homeService: HomeService,
+    private newsService: NewsService
   ) { }
 
   ngOnInit() {
-    if(this.activeRoute.snapshot.paramMap.get('type') == 'berita'){
+    if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'berita';
       this.getProfile();
@@ -85,7 +85,7 @@ export class LamanBeritaComponent implements OnInit {
       this.newsService.addViews(this.activeRoute.snapshot.paramMap.get('id')).subscribe(res => {
         console.log(res);
       })
-    }else{
+    } else {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'video';
       this.getProfile();
@@ -96,26 +96,26 @@ export class LamanBeritaComponent implements OnInit {
     this.getLatestNews(0);
   }
 
-  ngDoCheck(){
-    if(localStorage.getItem("gen_token") && localStorage.getItem("gen_loginId")){
-      if(this.username != atob(localStorage.getItem("gen_loginId"))){
+  ngDoCheck() {
+    if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
+      if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
         this.getProfile();
       }
-    }else{
+    } else {
       this.profile = false;
     }
 
-    if(this.titleBeritaRoute){
-      if(this.titleBeritaRoute !== this.activeRoute.snapshot.paramMap.get('title')){
+    if (this.titleBeritaRoute) {
+      if (this.titleBeritaRoute !== this.activeRoute.snapshot.paramMap.get('title')) {
         this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title')
         this.ngOnInit();
       }
     }
   }
 
-  getProfile(){
-    if(localStorage.getItem("gen_token") && localStorage.getItem("gen_loginId")){
-      this.authService.getProfile(atob(localStorage.getItem("gen_loginId"))).subscribe(res => {
+  getProfile() {
+    if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
+      this.authService.getProfile(atob(this.localStorage.getItem("gen_loginId"))).subscribe(res => {
         console.log(res.data);
         this.dataProfile = res.data;
         this.username = this.dataProfile.username;
@@ -123,7 +123,7 @@ export class LamanBeritaComponent implements OnInit {
         this.email = this.dataProfile.email;
         this.profile = true;
       })
-    }else{
+    } else {
       this.profile = false;
       this.dataProfile = [];
       this.username = "";
@@ -141,7 +141,7 @@ export class LamanBeritaComponent implements OnInit {
       this.description = this.detailBerita.description;
       this.category = this.detailBerita.category.categoryName;
       this.views = this.detailBerita.views;
-      this.imageBerita = this.config.fileSaverImage+this.detailBerita.base64Image;
+      this.imageBerita = this.config.fileSaverImage + this.detailBerita.base64Image;
       this.lamanBeritaService.getRelatedNews(this.detailBerita.keyword).subscribe(res => {
         this.relatedPost = res.data;
       })
@@ -158,46 +158,46 @@ export class LamanBeritaComponent implements OnInit {
       this.description = this.detailBerita.description;
       this.category = this.detailBerita.title;
       this.views = this.detailBerita.views;
-      this.imageBerita = this.config.fileSaverVideo+this.detailBerita.base64Video;
+      this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
     })
   }
 
-  getMainNews(param){
+  getMainNews(param) {
     let data = {
-      page : param,
-      size : 10,
-      sort : 'CreatedDate,DESC'
+      page: param,
+      size: 10,
+      sort: 'CreatedDate,DESC'
     }
     this.homeService.getMainNews(data).subscribe(res => {
       this.mainNewsData = res.data;
-      if(!this.dataValue){
+      if (!this.dataValue) {
         this.dataValue = res.count;
       }
     })
   }
 
-  getLatestNews(param){
+  getLatestNews(param) {
     let data = {
-      page : param,
-      size : 10,
-      sort : 'CreatedDate,DESC'
+      page: param,
+      size: 10,
+      sort: 'CreatedDate,DESC'
     }
     this.homeService.getLatestNews(data).subscribe(res => {
       this.latestNewsData = res.data;
-      if(!this.dataValueLatest){
+      if (!this.dataValueLatest) {
         this.dataValueLatest = res.count;
       }
     })
   }
 
-  submitComent(){
+  submitComent() {
     this.submitting = true;
     let data = {
-      description : this.inputValue,
+      description: this.inputValue,
       newsId: this.detailBerita.id,
       userId: this.dataProfile.id
     };
-    this.lamanBeritaService.createComment(data).subscribe(res =>{
+    this.lamanBeritaService.createComment(data).subscribe(res => {
       this.inputValue = '';
       this.submitting = false;
       this.getData();
@@ -205,37 +205,37 @@ export class LamanBeritaComponent implements OnInit {
     });
   }
 
-  detailBeritaGo(id, title){
-    window.scroll(0,0);
+  detailBeritaGo(id, title) {
+    this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
     // this.getData();
   }
 
-  newsCategori(kategori){
+  newsCategori(kategori) {
     this.router.navigate([`kategori/${kategori}`]);
   }
 
-  pageChangeMain(data){
+  pageChangeMain(data) {
     this.pageMain = data;
-    this.getMainNews( data - 1 );
+    this.getMainNews(data - 1);
   }
 
-  pageChangeLatest(data){
+  pageChangeLatest(data) {
     this.pageLatest = data;
-    this.getLatestNews( data - 1 );
+    this.getLatestNews(data - 1);
   }
 
-  follow(data){
-    if(data == 'facebook'){
-      window.open(this.config.facebook, '_blank');
-    }else if(data == 'twitter'){
-      window.open(this.config.twitter, '_blank');
-    }else if(data == 'youtube'){
-      window.open(this.config.youtube, '_blank');
-    }else if(data == 'instagram'){
-      window.open(this.config.instagram, '_blank');
+  follow(data) {
+    if (data == 'facebook') {
+      this.window.open(this.config.facebook, '_blank');
+    } else if (data == 'twitter') {
+      this.window.open(this.config.twitter, '_blank');
+    } else if (data == 'youtube') {
+      this.window.open(this.config.youtube, '_blank');
+    } else if (data == 'instagram') {
+      this.window.open(this.config.instagram, '_blank');
     }
   }
 

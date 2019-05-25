@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from 'src/app/providers/auth/auth.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { LOCAL_STORAGE } from '@ng-toolkit/universal';
+import { AuthService } from '../../../providers/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
   dataProfile: any;
   searchValue: any;
 
-  constructor(
+  constructor(@Inject(LOCAL_STORAGE) private localStorage: any,
     private router: Router,
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -52,12 +53,12 @@ export class HeaderComponent implements OnInit {
   }
 
   authentication() {
-    localStorage.removeItem("gen_token");
-    localStorage.removeItem("gen_loginId");
+    this.localStorage.removeItem("gen_token");
+    this.localStorage.removeItem("gen_loginId");
     this.authService.auth({ username: this.username, password: this.password, grant_type: "password" }).subscribe(response => {
       if (response) {
-        localStorage.setItem("gen_token", response.access_token);
-        localStorage.setItem("gen_loginId", btoa(this.username));
+        this.localStorage.setItem("gen_token", response.access_token);
+        this.localStorage.setItem("gen_loginId", btoa(this.username));
         this.isConfirmLoading = false;
         this.password = "";
         this.getProfile();
@@ -65,15 +66,15 @@ export class HeaderComponent implements OnInit {
         this.message.create('success', `Login Sukses`);
       }
     });
-    if(!localStorage.getItem("gen_token")){
+    if (!this.localStorage.getItem("gen_token")) {
       this.isConfirmLoading = false;
       this.message.create('failed', `Login Gagal`);
     }
   }
 
   getProfile() {
-    if (localStorage.getItem("gen_token") && localStorage.getItem("gen_loginId")) {
-      this.authService.getProfile(atob(localStorage.getItem("gen_loginId"))).subscribe(res => {
+    if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
+      this.authService.getProfile(atob(this.localStorage.getItem("gen_loginId"))).subscribe(res => {
         console.log(res.data);
         this.dataProfile = res.data;
         this.username = this.dataProfile.username;
@@ -91,8 +92,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem("gen_token");
-    localStorage.removeItem("gen_loginId");
+    this.localStorage.removeItem("gen_token");
+    this.localStorage.removeItem("gen_loginId");
     this.getProfile();
   }
 
