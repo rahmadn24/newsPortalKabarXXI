@@ -34,6 +34,7 @@ export class ResultSearchComponent implements OnInit {
 
     this.getData();
     this.getLatestNews(0);
+    this.getMainNews(0);
   }
 
   getMainNews(param) {
