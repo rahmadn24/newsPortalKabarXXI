@@ -12,14 +12,14 @@ export class Config {
   public fileSaverVideo = "http://202.157.176.44:8083/cjRoNHMxNHZpZGVvLXMzY3IzdC1rYWJhcnh4aQ/";
 
   //PlayStore & AppStore
-  public linkPlayStore = "https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180";
-  public linkAppStore = "https://play.google.com/store/apps/details?id=com.wKabarXXI_7875180";
+  public linkPlayStore = "https://play.google.com/store/apps/details?id=com.kabarxxi.apps";
+  public linkAppStore = "https://play.google.com/store/apps/details?id=om.kabarxxi.apps";
 
   //Sosial Media
-  public facebook = "http://facebook.com";
-  public instagram = "http://instagram.com";
-  public youtube = "http://youtube.com";
-  public twitter = "http://twitter.com";
+  public facebook = "https://web.facebook.com/kabarXXI/";
+  public instagram = "https://www.instagram.com/kabar.dua.satu/";
+  public youtube = "https://www.youtube.com/channel/UCbj-iBl4rLKzrYcuXhbJQfQ";
+  public twitter = "https://twitter.com/XxiKabarhttps://twitter.com/XxiKabar";
 
   constructor() {
   }
