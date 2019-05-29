@@ -50,9 +50,11 @@
               <div class="pokok-berita">
                 <div [innerHTML]="description"></div>
               </div>
-              <div>
+              <hr>
+              <div class="share-button">
+                <span>Share To</span>
                 <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5"
-                  [showText]="true" [showCount]="true" [url]="'kabarxxi.com'" [title]="'Kabar XXI'"></share-buttons>
+                  [showText]="true" [title]="'Kabar XXI'"></share-buttons>
                   <!-- <share-buttons show="5"></share-buttons> -->
               </div>
               <hr>
