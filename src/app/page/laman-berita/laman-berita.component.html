@@ -21,12 +21,10 @@
                       alt="">
                   </div>
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png"
-                      alt="">
+                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
                   </div>
                   <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png"
-                      alt="">
+                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
                   </div>
                 </div>
               </div>
@@ -52,11 +50,15 @@
               <div class="pokok-berita">
                 <div [innerHTML]="description"></div>
               </div>
+              <div>
+                <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5"
+                  [showText]="true" [showCount]="true" [url]="'kabarxxi.com'" [title]="'Kabar XXI'"></share-buttons>
+                  <!-- <share-buttons show="5"></share-buttons> -->
+              </div>
               <hr>
               <div *ngIf="type == 'berita'" class="related-post">
                 <h4>Related Post</h4>
-                <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
-                  [nzLoading]="loading">
+                <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
                   <ng-template #item let-item>
                     <nz-list-item>
                       <nz-list-item-meta [nzTitle]="nzTitle">
@@ -80,8 +82,8 @@
                       <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
                     </nz-form-item>
                     <nz-form-item>
-                      <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting"
-                        [disabled]="!inputValue" (click)="submitComent()">
+                      <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue"
+                        (click)="submitComent()">
                         Add Comment
                       </button>
                       <div *ngIf="profile != true">
@@ -109,8 +111,7 @@
                 <div class="section-heading">
                   <h5>Berita Utama</h5>
                 </div>
-                <div
-                  *ngFor="let item of mainNewsData | paginate: {id: 'main', itemsPerPage: 10 , currentPage: pageMain, totalItems: dataValue }"
+                <div *ngFor="let item of mainNewsData | paginate: {id: 'main', itemsPerPage: 10 , currentPage: pageMain, totalItems: dataValue }"
                   class="d-flex berita-utama" style="border-top: solid 1px #e0e0e0;">
                   <div class="post-thumb">
                     <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
@@ -120,7 +121,8 @@
                       {{item.category.categoryName}}</div>
                     <div class="post-meta">
                       <h2>{{item.title}}</h2>
-                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB
+                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}}
+                        WIB
                       </p>
                     </div>
                   </div>
@@ -138,8 +140,7 @@
             <div class="section-heading">
               <h5>Berita Terbaru</h5>
             </div>
-            <div
-              *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }"
+            <div *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }"
               class="d-flex berita-kecil-sider">
               <div class="post-thumb-kecil">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>

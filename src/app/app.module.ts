@@ -26,8 +26,17 @@ import { ResultSearchComponent } from './page/result-search/result-search.compon
 import { registerLocaleData, CommonModule } from '@angular/common';
 import localeId from '@angular/common/locales/id';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ShareModule } from '@ngx-share/core';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 
 registerLocaleData(localeId, 'id');
+
+library.add(faFacebookF, faTwitter, faWhatsapp);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -62,7 +71,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     ReactiveFormsModule,
     NgxPaginationModule,
     CommonModule,
-    TransferHttpCacheModule
+    TransferHttpCacheModule,
+    ShareButtonsModule,
+    ShareModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
     HomeService,
