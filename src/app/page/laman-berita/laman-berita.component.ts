@@ -6,6 +6,7 @@ import { Config } from '../../config/config';
 import { AuthService } from '../../providers/auth/auth.service';
 import { HomeService } from '../../providers/page/home.service';
 import { NewsService } from '../../providers/page/news.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-laman-berita',
@@ -21,29 +22,9 @@ export class LamanBeritaComponent implements OnInit {
   //komen
   inputValue: '';
   submitting: boolean = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
+  user = {};
 
-  komentarData = [
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: new Date()
-    },
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: new Date()
-    }
-  ];
+  komentarData = [];
   releaseDate: any;
   titleBerita: any;
   createdBy: any;
@@ -73,10 +54,13 @@ export class LamanBeritaComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private homeService: HomeService,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private metaService: Meta
+
   ) { }
 
   ngOnInit() {
+
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'berita';
@@ -134,6 +118,7 @@ export class LamanBeritaComponent implements OnInit {
 
   getData() {
     this.lamanBeritaService.requestDataFromMultipleSources(this.activeRoute.snapshot.paramMap.get('id')).subscribe(response => {
+
       this.detailBerita = response[0].data;
       this.releaseDate = this.detailBerita.releaseDate;
       this.titleBerita = this.detailBerita.title;
@@ -146,11 +131,14 @@ export class LamanBeritaComponent implements OnInit {
         this.relatedPost = res.data;
       })
       this.komentarBerita = response[1].data;
+      this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
+
     })
   }
 
   getData2() {
     this.homeService.requestDataFromMultipleSources().subscribe(response => {
+
       this.detailBerita = this.homeService.videoData;
       console.log(this.detailBerita);
       this.releaseDate = this.detailBerita.createdDate;
@@ -159,6 +147,8 @@ export class LamanBeritaComponent implements OnInit {
       this.category = this.detailBerita.title;
       this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
+      this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
+
     })
   }
 
