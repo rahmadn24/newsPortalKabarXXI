@@ -19,7 +19,7 @@ export class Config {
   public facebook = "https://web.facebook.com/kabarXXI/";
   public instagram = "https://www.instagram.com/kabar.dua.satu/";
   public youtube = "https://www.youtube.com/channel/UCbj-iBl4rLKzrYcuXhbJQfQ";
-  public twitter = "https://twitter.com/XxiKabarhttps://twitter.com/XxiKabar";
+  public twitter = "https://twitter.com/XxiKabar";
 
   constructor() {
   }

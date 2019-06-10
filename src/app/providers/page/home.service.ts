@@ -13,27 +13,33 @@ export class HomeService {
   videoData;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private commonApi: CommonApiService) { }
 
-    public searchResult(param, param2 : any) {
-      return this.commonApi.get(`public/v1/news/searchNews/${param}/kabarxxi`, param2)
-    }
+  public searchResult(param, param2: any) {
+    return this.commonApi.get(`public/v1/news/searchNews/${param}/kabarxxi`, param2)
+  }
 
-    public getMainNews(param: any) {
-      return this.commonApi.get("public/v1/news/main", param);
-    }
+  public getMainNews(param: any) {
+    return this.commonApi.get("public/v1/news/main", param);
+  }
 
-    public getLatestNews(param: any) {
-      return this.commonApi.get("public/v1/news/latest", param);
-    }
+  public getLatestNews(param: any) {
+    return this.commonApi.get("public/v1/news/latest", param);
+  }
 
-    public requestDataFromMultipleSources(): Observable<any[]> {
+  public requestDataFromMultipleSources(): Observable<any[]> {
 
-      let getVideo = this.commonApi.get("public/v1/video");
-      let getPopularNews = this.commonApi.get("public/v1/news/popular");
-  
-      return forkJoin([getVideo, getPopularNews]);
-  
-    }
+    let params = {
+      page: 0,
+      size: 10,
+      sort: 'CreatedDate,DESC'
+    };
+
+    let getVideo = this.commonApi.get("public/v1/video");
+    let getPopularNews = this.commonApi.get("public/v1/news/popular", params);
+
+    return forkJoin([getVideo, getPopularNews]);
+
+  }
 }
