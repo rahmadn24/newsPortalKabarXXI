@@ -6,7 +6,7 @@ import { Config } from '../../config/config';
 import { AuthService } from '../../providers/auth/auth.service';
 import { HomeService } from '../../providers/page/home.service';
 import { NewsService } from '../../providers/page/news.service';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-laman-berita',
@@ -55,7 +55,8 @@ export class LamanBeritaComponent implements OnInit {
     private router: Router,
     private homeService: HomeService,
     private newsService: NewsService,
-    private metaService: Meta
+    private metaService: Meta,
+    private titleService: Title,
 
   ) { }
 
@@ -132,6 +133,7 @@ export class LamanBeritaComponent implements OnInit {
       })
       this.komentarBerita = response[1].data;
       this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
+      this.titleService.setTitle(this.titleBerita);
 
     })
   }
@@ -148,6 +150,7 @@ export class LamanBeritaComponent implements OnInit {
       this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
       this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
+      this.titleService.setTitle(this.titleBerita);
 
     })
   }
