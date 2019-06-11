@@ -132,8 +132,20 @@ export class LamanBeritaComponent implements OnInit {
         this.relatedPost = res.data;
       })
       this.komentarBerita = response[1].data;
-      this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
+
       this.titleService.setTitle(this.titleBerita);
+      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      if (this.titleBerita.length < 70) {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
+      } else {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
+      }
+      this.metaService.updateTag({ property: 'og:image', content: this.config.fileSaverImage + "1549237835658_download.jpg" });
 
     })
   }
@@ -149,8 +161,19 @@ export class LamanBeritaComponent implements OnInit {
       this.category = this.detailBerita.title;
       this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
-      this.metaService.updateTag({ property: 'og:image', content: this.imageBerita });
       this.titleService.setTitle(this.titleBerita);
+      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      if (this.titleBerita.length < 70) {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
+      } else {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
+      }
+      this.metaService.updateTag({ property: 'og:image', content: this.config.fileSaverImage + "1549237835658_download.jpg" });
 
     })
   }
