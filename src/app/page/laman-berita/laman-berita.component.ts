@@ -7,6 +7,7 @@ import { AuthService } from '../../providers/auth/auth.service';
 import { HomeService } from '../../providers/page/home.service';
 import { NewsService } from '../../providers/page/news.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-laman-berita',
@@ -57,10 +58,13 @@ export class LamanBeritaComponent implements OnInit {
     private newsService: NewsService,
     private metaService: Meta,
     private titleService: Title,
+    private readonly meta: MetaService
 
   ) { }
 
   ngOnInit() {
+
+    this.meta.setTag('description', 'Meta update from init abiii');
 
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
@@ -81,7 +85,15 @@ export class LamanBeritaComponent implements OnInit {
     this.getLatestNews(0);
   }
 
+
+
   ngDoCheck() {
+
+    this.metaService.addTag({ name: 'keywords', content: 'Angular Project, Create Angular Project' });
+    this.metaService.addTag({ name: 'description', content: 'Angular project training on rsgitech.com' });
+    this.metaService.addTag({ name: 'author', content: 'rsgitech' });
+    this.metaService.addTag({ name: 'robots', content: 'index, follow' });
+
     if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
       if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
         this.getProfile();

@@ -33,6 +33,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
 
 registerLocaleData(localeId, 'id');
 
@@ -42,6 +43,22 @@ const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: 'Tour of (lazy/busy) heroes',
+    defaults: {
+      title: 'Mighty mighty mouse',
+      description: 'Mighty Mouse is an animated superhero mouse character',
+      'og:image': 'https://upload.wikimedia.org/wikipedia/commons/f/f8/superraton.jpg',
+      'og:type': 'website',
+      'og:locale': 'en_US',
+      'og:locale:alternate': 'en_US,nl_NL,tr_TR'
+    }
+  });
+}
 
 @NgModule({
   declarations: [
@@ -73,7 +90,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     CommonModule,
     TransferHttpCacheModule,
     ShareButtonsModule,
-    ShareModule
+    ShareModule,
+    MetaModule.forRoot(),
+    MetaModule.forRoot({
+      provide: MetaLoader,
+      useFactory: (metaFactory)
+    })
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
     HomeService,
