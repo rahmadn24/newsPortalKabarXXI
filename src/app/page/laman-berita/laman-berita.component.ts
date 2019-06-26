@@ -47,6 +47,7 @@ export class LamanBeritaComponent implements OnInit {
   pageMain: any;
   pageLatest: any;
   views: any;
+  image: string;
 
   constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any,
     private lamanBeritaService: LamanBeritaService,
@@ -60,10 +61,13 @@ export class LamanBeritaComponent implements OnInit {
     private titleService: Title,
     private readonly meta: MetaService
 
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.image = this.homeService.imageData;
+    console.log(this.image);
 
+    this.meta.setTag('image', this.homeService.imageData);
     this.meta.setTag('description', 'Meta update from init abiii');
 
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
@@ -79,7 +83,7 @@ export class LamanBeritaComponent implements OnInit {
       this.type = 'video';
       this.getProfile();
       this.getData2();
-    }
+    } 
 
     this.getMainNews(0);
     this.getLatestNews(0);
@@ -93,7 +97,8 @@ export class LamanBeritaComponent implements OnInit {
     this.metaService.addTag({ name: 'description', content: 'Angular project training on rsgitech.com' });
     this.metaService.addTag({ name: 'author', content: 'rsgitech' });
     this.metaService.addTag({ name: 'robots', content: 'index, follow' });
-
+      this.meta.setTag('og:image', this.homeService.imageData);
+      this.metaService.addTag({ name: 'og:image', content: this.homeService.imageData});
     if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
       if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
         this.getProfile();
@@ -157,7 +162,7 @@ export class LamanBeritaComponent implements OnInit {
       } else {
         this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
       }
-      this.metaService.updateTag({ property: 'og:image', content: this.config.fileSaverImage + "1549237835658_download.jpg" });
+      this.meta.setTag('og:image', this.imageBerita);
 
     })
   }

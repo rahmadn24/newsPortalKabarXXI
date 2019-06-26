@@ -68,7 +68,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  detailBerita(id, title) {
+  detailBerita(id, title, image) {
+    this.homeService.imageData = image;
     this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");

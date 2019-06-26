@@ -11,6 +11,7 @@ import { Cacheable } from 'ngx-cacheable';
 export class HomeService {
 
   videoData;
+  imageData;
 
   constructor(
     private http: HttpClient,
