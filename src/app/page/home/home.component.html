@@ -53,7 +53,7 @@
               <div class="post-thumb">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
               </div>
-              <div class="post-data" (click)="detailBerita(item.id, item.title)">
+              <div class="post-data" (click)="detailBerita(item.id, item.title, config.fileSaverImage+item.base64Image)">
                 <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
                   {{item.category.categoryName}}</div>
                 <div class="post-meta">

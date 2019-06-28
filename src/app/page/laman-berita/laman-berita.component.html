@@ -46,11 +46,18 @@
                 <img style="width:100%" [src]="imageBerita" alt="">
               </div>
               <div *ngIf="type == 'video'" class="image-berita">
-                <video style="width:100%" [src]="imageBerita" controls>
+                <video style="width:100%" [src]="imageBerita" autoplay controls controlsList="nodownload">
                 </video>
               </div>
               <div class="pokok-berita">
                 <div [innerHTML]="description"></div>
+              </div>
+              <hr>
+              <div class="share-button">
+                <span>Share To</span>
+                <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5"
+                  [showText]="true" [title]="'Kabar XXI'"></share-buttons>
+                <!-- <share-buttons show="5"></share-buttons> -->
               </div>
               <hr>
               <div *ngIf="type == 'berita'" class="related-post">
@@ -120,7 +127,8 @@
                       {{item.category.categoryName}}</div>
                     <div class="post-meta">
                       <h2>{{item.title}}</h2>
-                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB
+                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}}
+                        WIB
                       </p>
                     </div>
                   </div>

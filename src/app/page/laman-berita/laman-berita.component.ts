@@ -6,6 +6,8 @@ import { Config } from '../../config/config';
 import { AuthService } from '../../providers/auth/auth.service';
 import { HomeService } from '../../providers/page/home.service';
 import { NewsService } from '../../providers/page/news.service';
+import { Meta, Title } from '@angular/platform-browser';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-laman-berita',
@@ -21,29 +23,9 @@ export class LamanBeritaComponent implements OnInit {
   //komen
   inputValue: '';
   submitting: boolean = false;
-  user = {
-    author: 'Han Solo',
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
-  };
+  user = {};
 
-  komentarData = [
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: new Date()
-    },
-    {
-      author: 'Han Solo',
-      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      content:
-        'We supply a series of design principles, practical patterns and high quality design resources' +
-        '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-      datetime: new Date()
-    }
-  ];
+  komentarData = [];
   releaseDate: any;
   titleBerita: any;
   createdBy: any;
@@ -65,6 +47,7 @@ export class LamanBeritaComponent implements OnInit {
   pageMain: any;
   pageLatest: any;
   views: any;
+  image: string;
 
   constructor(@Inject(WINDOW) private window: Window, @Inject(LOCAL_STORAGE) private localStorage: any,
     private lamanBeritaService: LamanBeritaService,
@@ -73,10 +56,20 @@ export class LamanBeritaComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private homeService: HomeService,
-    private newsService: NewsService
-  ) { }
+    private newsService: NewsService,
+    private metaService: Meta,
+    private titleService: Title,
+    private readonly meta: MetaService
+
+  ) {}
 
   ngOnInit() {
+    this.image = this.homeService.imageData;
+    console.log(this.image);
+
+    this.meta.setTag('image', this.homeService.imageData);
+    this.meta.setTag('description', 'Meta update from init abiii');
+
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'berita';
@@ -90,13 +83,22 @@ export class LamanBeritaComponent implements OnInit {
       this.type = 'video';
       this.getProfile();
       this.getData2();
-    }
+    } 
 
     this.getMainNews(0);
     this.getLatestNews(0);
   }
 
+
+
   ngDoCheck() {
+
+    this.metaService.addTag({ name: 'keywords', content: 'Angular Project, Create Angular Project' });
+    this.metaService.addTag({ name: 'description', content: 'Angular project training on rsgitech.com' });
+    this.metaService.addTag({ name: 'author', content: 'rsgitech' });
+    this.metaService.addTag({ name: 'robots', content: 'index, follow' });
+      this.meta.setTag('og:image', this.homeService.imageData);
+      this.metaService.addTag({ name: 'og:image', content: this.homeService.imageData});
     if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
       if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
         this.getProfile();
@@ -134,6 +136,7 @@ export class LamanBeritaComponent implements OnInit {
 
   getData() {
     this.lamanBeritaService.requestDataFromMultipleSources(this.activeRoute.snapshot.paramMap.get('id')).subscribe(response => {
+
       this.detailBerita = response[0].data;
       this.releaseDate = this.detailBerita.releaseDate;
       this.titleBerita = this.detailBerita.title;
@@ -146,11 +149,27 @@ export class LamanBeritaComponent implements OnInit {
         this.relatedPost = res.data;
       })
       this.komentarBerita = response[1].data;
+
+      this.titleService.setTitle(this.titleBerita);
+      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      if (this.titleBerita.length < 70) {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
+      } else {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
+      }
+      this.meta.setTag('og:image', this.imageBerita);
+
     })
   }
 
   getData2() {
     this.homeService.requestDataFromMultipleSources().subscribe(response => {
+
       this.detailBerita = this.homeService.videoData;
       console.log(this.detailBerita);
       this.releaseDate = this.detailBerita.createdDate;
@@ -159,6 +178,20 @@ export class LamanBeritaComponent implements OnInit {
       this.category = this.detailBerita.title;
       this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
+      this.titleService.setTitle(this.titleBerita);
+      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
+      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
+      if (this.titleBerita.length < 70) {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
+      } else {
+        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
+      }
+      this.metaService.updateTag({ property: 'og:image', content: this.config.fileSaverImage + "1549237835658_download.jpg" });
+
     })
   }
 
