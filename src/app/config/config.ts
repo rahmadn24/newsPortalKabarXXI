@@ -13,7 +13,7 @@ export class Config {
 
   //PlayStore & AppStore
   public linkPlayStore = "https://play.google.com/store/apps/details?id=com.kabarxxi.apps";
-  public linkAppStore = "https://play.google.com/store/apps/details?id=om.kabarxxi.apps";
+  public linkAppStore = "https://apps.apple.com/us/app/kabarxxi/id1467860358";
 
   //Sosial Media
   public facebook = "https://web.facebook.com/kabarXXI/";
