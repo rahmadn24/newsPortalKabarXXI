@@ -1,3 +1,4 @@
+import { Meta, Title } from '@angular/platform-browser';
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LOCAL_STORAGE, WINDOW } from '@ng-toolkit/universal';
@@ -6,7 +7,6 @@ import { Config } from '../../config/config';
 import { AuthService } from '../../providers/auth/auth.service';
 import { HomeService } from '../../providers/page/home.service';
 import { NewsService } from '../../providers/page/news.service';
-import { Meta, Title } from '@angular/platform-browser';
 import { MetaService } from '@ngx-meta/core';
 
 @Component({
@@ -27,9 +27,9 @@ export class LamanBeritaComponent implements OnInit {
 
   komentarData = [];
   releaseDate: any;
-  titleBerita: any;
-  createdBy: any;
-  description: any;
+  titleBerita: string = null;
+  createdBy: string = null;
+  description: string = null;
   komentarBerita = [];
   imageBerita: any;
   category: any;
@@ -61,14 +61,21 @@ export class LamanBeritaComponent implements OnInit {
     private titleService: Title,
     private readonly meta: MetaService
 
-  ) {}
+  ) { 
+
+  }
 
   ngOnInit() {
-    this.image = this.homeService.imageData;
-    console.log(this.image);
 
-    this.meta.setTag('image', this.homeService.imageData);
-    this.meta.setTag('description', 'Meta update from init abiii');
+
+    this.titleService.setTitle(this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
+    this.meta.setTag('description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
+    this.meta.setTag('og:description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
+
+    if(this.activeRoute.snapshot.paramMap.get('image')){
+      const imageName = this.config.fileSaverImage + this.activeRoute.snapshot.paramMap.get('image');
+      this.meta.setTag('og:image',  imageName);
+    }
 
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
@@ -83,22 +90,15 @@ export class LamanBeritaComponent implements OnInit {
       this.type = 'video';
       this.getProfile();
       this.getData2();
-    } 
+    }
 
     this.getMainNews(0);
     this.getLatestNews(0);
   }
 
 
-
   ngDoCheck() {
 
-    this.metaService.addTag({ name: 'keywords', content: 'Angular Project, Create Angular Project' });
-    this.metaService.addTag({ name: 'description', content: 'Angular project training on rsgitech.com' });
-    this.metaService.addTag({ name: 'author', content: 'rsgitech' });
-    this.metaService.addTag({ name: 'robots', content: 'index, follow' });
-      this.meta.setTag('og:image', this.homeService.imageData);
-      this.metaService.addTag({ name: 'og:image', content: this.homeService.imageData});
     if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
       if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
         this.getProfile();
@@ -147,22 +147,9 @@ export class LamanBeritaComponent implements OnInit {
       this.imageBerita = this.config.fileSaverImage + this.detailBerita.base64Image;
       this.lamanBeritaService.getRelatedNews(this.detailBerita.keyword).subscribe(res => {
         this.relatedPost = res.data;
-      })
-      this.komentarBerita = response[1].data;
+      });
 
-      this.titleService.setTitle(this.titleBerita);
-      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      if (this.titleBerita.length < 70) {
-        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
-      } else {
-        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
-      }
-      this.meta.setTag('og:image', this.imageBerita);
+      this.komentarBerita = response[1].data;
 
     })
   }
@@ -179,18 +166,6 @@ export class LamanBeritaComponent implements OnInit {
       this.views = this.detailBerita.views;
       this.imageBerita = this.config.fileSaverVideo + this.detailBerita.base64Video;
       this.titleService.setTitle(this.titleBerita);
-      this.metaService.addTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.addTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.addTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ name: 'og:title', content: this.titleBerita.substring(0, 30) });
-      this.metaService.updateTag({ name: 'og:title', property: 'og:title', content: this.titleBerita.substring(0, 30) });
-      if (this.titleBerita.length < 70) {
-        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, this.titleBerita.length) });
-      } else {
-        this.metaService.updateTag({ property: 'og:description', content: this.titleBerita.substring(0, 70) });
-      }
-      this.metaService.updateTag({ property: 'og:image', content: this.config.fileSaverImage + "1549237835658_download.jpg" });
 
     })
   }
@@ -238,11 +213,11 @@ export class LamanBeritaComponent implements OnInit {
     });
   }
 
-  detailBeritaGo(id, title) {
+  detailBeritaGo(id, title, image) {
     this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
-    this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
+    this.router.navigate([`laman-berita/berita/${id}/${titleDone}/${image}`]);
     // this.getData();
   }
 

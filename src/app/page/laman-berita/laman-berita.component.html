@@ -1,170 +1,156 @@
 <nz-layout class="layout">
-  <app-header></app-header>
-  <nz-content>
-    <div class="container main-content">
-      <div class="row">
-        <div class="col-md-8" style="padding:0">
-          <div class="content-berita">
-            <div nz-row style="margin-top: 2%">
-              <div nz-col nzSpan="16" class="breadcumb">
-                KabarXXI / Berita / {{category}}
-              </div>
-              <div nz-col nzSpan="8" class="social-media-icon">
-                <span style="margin-right: 5%;">Ikuti Kami di</span>
-                <div nz-row nzType="flex">
-                  <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png"
-                      alt="">
-                  </div>
-                  <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png"
-                      alt="">
-                  </div>
-                  <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png"
-                      alt="">
-                  </div>
-                  <div nz-col nzSpan="6">
-                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png"
-                      alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br><br>
-            <div class="col-md-12 detail-berita">
-              <span>{{releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB</span>
-              <h3>
-                {{titleBerita}}
-              </h3>
-              <span *ngIf="type == 'berita'">{{createdBy}}</span>
-              <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline"
-                  style="position: absolute;padding: 5px 0px;
+    <app-header></app-header>
+    <nz-content>
+        <div class="container main-content">
+            <div class="row">
+                <div class="col-md-8" style="padding:0">
+                    <div class="content-berita">
+                        <div nz-row style="margin-top: 2%">
+                            <div nz-col nzSpan="16" class="breadcumb">
+                                KabarXXI / Berita / {{category}}
+                            </div>
+                            <div nz-col nzSpan="8" class="social-media-icon">
+                                <span style="margin-right: 5%;">Ikuti Kami di</span>
+                                <div nz-row nzType="flex">
+                                    <div nz-col nzSpan="6">
+                                        <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png" alt="">
+                                    </div>
+                                    <div nz-col nzSpan="6">
+                                        <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png" alt="">
+                                    </div>
+                                    <div nz-col nzSpan="6">
+                                        <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
+                                    </div>
+                                    <div nz-col nzSpan="6">
+                                        <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="col-md-12 detail-berita">
+                            <span>{{releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB</span>
+                            <h3>
+                                {{titleBerita}}
+                            </h3>
+                            <span *ngIf="type == 'berita'">{{createdBy}}</span>
+                            <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline" style="position: absolute;padding: 5px 0px;
                 margin-left: -25px;"></i> {{views}}</div>
-              <hr>
-              <div *ngIf="type == 'berita'" class="image-berita">
-                <img style="width:100%" [src]="imageBerita" alt="">
-              </div>
-              <div *ngIf="type == 'video'" class="image-berita">
-                <video style="width:100%" [src]="imageBerita" autoplay controls controlsList="nodownload">
+                            <hr>
+                            <div *ngIf="type == 'berita'" class="image-berita">
+                                <img style="width:100%" [src]="imageBerita" alt="">
+                            </div>
+                            <div *ngIf="type == 'video'" class="image-berita">
+                                <video style="width:100%" [src]="imageBerita" autoplay controls controlsList="nodownload">
                 </video>
-              </div>
-              <div class="pokok-berita">
-                <div [innerHTML]="description"></div>
-              </div>
-              <hr>
-              <div class="share-button">
-                <span>Share To</span>
-                <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5"
-                  [showText]="true" [title]="'Kabar XXI'"></share-buttons>
-                <!-- <share-buttons show="5"></share-buttons> -->
-              </div>
-              <hr>
-              <div *ngIf="type == 'berita'" class="related-post">
-                <h4>Related Post</h4>
-                <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'"
-                  [nzLoading]="loading">
-                  <ng-template #item let-item>
-                    <nz-list-item>
-                      <nz-list-item-meta [nzTitle]="nzTitle">
-                        <ng-template #nzTitle>
-                          <a (click)="detailBeritaGo(item.id, item.title)">{{ item.title }}</a>
-                        </ng-template>
-                      </nz-list-item-meta>
-                    </nz-list-item>
-                  </ng-template>
-                </nz-list>
-                <hr>
-              </div>
-              <div *ngIf="type == 'berita'" class="komentar">
-                <div class="title-komentar">
-                  KOMENTAR
-                </div>
-                <nz-comment>
-                  <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
-                  <nz-comment-content>
-                    <nz-form-item>
-                      <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
-                    </nz-form-item>
-                    <nz-form-item>
-                      <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting"
-                        [disabled]="!inputValue" (click)="submitComent()">
+                            </div>
+                            <div class="pokok-berita">
+                                <div [innerHTML]="description"></div>
+                            </div>
+                            <hr>
+                            <div class="share-button">
+                                <span>Share To</span>
+                                <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5" [showText]="true" [title]="'Kabar XXI'"></share-buttons>
+                                <!-- <share-buttons show="5"></share-buttons> -->
+                            </div>
+                            <hr>
+                            <div *ngIf="type == 'berita'" class="related-post">
+                                <h4>Related Post</h4>
+                                <nz-list [nzDataSource]="relatedPost" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+                                    <ng-template #item let-item>
+                                        <nz-list-item>
+                                            <nz-list-item-meta [nzTitle]="nzTitle">
+                                                <ng-template #nzTitle>
+                                                    <a (click)="detailBeritaGo(item.id, item.title, item.base64Image)">{{ item.title }}</a>
+                                                </ng-template>
+                                            </nz-list-item-meta>
+                                        </nz-list-item>
+                                    </ng-template>
+                                </nz-list>
+                                <hr>
+                            </div>
+                            <div *ngIf="type == 'berita'" class="komentar">
+                                <div class="title-komentar">
+                                    KOMENTAR
+                                </div>
+                                <nz-comment>
+                                    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+                                    <nz-comment-content>
+                                        <nz-form-item>
+                                            <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                                        </nz-form-item>
+                                        <nz-form-item>
+                                            <button *ngIf="profile == true" nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="submitComent()">
                         Add Comment
                       </button>
-                      <div *ngIf="profile != true">
-                        <p>* Sebelum Comment harap login atau register terlebih dahulu</p>
-                      </div>
-                    </nz-form-item>
-                  </nz-comment-content>
-                </nz-comment>
-                <span>{{komentarBerita.length}} Komentar</span>
-                <nz-list *ngIf="komentarBerita.length" [nzDataSource]="komentarBerita" [nzRenderItem]="item"
-                  [nzItemLayout]="'horizontal'">
-                  <ng-template #item let-item>
-                    <!-- [nzDatetime]="item.displayTime" -->
-                    <nz-comment [nzAuthor]="item.users.username">
-                      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
-                      <nz-comment-content>
-                        <p>{{ item.description }}</p>
-                      </nz-comment-content>
-                    </nz-comment>
-                  </ng-template>
-                </nz-list>
-                <hr>
-              </div>
-              <div class="main-berita-data">
-                <div class="section-heading">
-                  <h5>Berita Utama</h5>
-                </div>
-                <div
-                  *ngFor="let item of mainNewsData | paginate: {id: 'main', itemsPerPage: 10 , currentPage: pageMain, totalItems: dataValue }"
-                  class="d-flex berita-utama" style="border-top: solid 1px #e0e0e0;">
-                  <div class="post-thumb">
-                    <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
-                  </div>
-                  <div class="post-data" (click)="detailBeritaGo(item.id, item.title)">
-                    <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
-                      {{item.category.categoryName}}</div>
-                    <div class="post-meta">
-                      <h2>{{item.title}}</h2>
-                      <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}}
-                        WIB
-                      </p>
+                                            <div *ngIf="profile != true">
+                                                <p>* Sebelum Comment harap login atau register terlebih dahulu</p>
+                                            </div>
+                                        </nz-form-item>
+                                    </nz-comment-content>
+                                </nz-comment>
+                                <span>{{komentarBerita.length}} Komentar</span>
+                                <nz-list *ngIf="komentarBerita.length" [nzDataSource]="komentarBerita" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+                                    <ng-template #item let-item>
+                                        <!-- [nzDatetime]="item.displayTime" -->
+                                        <nz-comment [nzAuthor]="item.users.username">
+                                            <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                                            <nz-comment-content>
+                                                <p>{{ item.description }}</p>
+                                            </nz-comment-content>
+                                        </nz-comment>
+                                    </ng-template>
+                                </nz-list>
+                                <hr>
+                            </div>
+                            <div class="main-berita-data">
+                                <div class="section-heading">
+                                    <h5>Berita Utama</h5>
+                                </div>
+                                <div *ngFor="let item of mainNewsData | paginate: {id: 'main', itemsPerPage: 10 , currentPage: pageMain, totalItems: dataValue }" class="d-flex berita-utama" style="border-top: solid 1px #e0e0e0;">
+                                    <div class="post-thumb">
+                                        <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                                    </div>
+                                    <div class="post-data" (click)="detailBeritaGo(item.id, item.title, item.base64Image)">
+                                        <div (click)="newsCategori(item.category.categoryName)" class="post-catagory">
+                                            {{item.category.categoryName}}</div>
+                                        <div class="post-meta">
+                                            <h2>{{item.title}}</h2>
+                                            <p class="post-date">{{item.createdBy}} | {{item.releaseDate | date:'EEEE, MMMM d y h:mm:ss'}} WIB
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <pagination-controls id='main' (pageChange)="pageChangeMain($event)" maxSize="5"></pagination-controls>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <pagination-controls id='main' (pageChange)="pageChangeMain($event)" maxSize="5"></pagination-controls>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 side-laman-berita">
-          <div class="advertiser-sider">
-            <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
-          </div>
-          <div class="content-1">
-            <div class="section-heading">
-              <h5>Berita Terbaru</h5>
-            </div>
-            <div
-              *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }"
-              class="d-flex berita-kecil-sider">
-              <div class="post-thumb-kecil">
-                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
-              </div>
-              <div class="post-data-kecil" (click)="detailBeritaGo(item.id, item.title)">
-                <div class="post-meta-kecil">
-                  <p>{{item.title}}</p>
+                <div class="col-md-4 side-laman-berita">
+                    <div class="advertiser-sider">
+                        <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
+                    </div>
+                    <div class="content-1">
+                        <div class="section-heading">
+                            <h5>Berita Terbaru</h5>
+                        </div>
+                        <div *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }" class="d-flex berita-kecil-sider">
+                            <div class="post-thumb-kecil">
+                                <a href="#"><img [src]="config.fileSaverImage+item.base64Image" alt=""></a>
+                            </div>
+                            <div class="post-data-kecil" (click)="detailBeritaGo(item.id, item.title, item.base64Image)">
+                                <div class="post-meta-kecil">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
+                    </div>
                 </div>
-              </div>
             </div>
-            <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
-          </div>
         </div>
-      </div>
-    </div>
-    <nz-back-top [nzVisibilityHeight]="500">
-    </nz-back-top>
-    <app-footer></app-footer>
-  </nz-content>
+        <nz-back-top [nzVisibilityHeight]="500">
+        </nz-back-top>
+        <app-footer></app-footer>
+    </nz-content>
 </nz-layout>

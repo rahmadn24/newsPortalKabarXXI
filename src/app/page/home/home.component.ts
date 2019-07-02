@@ -73,11 +73,12 @@ export class HomeComponent implements OnInit {
     this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
-    this.router.navigate([`laman-berita/berita/${id}/${titleDone}`]);
+    this.router.navigate([`laman-berita/berita/${id}/${titleDone}/${image}`]);
     console.log(id, title);
   }
 
-  detailVideo(id, title) {
+  detailVideo(id, title, image) {
+
     this.window.scroll(0, 0);
     let titleDone = title.replace(/ /g, "-");
     titleDone = titleDone.replace(/\//g, "-");
@@ -86,7 +87,8 @@ export class HomeComponent implements OnInit {
         this.homeService.videoData = this.videoData[i];
       };
     };
-    this.router.navigate([`laman-berita/video/${id}/${titleDone}`]);
+
+    this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
   }
 
   newsCategori(kategori) {

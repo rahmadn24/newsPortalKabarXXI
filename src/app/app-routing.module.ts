@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'kategori/:kategori', component: NewsByCategoryComponent},
   { path: 'laman-berita/:type/:id/:title', component: LamanBeritaComponent},
+  { path: 'laman-berita/:type/:id/:title/:image', component: LamanBeritaComponent},
   { path: 'laman/:tag', component: LamanComponent},
   { path: 'laman-berita/:search', component: ResultSearchComponent}
 ];

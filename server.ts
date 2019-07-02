@@ -29,6 +29,9 @@ global["navigator"] = win.navigator;
 global["branch"] = null;
 global["object"] = win.object;
 global['Event'] = win.Event;
+global["btoa"] = win.btoa;
+global["atob"] = win.atob;
+
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
