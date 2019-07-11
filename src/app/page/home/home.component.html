@@ -8,8 +8,25 @@
             <div class="section-heading">
               <h5>Video</h5>
             </div>
-            <div class="item" *ngIf="videoData.length">
-              <ngx-skeleton-loader count="5" appearance="line"> </ngx-skeleton-loader>
+            <div class="fb-item" *ngIf="videoData.length==0">
+              <div class="first-section-wrapper" *ngFor="let item of [1,2]">
+                <div class="gravatar">
+                  <ngx-skeleton-loader appearance="circle"
+                    [theme]="{ width: '80px', 'border-radius': '5px', height: '80px' }">
+                  </ngx-skeleton-loader>
+                </div>
+                <div class="gravatar-title">
+                  <div>
+                    <ngx-skeleton-loader [theme]="{ width: '170px', 'border-radius': '0', height: '15px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                  <div>
+                    <ngx-skeleton-loader
+                      [theme]="{width: '200px','border-radius': '0',height: '15px','margin-bottom': '10px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                </div>
+              </div>
             </div>
             <div *ngFor="let item of videoData" class="berita-optional">
               <div class="video-thumb" (click)="detailVideo(item.id, item.title, item.base64Thumbnail)">
@@ -32,6 +49,26 @@
             <div class="section-heading">
               <h5>Most Popular</h5>
             </div>
+            <div class="fb-item" *ngIf="popularNewsData.length==0">
+              <div class="first-section-wrapper" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
+                <div class="gravatar">
+                  <ngx-skeleton-loader appearance="circle"
+                    [theme]="{ width: '80px', 'border-radius': '5px', height: '80px' }">
+                  </ngx-skeleton-loader>
+                </div>
+                <div class="gravatar-title">
+                  <div>
+                    <ngx-skeleton-loader [theme]="{ width: '170px', 'border-radius': '0', height: '15px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                  <div>
+                    <ngx-skeleton-loader
+                      [theme]="{width: '200px','border-radius': '0',height: '15px','margin-bottom': '10px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div *ngFor="let item of popularNewsData" class="d-flex berita-kecil-sider">
               <div class="post-thumb-kecil">
                 <a href="#"><img [src]="config.fileSaverImage+item.base64Image" [alt]="item.title"></a>
@@ -45,12 +82,12 @@
           </div>
         </div>
         <div class="col-md-5" style="padding: 0;">
-          <div class="content-1" style="background-color: #1b3682">
+          <div class="content-1" [ngStyle]="{'background-color' : mainNewsData.length == 0 ? '#fff' : '#1b3682'}">
             <div class="section-heading">
               <h5>News Feed</h5>
             </div>
-            <div class="fb-item" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
-              <div class="first-section-wrapper" *ngIf="mainNewsData.length">
+            <div class="fb-item" *ngIf="mainNewsData.length==0">
+              <div class="first-section-wrapper" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
                 <div class="gravatar">
                   <ngx-skeleton-loader appearance="circle"
                     [theme]="{ width: '80px', 'border-radius': '5px', height: '80px' }">
@@ -92,6 +129,26 @@
           <div class="content-1">
             <div class="section-heading">
               <h5>Latest News</h5>
+            </div>
+            <div class="fb-item" *ngIf="latestNewsData.length==0">
+              <div class="first-section-wrapper" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
+                <div class="gravatar">
+                  <ngx-skeleton-loader appearance="circle"
+                    [theme]="{ width: '80px', 'border-radius': '5px', height: '80px' }">
+                  </ngx-skeleton-loader>
+                </div>
+                <div class="gravatar-title">
+                  <div>
+                    <ngx-skeleton-loader [theme]="{ width: '170px', 'border-radius': '0', height: '15px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                  <div>
+                    <ngx-skeleton-loader
+                      [theme]="{width: '200px','border-radius': '0',height: '15px','margin-bottom': '10px'}">
+                    </ngx-skeleton-loader>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               *ngFor="let item of latestNewsData | paginate: {id: 'latest', itemsPerPage: 10 , currentPage: pageLatest, totalItems: dataValueLatest }"

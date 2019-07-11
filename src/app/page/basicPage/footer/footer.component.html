@@ -3,6 +3,11 @@
     <div class="section-heading">
       <h5>Advertiser</h5>
     </div>
+    <div class="item center-text" *ngIf="dataAdvertiser.length==0">
+      <ngx-skeleton-loader count="4" appearance="circle"
+        [theme]="{ width: '120px', height: '120px', 'border-radius': '10px' }">
+      </ngx-skeleton-loader>
+    </div>
     <div class="row">
       <div class="col-md-3 advertiser"
         *ngFor="let item of dataAdvertiser | paginate: {id: 'advertiser', itemsPerPage: 8 , currentPage: pageAdvertiser, totalItems: countAdvertiser}">
