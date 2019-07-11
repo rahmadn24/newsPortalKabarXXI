@@ -10,8 +10,10 @@ import { FooterService } from '../../../providers/page/footer.service';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  dataBerita: any;
-  image: any;
+
+  dataAdvertiser = [];
+  countAdvertiser = 0;
+  pageAdvertiser = 0;
 
   constructor(@Inject(WINDOW) private window: Window,
     private router: Router,
@@ -20,9 +22,20 @@ export class FooterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.foooterService.requestDataFromMultipleSources().subscribe(res => {
-      this.dataBerita = res[0].data;
-      this.image = this.dataBerita.base64Image;
+    this.getAdvertiserData(0);
+  }
+
+  getAdvertiserData(page) {
+
+    let params = {
+      page: page,
+      size: 8,
+      sort: 'CreatedDate,DESC'
+    };
+
+    this.foooterService.getAdvertiser(params).subscribe(res => {
+      this.dataAdvertiser = res.data;
+      this.countAdvertiser = res.count;
     });
   }
 
@@ -46,14 +59,12 @@ export class FooterComponent implements OnInit {
 
   follow(data) {
     console.log(data);
-    if (data == 'facebook') {
-      this.window.open(this.config.facebook, '_blank');
-    } else if (data == 'twitter') {
-      this.window.open(this.config.twitter, '_blank');
-    } else if (data == 'youtube') {
-      this.window.open(this.config.youtube, '_blank');
-    } else if (data == 'instagram') {
-      this.window.open(this.config.instagram, '_blank');
-    }
+    this.window.open(this.config[data], '_blank');
   }
+
+  changePageAdvertiser(page) {
+    this.pageAdvertiser = page;
+    this.getAdvertiserData(page - 1);
+  }
+
 }

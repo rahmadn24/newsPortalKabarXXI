@@ -1,0 +1,27 @@
+<nz-layout class="layout">
+  <app-header></app-header>
+  <nz-content>
+
+    <div class="container" style="padding:0">
+      <div nz-row>
+        <div class="section-heading">
+          <h5>News Video</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-3"
+            *ngFor="let video of videoData | paginate: {id: 'video', itemsPerPage: 10 , currentPage: pageVideo, totalItems: dataValue}">
+            <div class="video-thumb padding10" (click)="detailVideo(video.id, video.title, video.base64Thumbnail)">
+              <img [src]="config.fileSaverImage+video.base64Thumbnail" alt="video.title">
+              <button class="btn-thumb"></button>
+            </div>
+            <p class="videos-title">{{video.title}}</p>
+          </div>
+        </div>
+        <pagination-controls id='video' (pageChange)="pageChangeVideo($event)"></pagination-controls>
+      </div>
+    </div>
+    <nz-back-top [nzVisibilityHeight]="500">
+    </nz-back-top>
+    <app-footer></app-footer>
+  </nz-content>
+</nz-layout>

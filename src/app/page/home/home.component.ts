@@ -11,10 +11,10 @@ import { Config } from '../../config/config';
 export class HomeComponent implements OnInit {
 
   mostPopular = true;
-  mainNewsData: any;
-  videoData: any;
-  latestNewsData: any;
-  popularNewsData: any;
+  mainNewsData = [];
+  videoData = [];
+  latestNewsData = [];
+  popularNewsData = [];
 
   collection = [];
   dataValue: any;
@@ -41,11 +41,13 @@ export class HomeComponent implements OnInit {
   }
 
   getMainNews(param) {
+
     let data = {
       page: param,
       size: 10,
       sort: 'CreatedDate,DESC'
-    }
+    };
+
     this.homeService.getMainNews(data).subscribe(res => {
       this.mainNewsData = res.data;
       if (!this.dataValue) {
@@ -55,11 +57,13 @@ export class HomeComponent implements OnInit {
   }
 
   getLatestNews(param) {
+
     let data = {
       page: param,
       size: 10,
       sort: 'CreatedDate,DESC'
-    }
+    };
+
     this.homeService.getLatestNews(data).subscribe(res => {
       this.latestNewsData = res.data;
       if (!this.dataValueLatest) {
@@ -77,19 +81,25 @@ export class HomeComponent implements OnInit {
     console.log(id, title);
   }
 
-  detailVideo(id, title, image) {
-
-    this.window.scroll(0, 0);
-    let titleDone = title.replace(/ /g, "-");
-    titleDone = titleDone.replace(/\//g, "-");
-    for (let i = 0; i < this.videoData.length; i++) {
-      if (this.videoData[i].id == id) {
-        this.homeService.videoData = this.videoData[i];
-      };
-    };
-
-    this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
+  listVideo() {
+    this.router.navigate(['laman-video']);
   }
+
+  // detailVideo(id, title, image) {
+
+  //   this.window.scroll(0, 0);
+  //   let titleDone = title.replace(/ /g, "-");
+  //   titleDone = titleDone.replace(/\//g, "-");
+  //   for (let i = 0; i < this.videoData.length; i++) {
+  //     if (this.videoData[i].id == id) {
+  //       this.homeService.videoData = this.videoData[i];
+  //     };
+  //   };
+
+  //   // this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
+  //   this.router.navigate([`laman-video`]);
+
+  // }
 
   newsCategori(kategori) {
     this.router.navigate([`kategori/${kategori}`]);
