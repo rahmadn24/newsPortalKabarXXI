@@ -9,7 +9,6 @@ import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import en from '@angular/common/locales/en';
 import { HeaderComponent } from './page/basicPage/header/header.component';
 import { HomeComponent } from './page/home/home.component';
 import { MatIconModule, MatSidenavModule, MatGridListModule, MatTabsModule } from '@angular/material';
@@ -35,6 +34,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 import { NewsVideoComponent } from './page/news-video/news-video.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MetaModule } from '@ngx-meta/core';
 
 registerLocaleData(localeId, 'id');
 
@@ -78,6 +78,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     TransferHttpCacheModule,
     ShareButtonsModule,
     ShareModule,
+    MetaModule.forRoot(),
     NgxSkeletonLoaderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },

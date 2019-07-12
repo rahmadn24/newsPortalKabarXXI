@@ -11,7 +11,7 @@ import { Config } from '../../config/config';
 })
 export class NewsVideoComponent implements OnInit {
 
-  videoData: any;
+  videoData = [];
   dataValue = 0;
   pageVideo: number = 0;
 

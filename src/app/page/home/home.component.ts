@@ -85,21 +85,20 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['laman-video']);
   }
 
-  // detailVideo(id, title, image) {
+  detailVideo(id, title, image) {
 
-  //   this.window.scroll(0, 0);
-  //   let titleDone = title.replace(/ /g, "-");
-  //   titleDone = titleDone.replace(/\//g, "-");
-  //   for (let i = 0; i < this.videoData.length; i++) {
-  //     if (this.videoData[i].id == id) {
-  //       this.homeService.videoData = this.videoData[i];
-  //     };
-  //   };
+    this.window.scroll(0, 0);
+    let titleDone = title.replace(/ /g, "-");
+    titleDone = titleDone.replace(/\//g, "-");
+    for (let i = 0; i < this.videoData.length; i++) {
+      if (this.videoData[i].id == id) {
+        this.homeService.videoData = this.videoData[i];
+      };
+    };
 
-  //   // this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
-  //   this.router.navigate([`laman-video`]);
+    this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
 
-  // }
+  }
 
   newsCategori(kategori) {
     this.router.navigate([`kategori/${kategori}`]);

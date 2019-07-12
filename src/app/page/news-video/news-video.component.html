@@ -8,13 +8,21 @@
           <h5>News Video</h5>
         </div>
         <div class="row">
+          <div class="item center-text" *ngIf="videoData.length==0">
+            <ngx-skeleton-loader count="4" appearance="circle"
+              [theme]="{ width: '120px', height: '120px', 'border-radius': '10px' }">
+            </ngx-skeleton-loader>
+          </div>
           <div class="col-md-3"
             *ngFor="let video of videoData | paginate: {id: 'video', itemsPerPage: 10 , currentPage: pageVideo, totalItems: dataValue}">
             <div class="video-thumb padding10" (click)="detailVideo(video.id, video.title, video.base64Thumbnail)">
-              <img [src]="config.fileSaverImage+video.base64Thumbnail" alt="video.title">
+              <a (click)="detailVideo(video.id, video.title, video.base64Thumbnail)"> <img
+                  [src]="config.fileSaverImage+video.base64Thumbnail" alt="video.title"></a>
               <button class="btn-thumb"></button>
             </div>
-            <p class="videos-title">{{video.title}}</p>
+            <a (click)="detailVideo(video.id, video.title, video.base64Thumbnail)">
+              <p class="videos-title">{{video.title}}</p>
+            </a>
           </div>
         </div>
         <pagination-controls id='video' (pageChange)="pageChangeVideo($event)"></pagination-controls>
