@@ -9,7 +9,6 @@ import { NgZorroAntdModule, NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import en from '@angular/common/locales/en';
 import { HeaderComponent } from './page/basicPage/header/header.component';
 import { HomeComponent } from './page/home/home.component';
 import { MatIconModule, MatSidenavModule, MatGridListModule, MatTabsModule } from '@angular/material';
@@ -34,6 +33,7 @@ import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
+import { AdsenseModule } from 'ng2-adsense';
 
 registerLocaleData(localeId, 'id');
 
@@ -95,6 +95,10 @@ export function metaFactory(): MetaLoader {
     MetaModule.forRoot({
       provide: MetaLoader,
       useFactory: (metaFactory)
+    }),
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-5028324603407349',
+      adSlot: 7259870550,
     })
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
