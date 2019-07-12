@@ -304,3 +304,80 @@
 .video-thumb .btn-thumb:hover {
   background-color: black;
 }
+
+.padding10 {
+  padding: 10px;
+}
+
+.ant-btn-primary {
+  background-color: #20409a;
+  color: #fed019;
+
+  :hover {
+    background-color: #20409a;
+    color: #fed019;
+  }
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  color: #fed019;
+  background-color: #3d569c;
+  border-color: #3d569c;
+}
+
+.item {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  // border: 1px solid #eaeaea;
+  padding: 10px;
+}
+
+.fb-item {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  // border: 1px solid #eaeaea;
+  padding: 10px;
+}
+
+.gravatar {
+  width: 100px;
+  height: 90px;
+}
+
+.gravatar-title {
+  width: 500px;
+  padding: 10px;
+  height: 80px;
+}
+
+.first-section-wrapper,
+.second-section-wrapper {
+  width: 100%;
+  height: auto;
+  flex: 1;
+}
+
+.first-section-wrapper {
+  display: inline-flex;
+}
+
+.second-section-wrapper {
+  margin-top: 30px;
+}
+
+.wrapper {
+  width: 100%;
+  flex: 1;
+}
+
+.item-with-background {
+  background: #FF0001;
+  padding: 10px;
+}
+
+.center-text {
+  text-align: center;
+}

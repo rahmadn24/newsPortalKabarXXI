@@ -14,3 +14,17 @@
 .post-catagory {
   color: #007bff;
 }
+
+.button-lihat {
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 130%;
+    color: #fed019;
+  }
+
+  p:hover {
+    color: #fff;
+    transition: 1s;
+  }
+}

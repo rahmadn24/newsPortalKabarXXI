@@ -1,0 +1,45 @@
+.berita-utama {
+  padding: 12px 10px;
+  margin: 0;
+  border-bottom: solid 1px #13265b;
+  border-top: solid 1px #2346a8;
+}
+
+.berita-optional {
+  padding: 12px 10px;
+  margin: 0;
+  border-top: solid 1px #e0e0e0;
+}
+
+.post-catagory {
+  color: #007bff;
+}
+
+.videos {
+  height: 100%;
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+  }
+}
+
+.videos-title {
+  text-align: center;
+  padding: 10px;
+}
+
+.col-md-3 {
+  background: #ffff;
+}
+
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.ant-row {
+  background: #fff;
+}

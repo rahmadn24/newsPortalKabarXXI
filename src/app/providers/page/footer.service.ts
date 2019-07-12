@@ -9,7 +9,7 @@ import { forkJoin, Observable } from 'rxjs';
 export class FooterService {
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private commonApi: CommonApiService
   ) { }
 
@@ -17,6 +17,12 @@ export class FooterService {
 
     let getAdvertiser = this.commonApi.get('public/v1/advertiser');
     return forkJoin([getAdvertiser]);
+
+  }
+
+  public getAdvertiser(params) {
+
+    return this.commonApi.get('public/v1/advertiser/new', params);
 
   }
 }
