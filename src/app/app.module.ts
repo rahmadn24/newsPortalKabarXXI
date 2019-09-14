@@ -60,6 +60,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NewsVideoComponent
   ],
   imports: [
+    NgxSkeletonLoaderModule,
     NgxUiLoaderModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
@@ -84,7 +85,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
       adClient: 'ca-pub-5028324603407349',
       adSlot: 7259870550,
     }),
-    NgxSkeletonLoaderModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
     HomeService,

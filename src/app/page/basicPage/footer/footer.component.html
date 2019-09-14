@@ -1,68 +1,62 @@
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5028324603407349" data-ad-slot="5694570849" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <div class="container adv" style="padding:0">
-  <div nz-row>
-    <div class="section-heading">
-      <h5>Advertiser</h5>
+    <div nz-row>
+        <div class="section-heading">
+            <h5>Advertiser</h5>
+        </div>
+        <div class="item center-text" *ngIf="dataAdvertiser.length==0">
+            <ngx-skeleton-loader count="4" appearance="circle" [theme]="{ width: '120px', height: '120px', 'border-radius': '10px' }">
+            </ngx-skeleton-loader>
+        </div>
+        <div class="row">
+            <div class="col-md-3 advertiser" *ngFor="let item of dataAdvertiser | paginate: {id: 'advertiser', itemsPerPage: 8 , currentPage: pageAdvertiser, totalItems: countAdvertiser}">
+                <img [src]=" config.fileSaverImage+item.base64Image" alt="">
+            </div>
+        </div>
+        <pagination-controls id='advertiser' (pageChange)="changePageAdvertiser($event)"></pagination-controls>
     </div>
-    <div class="item center-text" *ngIf="dataAdvertiser.length==0">
-      <ngx-skeleton-loader count="4" appearance="circle"
-        [theme]="{ width: '120px', height: '120px', 'border-radius': '10px' }">
-      </ngx-skeleton-loader>
-    </div>
-    <div class="row">
-      <div class="col-md-3 advertiser"
-        *ngFor="let item of dataAdvertiser | paginate: {id: 'advertiser', itemsPerPage: 8 , currentPage: pageAdvertiser, totalItems: countAdvertiser}">
-        <img [src]=" config.fileSaverImage+item.base64Image" alt="">
-      </div>
-    </div>
-    <pagination-controls id='advertiser' (pageChange)="changePageAdvertiser($event)"></pagination-controls>
-  </div>
 </div>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5028324603407349" data-ad-slot="5694570849" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <div class="container footer" style="background-color:#222222;margin-top: 1%">
-  <div class="row">
-    <div class="col-md-6 logo-footer">
-      <img class="imageHeader" src="../../../../assets/img/logoKabarxxi.png">
-      <div nz-row nzType="flex" style="margin-top: 2%;" class="logo-footer">
-        <div nz-col nzSpan="2">
-          <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png" alt="">
+    <div class="row">
+        <div class="col-md-6 logo-footer">
+            <img class="imageHeader" src="../../../../assets/img/logoKabarxxi.png">
+            <div nz-row nzType="flex" style="margin-top: 2%;" class="logo-footer">
+                <div nz-col nzSpan="2">
+                    <img class="socmed-icon" (click)="follow('facebook')" src="../../../../assets/icon/facebook.png" alt="">
+                </div>
+                <div nz-col nzSpan="2">
+                    <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png" alt="">
+                </div>
+                <div nz-col nzSpan="2">
+                    <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
+                </div>
+                <div nz-col nzSpan="2">
+                    <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
+                </div>
+            </div>
         </div>
-        <div nz-col nzSpan="2">
-          <img class="socmed-icon" (click)="follow('instagram')" src="../../../../assets/icon/instagram.png" alt="">
+        <div class="col-md-6">
+            <div class="col-md-12" class="avai">
+                <span>KabarXXI App Available At</span>
+            </div>
+            <div class="col-md-12 logo-playstore">
+                <img (click)="getAt('play')" class="imageGetAt" src="../../../../assets/icon/playstore.png">
+                <img (click)="getAt('app')" class="imageGetAt" src="../../../../assets/icon/app-store.png">
+            </div>
         </div>
-        <div nz-col nzSpan="2">
-          <img class="socmed-icon" (click)="follow('twitter')" src="../../../../assets/icon/twitter.png" alt="">
+        <div class="col-md-12 laman-link">
+            <hr>
+            <a (click)="laman('Syarat dan Ketentuan')" class="btn primary min">Syarat Dan Ketentuan</a> .
+            <a (click)="laman('About')" class="btn primary min">About</a> .
+            <a (click)="laman('Contact')" class="btn primary min">Contact</a> .
+            <a (click)="laman('Redaksi')" class="btn primary min">Redaksi</a> .
+            <a (click)="laman('Pedoman Media Siber')" class="btn primary min">Pedoman Media Siber</a> .
+            <a (click)="laman('Kontributor Berita')" class="btn primary min">Kontributor Berita</a> .
+            <a (click)="laman('Kebijakan Privasi')" class="btn primary min">Kebijakan Privasi</a>
         </div>
-        <div nz-col nzSpan="2">
-          <img class="socmed-icon" (click)="follow('youtube')" src="../../../../assets/icon/youtube.png" alt="">
+        <div class="col-md-12 copiright">
+            Copyright © 2019 KabarXXI.Com. All rights reserved
         </div>
-      </div>
     </div>
-    <div class="col-md-6">
-      <div class="col-md-12" class="avai">
-        <span>KabarXXI App Available At</span>
-      </div>
-      <div class="col-md-12 logo-playstore">
-        <img (click)="getAt('play')" class="imageGetAt" src="../../../../assets/icon/playstore.png">
-        <img (click)="getAt('app')" class="imageGetAt" src="../../../../assets/icon/app-store.png">
-      </div>
-    </div>
-    <div class="col-md-12 laman-link">
-      <hr>
-      <a (click)="laman('Syarat dan Ketentuan')" class="btn primary min">Syarat Dan Ketentuan</a>
-      .
-      <a (click)="laman('About')" class="btn primary min">About</a>
-      .
-      <a (click)="laman('Contact')" class="btn primary min">Contact</a>
-      .
-      <a (click)="laman('Redaksi')" class="btn primary min">Redaksi</a>
-      .
-      <a (click)="laman('Pedoman Media Siber')" class="btn primary min">Pedoman Media Siber</a>
-      .
-      <a (click)="laman('Kontributor Berita')" class="btn primary min">Kontributor Berita</a>
-      .
-      <a (click)="laman('Kebijakan Privasi')" class="btn primary min">Kebijakan Privasi</a>
-    </div>
-    <div class="col-md-12 copiright">
-      Copyright © 2019 KabarXXI.Com. All rights reserved
-    </div>
-  </div>
 </div>
