@@ -1,0 +1,21 @@
+{
+    "/api": {
+        "target": "http://202.157.176.44:8082/",
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/czNjcjN0dmlkZW8ta2FiYXJ4eGktcjRoNHMxNA": {
+        "target": "http://202.157.176.44:8083/",
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/cjRoNHMxNHZpZGVvLXMzY3IzdC1rYWJhcnh4aQ": {
+        "target": "http://202.157.176.44:8083/",
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
+    }
+
+}

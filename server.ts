@@ -20,6 +20,8 @@ const templateA = fs
   .readFileSync(path.join("dist/browser", "index.html"))
   .toString();
 const win = domino.createWindow(templateA);
+const proxy = require('http-proxy-middleware');
+
 win.Object = Object;
 win.Math = Math;
 
@@ -50,6 +52,24 @@ app.engine('html', ngExpressEngine({
 app.set('view engine', 'html');
 app.set('views', './dist/browser');
 
+app.use('/api', proxy({
+  target: "http://202.157.176.44:8082/",
+  changeOrigin: true,
+  secure: false,
+}));
+
+app.use('/czNjcjN0dmlkZW8ta2FiYXJ4eGktcjRoNHMxNA', proxy({
+  target: "http://202.157.176.44:8083/",
+  changeOrigin: true,
+  secure: false,
+}));
+
+app.use('/cjRoNHMxNHZpZGVvLXMzY3IzdC1rYWJhcnh4aQ', proxy({
+  target: "http://202.157.176.44:8083/",
+  changeOrigin: true,
+  secure: false,
+}));
+
 app.get('/redirect/**', (req, res) => {
   const location = req.url.substring(10);
   res.redirect(301, location);
@@ -69,3 +89,5 @@ app.get('/*', (req, res) => {
     }
   });
 });
+
+app.listen(80);
