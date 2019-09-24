@@ -1,9 +1,9 @@
 <nz-layout class="layout">
-    <app-header></app-header>
+    <app-header *ngIf="videoData.length>=0"></app-header>
     <nz-content>
         <div class="container main-content">
             <div class="row">
-                <div class="col-md-3" style="padding-left: 0;">
+                <div class="col-md-3">
                     <div class="content-1">
                         <div class="section-heading">
                             <h5>Video</h5>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5" style="padding: 0;">
+                <div class="col-md-5">
                     <div class="content-1" [ngStyle]="{'background-color' : mainNewsData.length == 0 ? '#fff' : '#1b3682'}">
                         <div class="section-heading">
                             <h5>News Feed</h5>
@@ -116,7 +116,7 @@
                     </div>
                     <pagination-controls id='main' (pageChange)="pageChangeMain($event)"></pagination-controls>
                 </div>
-                <div class="col-md-4" style="padding-right: 0;">
+                <div class="col-md-4">
                     <div class="content-1">
                         <div class="section-heading">
                             <h5>Latest News</h5>

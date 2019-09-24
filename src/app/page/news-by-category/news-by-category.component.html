@@ -10,15 +10,18 @@
                         </div>
                         <div *ngFor="let item of videoData" class="berita-optional">
                             <div class="video-thumb" (click)="detailVideo(item.id, item.title, item.base64Thumbnail)">
-                                <!-- <video [src]="config.fileSaverVideo+item.base64Video" controls>
-                  </video> --><img [src]="config.fileSaverImage+item.base64Thumbnail" [alt]="item.title">
+                                <img [src]="config.fileSaverImage+item.base64Thumbnail" [alt]="item.title">
                                 <button class="btn-thumb"></button>
                             </div>
-                            <div class="post-data" style="float:none" (click)="detailBerita(item.id, item.title, item.base64Thumbnail)">
-                                <div class="post-meta">
+                            <div class="post-data" style="float:none" (click)="detailVideo(item.id, item.title, item.base64Thumbnail)">
+                                <div class="post-meta center-text">
                                     <p>{{item.title}}</p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="center-text" (click)="listVideo()">
+                            <button nz-button (click)="listVideo()" nzType="primary" nzShape="round" style="margin-right:5px">Semua
+                Video</button>
                         </div>
                     </div>
                     <!-- <div class="advertiser-sider">

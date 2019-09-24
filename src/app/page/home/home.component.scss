@@ -1,30 +1,59 @@
 .berita-utama {
-  padding: 12px 10px;
-  margin: 0;
-  border-bottom: solid 1px #13265b;
-  border-top: solid 1px #2346a8;
+    padding: 12px 10px;
+    margin: 0;
+    border-bottom: solid 1px #13265b;
+    border-top: solid 1px #2346a8;
 }
 
 .berita-optional {
-  padding: 12px 10px;
-  margin: 0;
-  border-top: solid 1px #e0e0e0;
+    padding: 12px 10px;
+    margin: 0;
+    border-top: solid 1px #e0e0e0;
 }
 
 .post-catagory {
-  color: #007bff;
+    color: #007bff;
 }
 
 .button-lihat {
-  p {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 130%;
-    color: #fed019;
-  }
+    p {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 130%;
+        color: #fed019;
+    }
+    p:hover {
+        color: #fff;
+        transition: 1s;
+    }
+}
 
-  p:hover {
-    color: #fff;
-    transition: 1s;
-  }
+.col-md-3 .col-md-5 .col-md-4 {
+    @media screen and (min-width: 540px) {
+        padding: unset;
+    }
+}
+
+.col-md-3 {
+    @media (min-width: 768px) {
+        padding-left: 0;
+    }
+}
+
+.col-md-3 {
+    @media (min-width: 768px) {
+        padding-left: 0;
+    }
+}
+
+.col-md-4 {
+    @media (min-width: 768px) {
+        padding-right: 0;
+    }
+}
+
+.col-md-5 {
+    @media (min-width: 768px) {
+        padding: 0;
+    }
 }

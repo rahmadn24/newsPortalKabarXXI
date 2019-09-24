@@ -28,7 +28,13 @@ export class NewsByCategoryService {
       sort: 'CreatedDate,DESC'
     };
 
-    let getVideo = this.commonApi.get("public/v1/video");
+    let paramsVideo = {
+      page: 0,
+      size: 2,
+      sort: 'CreatedDate,DESC'
+    };
+
+    let getVideo = this.commonApi.get("public/v1/video/new", paramsVideo);
     let getPopularNews = this.commonApi.get("public/v1/news/popular", params);
 
     return forkJoin([getVideo, getPopularNews]);

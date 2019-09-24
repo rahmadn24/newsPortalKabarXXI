@@ -102,6 +102,10 @@ export class NewsByCategoryComponent implements OnInit {
     this.router.navigate([`laman-berita/video/${id}/${titleDone}/${image}`]);
   }
 
+  listVideo() {
+    this.router.navigate(['laman-video']);
+  }
+
   pageChangeMain(data) {
     this.pageMain = data;
     this.getMainNews(data - 1);

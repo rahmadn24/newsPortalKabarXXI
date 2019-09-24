@@ -1,74 +1,84 @@
 .menu-list {
-  background-color: #20409a;
-  color: white;
-  border-bottom: 4px solid #fe8917;
-  margin-top: 1%;
-  li {
-    padding: 0px 20px;
-    border-right: 1px solid #e0e5ea;
-    font-weight: 600;
-  }
+    background-color: #20409a;
+    color: white;
+    border-bottom: 2px solid #fe8917;
+    margin-top: 1%;
+    li {
+        padding: 0px 20px;
+        border-right: 1px solid #2d24b9;
+        font-weight: 600;
+    }
 }
+
 .menu-text {
-  float: right;
-  margin-top: 5px;
-  margin-left: 5px;
-  @media screen and (max-width: 540px) {
-    display: none;
-  }
+    float: right;
+    margin-top: 5px;
+    margin-left: 5px;
+    @media screen and (max-width: 540px) {
+        display: none;
+    }
 }
+
 .logoHeader {
-  width: 100%;
-  height: 95px;
-  padding: 10% 0% 0% 0%;
-  float: left;
+    width: 100%;
+    height: 95px;
+    padding: 10% 0% 0% 0%;
+    float: left;
 }
+
 .header-items {
-  padding: 10px;
-  @media screen and (max-width: 540px) {
-    position: absolute;
-    margin-left: 15px;
-    display: inherit;
-    width: 80%;
-  }
+    padding: 10px;
+    @media screen and (max-width: 540px) {
+        position: absolute;
+        margin-left: 15px;
+        display: inherit;
+        width: 80%;
+    }
 }
 
 .profile {
-  @media screen and (max-width: 540px) {
-    display: none;
-  }
+    @media screen and (max-width: 540px) {
+        display: none;
+    }
 }
 
 .button-menu {
-  padding: 10px;
-  border-right: 1px solid #e0e5ea;
-  @media screen and (max-width: 540px) {
-    border: none;
-  }
+    padding: 10px;
+    border-right: 1px solid #e0e5ea;
+    @media screen and (max-width: 540px) {
+        border: none;
+    }
 }
 
 .button-click-menu {
-  float: right;
-  @media screen and (max-width: 540px) {
-    margin-right: 10px;
-  }
+    float: right;
+    @media screen and (max-width: 540px) {
+        margin-right: 10px;
+    }
 }
 
 .menu-header {
-  @media screen and (max-width: 540px) {
-    display: none;
-  }
+    @media screen and (max-width: 540px) {
+        display: none;
+    }
 }
 
 .menu-sider {
-  @media screen and (max-width: 540px) {
-    display: inherit;
-    padding: 0 5px;
-  }
+    @media screen and (max-width: 540px) {
+        display: inherit;
+        padding: 0 5px;
+    }
 }
 
 .profile-sider {
-  @media screen and (min-width: 540px) {
-    display: none;
-  }
+    @media screen and (min-width: 540px) {
+        display: none;
+    }
+}
+
+.img-banner-ads {
+    background-image: url('../../../../assets/img/banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
