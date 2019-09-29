@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   dataValueLatest: any;
   pageLatest: number = 0;
   pageMain: number = 0;
+  showHeader = false;
+
   constructor(@Inject(WINDOW) private window: Window,
     private homeService: HomeService,
     private router: Router,
@@ -28,6 +30,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.showHeader = true;
+    }, 10);
     this.getData();
   }
 

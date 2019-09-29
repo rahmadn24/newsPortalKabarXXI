@@ -1,28 +1,28 @@
 <nz-layout class="layout">
-  <app-header></app-header>
-  <nz-content>
-    <div class="container main-content">
-      <div class="row">
-        <div class="col-md-12" style="padding-left: 0;">
-          <div class="f1">KabarXXI Inside</div>
-        </div>
-        <div class="col-md-9" style="padding:0">
-            <div class="content-berita">
-              <div class="col-md-12 detail-berita">
-                <h3>
-                  {{tag}}
-                </h3>
-                <div class="image-berita">
-                  <img style="width:60%" [src]="image" alt="">
+    <app-header></app-header>
+    <nz-content>
+        <div class="container main-content">
+            <div class="row">
+                <div class="col-md-12" style="padding-left: 0;">
+                    <div class="f1">KabarXXI Inside</div>
                 </div>
-                <div class="pokok-berita">
-                  <div [innerHTML]="description"></div>
+                <div class="col-md-9" style="padding:0">
+                    <div class="content-berita">
+                        <div class="col-md-12 detail-berita">
+                            <h3>
+                                {{tag}}
+                            </h3>
+                            <div class="image-berita">
+                                <img style="width:60%" [src]="image" alt="">
+                            </div>
+                            <div class="pokok-berita">
+                                <div [innerHTML]="description"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        <div class="col-md-3 side-laman-berita">
-          <!-- <div class="content-1">
+                <div class="col-md-3 side-laman-berita">
+                    <!-- <div class="content-1">
             <div class="section-heading">
               <h5>Berita Terbaru</h5>
             </div>
@@ -37,14 +37,14 @@
               </div>
             </div>
           </div> -->
-          <div class="advertiser-sider">
-            <img src="../../../assets/img/advertiser_sider.jpeg" alt="">
-          </div>
+                    <div class="advertiser-sider">
+                        <img src="/assets/img/advertiser_sider.jpeg" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <nz-back-top [nzVisibilityHeight]="500">
-    </nz-back-top>
-    <app-footer></app-footer>
-  </nz-content>
+        <nz-back-top [nzVisibilityHeight]="500">
+        </nz-back-top>
+        <app-footer></app-footer>
+    </nz-content>
 </nz-layout>
