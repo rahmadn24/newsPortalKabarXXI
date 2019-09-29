@@ -12,7 +12,7 @@
 
 .menu-text {
     float: right;
-    margin-top: 5px;
+    margin-top: 9px;
     margin-left: 5px;
     @media screen and (max-width: 540px) {
         display: none;
@@ -27,12 +27,12 @@
 }
 
 .header-items {
-    padding: 10px;
+    padding: 15px;
     @media screen and (max-width: 540px) {
         position: absolute;
         margin-left: 15px;
         display: inherit;
-        width: 80%;
+        width: 100%;
     }
 }
 
@@ -77,8 +77,15 @@
 }
 
 .img-banner-ads {
-    background-image: url('../../../../assets/img/banner.jpg');
+    background-image: url("../../../../assets/img/bannertop.jpeg");
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;
+    background-size: 100% 100%;
+}
+
+.group-search {
+    width: 50%;
+    @media screen and (max-width: 540px) {
+        width: 80%;
+    }
 }

@@ -61,7 +61,7 @@ export class LamanBeritaComponent implements OnInit {
     private titleService: Title,
     private readonly meta: MetaService
 
-  ) { 
+  ) {
 
   }
 
@@ -72,9 +72,9 @@ export class LamanBeritaComponent implements OnInit {
     this.meta.setTag('description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
     this.meta.setTag('og:description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
 
-    if(this.activeRoute.snapshot.paramMap.get('image')){
+    if (this.activeRoute.snapshot.paramMap.get('image')) {
       const imageName = this.config.fileSaverImage + this.activeRoute.snapshot.paramMap.get('image');
-      this.meta.setTag('og:image',  imageName);
+      this.meta.setTag('og:image', imageName);
     }
 
     if (this.activeRoute.snapshot.paramMap.get('type') == 'berita') {
@@ -109,7 +109,7 @@ export class LamanBeritaComponent implements OnInit {
 
     if (this.titleBeritaRoute) {
       if (this.titleBeritaRoute !== this.activeRoute.snapshot.paramMap.get('title')) {
-        this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title')
+        this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
         this.ngOnInit();
       }
     }

@@ -170,7 +170,7 @@ export class HeaderComponent implements OnInit {
     return {};
   };
 
-  onKeyDown() {
+  search() {
     if (this.searchValue) {
       this.router.navigate([`laman-berita/${this.searchValue}`]);
     }

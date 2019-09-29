@@ -26,7 +26,7 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import localeId from '@angular/common/locales/id';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { ShareButtonsModule } from '@ngx-share/buttons';
-import { ShareModule } from '@ngx-share/core';
+import { ShareModule, ShareButtonsConfig } from '@ngx-share/core';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
@@ -44,8 +44,12 @@ library.add(faFacebookF, faTwitter, faWhatsapp);
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
-
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+const customConfig: ShareButtonsConfig = {
+  exclude: [],
+  gaTracking: true,
+  autoSetMeta: true,
+};
 
 @NgModule({
   declarations: [
@@ -85,6 +89,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
       adClient: 'ca-pub-5028324603407349',
       adSlot: 7259870550,
     }),
+    ShareButtonsModule.withConfig(customConfig)
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: LOCALE_ID, useValue: 'id' }, { provide: NZ_ICONS, useValue: icons },
     HomeService,

@@ -12,11 +12,11 @@ export class AppComponent implements OnInit {
   location: Location;
   ngOnInit() {
 
-    if (environment.production) {
-      if (location.protocol === 'http:') {
-        window.location.href = location.href.replace('http', 'https');
-      }
-    }
+    // if (environment.production) {
+    //   if (location.protocol === 'http:') {
+    //     window.location.href = location.href.replace('http', 'https');
+    //   }
+    // }
 
   }
 

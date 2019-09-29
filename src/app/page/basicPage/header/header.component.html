@@ -9,8 +9,8 @@
         </div>
         <div class="col-md-6 header-items" style="text-align:center">
             <form action="search()"></form>
-            <nz-input-group [nzSuffix]="suffixIconSearch" style="width: 40%;">
-                <input (keydown.enter)="onKeyDown()" [(ngModel)]="searchValue" style="border-radius: 50px;" type="text" nz-input placeholder="Cari Berita" />
+            <nz-input-group [nzSuffix]="suffixIconSearch" class="group-search">
+                <input (keydown.enter)="search()" [(ngModel)]="searchValue" style="border-radius: 50px;" type="text" nz-input placeholder="Cari Berita" />
             </nz-input-group>
             <ng-template #suffixIconSearch>
                 <i nz-icon type="search"></i>
