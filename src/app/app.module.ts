@@ -87,7 +87,7 @@ const customConfig: ShareButtonsConfig = {
     MetaModule.forRoot(),
     AdsenseModule.forRoot({
       adClient: 'ca-pub-5028324603407349',
-      adSlot: 7259870550,
+      adSlot: 4234149515,
     }),
     ShareButtonsModule.withConfig(customConfig)
   ],
