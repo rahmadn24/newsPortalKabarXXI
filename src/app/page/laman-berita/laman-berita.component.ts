@@ -67,10 +67,10 @@ export class LamanBeritaComponent implements OnInit {
 
   ngOnInit() {
 
-
-    this.titleService.setTitle(this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
-    this.meta.setTag('description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
-    this.meta.setTag('og:description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, " "));
+    this.meta.setTag('og:url', window.location.href);
+    this.titleService.setTitle(this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
+    this.meta.setTag('description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
+    this.meta.setTag('og:description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
 
     if (this.activeRoute.snapshot.paramMap.get('image')) {
       const imageName = this.config.fileSaverImage + this.activeRoute.snapshot.paramMap.get('image');
@@ -84,7 +84,7 @@ export class LamanBeritaComponent implements OnInit {
       this.getData();
       this.newsService.addViews(this.activeRoute.snapshot.paramMap.get('id')).subscribe(res => {
         console.log(res);
-      })
+      });
     } else {
       this.titleBeritaRoute = this.activeRoute.snapshot.paramMap.get('title');
       this.type = 'video';
@@ -99,8 +99,8 @@ export class LamanBeritaComponent implements OnInit {
 
   ngDoCheck() {
 
-    if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
-      if (this.username != atob(this.localStorage.getItem("gen_loginId"))) {
+    if (this.localStorage.getItem('gen_token') && this.localStorage.getItem('gen_loginId')) {
+      if (this.username != atob(this.localStorage.getItem('gen_loginId'))) {
         this.getProfile();
       }
     } else {
@@ -116,8 +116,8 @@ export class LamanBeritaComponent implements OnInit {
   }
 
   getProfile() {
-    if (this.localStorage.getItem("gen_token") && this.localStorage.getItem("gen_loginId")) {
-      this.authService.getProfile(atob(this.localStorage.getItem("gen_loginId"))).subscribe(res => {
+    if (this.localStorage.getItem('gen_token') && this.localStorage.getItem('gen_loginId')) {
+      this.authService.getProfile(atob(this.localStorage.getItem('gen_loginId'))).subscribe(res => {
         console.log(res.data);
         this.dataProfile = res.data;
         this.username = this.dataProfile.username;
@@ -128,9 +128,9 @@ export class LamanBeritaComponent implements OnInit {
     } else {
       this.profile = false;
       this.dataProfile = [];
-      this.username = "";
-      this.no_hp = "";
-      this.email = "";
+      this.username = '';
+      this.no_hp = '';
+      this.email = '';
     }
   }
 
@@ -171,36 +171,36 @@ export class LamanBeritaComponent implements OnInit {
   }
 
   getMainNews(param) {
-    let data = {
+    const data = {
       page: param,
       size: 10,
       sort: 'CreatedDate,DESC'
-    }
+    };
     this.homeService.getMainNews(data).subscribe(res => {
       this.mainNewsData = res.data;
       if (!this.dataValue) {
         this.dataValue = res.count;
       }
-    })
+    });
   }
 
   getLatestNews(param) {
-    let data = {
+    const data = {
       page: param,
       size: 10,
       sort: 'CreatedDate,DESC'
-    }
+    };
     this.homeService.getLatestNews(data).subscribe(res => {
       this.latestNewsData = res.data;
       if (!this.dataValueLatest) {
         this.dataValueLatest = res.count;
       }
-    })
+    });
   }
 
   submitComent() {
     this.submitting = true;
-    let data = {
+    const data = {
       description: this.inputValue,
       newsId: this.detailBerita.id,
       userId: this.dataProfile.id
@@ -215,8 +215,8 @@ export class LamanBeritaComponent implements OnInit {
 
   detailBeritaGo(id, title, image) {
     this.window.scroll(0, 0);
-    let titleDone = title.replace(/ /g, "-");
-    titleDone = titleDone.replace(/\//g, "-");
+    let titleDone = title.replace(/ /g, '-');
+    titleDone = titleDone.replace(/\//g, '-');
     this.router.navigate([`laman-berita/berita/${id}/${titleDone}/${image}`]);
     // this.getData();
   }
@@ -235,16 +235,8 @@ export class LamanBeritaComponent implements OnInit {
     this.getLatestNews(data - 1);
   }
 
-  follow(data) {
-    if (data == 'facebook') {
-      this.window.open(this.config.facebook, '_blank');
-    } else if (data == 'twitter') {
-      this.window.open(this.config.twitter, '_blank');
-    } else if (data == 'youtube') {
-      this.window.open(this.config.youtube, '_blank');
-    } else if (data == 'instagram') {
-      this.window.open(this.config.instagram, '_blank');
-    }
+  follow(sosmed: string) {
+    this.window.open(this.config[sosmed], '_blank');
   }
 
 }

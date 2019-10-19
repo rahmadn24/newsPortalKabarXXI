@@ -37,17 +37,18 @@
                             <div style="float:right;font-size: 20px;padding: 3px;"><i nz-icon sty nzType="eye" nzTheme="outline" style="position: absolute;padding: 5px 0px;
                 margin-left: -25px;"></i> {{views}}</div>
                             <hr>
+                            <ng-adsense></ng-adsense>
                             <div *ngIf="type == 'berita'" class="image-berita">
                                 <img style="width:100%" [src]="imageBerita" alt="">
                             </div>
                             <div *ngIf="type == 'video'" class="image-berita">
-                                <video style="width:100%" [src]="imageBerita" autoplay controls controlsList="nodownload">
-                </video>
+                                <video style="width:100%" [src]="imageBerita" autoplay controls controlsList="nodownload"></video>
                             </div>
                             <div class="pokok-berita">
                                 <div [innerHTML]="description"></div>
                             </div>
                             <hr>
+                            <ng-adsense></ng-adsense>
                             <div class="share-button">
                                 <span>Share To</span>
                                 <share-buttons [theme]="'circles-dark'" [include]="['facebook','twitter','whatsapp']" [show]="5" [showText]="true" [title]="'Kabar XXI'" [autoSetMeta]="true"></share-buttons>
@@ -122,14 +123,16 @@
                                     </div>
                                 </div>
                                 <pagination-controls id='main' (pageChange)="pageChangeMain($event)" maxSize="5"></pagination-controls>
+                                <ng-adsense></ng-adsense>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 side-laman-berita">
-                    <div class="advertiser-sider">
+                    <!-- <div class="advertiser-sider">
                         <img src="/assets/img/advertiser_sider.jpeg" alt="">
-                    </div>
+                    </div> -->
+                    <ng-adsense></ng-adsense>
                     <div class="content-1">
                         <div class="section-heading">
                             <h5>Berita Terbaru</h5>
@@ -144,8 +147,9 @@
                                 </div>
                             </div>
                         </div>
-                        <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="5"></pagination-controls>
+                        <pagination-controls id='latest' (pageChange)="pageChangeLatest($event)" maxSize="4"></pagination-controls>
                     </div>
+                    <ng-adsense></ng-adsense>
                 </div>
             </div>
         </div>
