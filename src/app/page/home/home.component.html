@@ -117,11 +117,11 @@
                     <pagination-controls id='main' (pageChange)="pageChangeMain($event)"></pagination-controls>
                 </div>
                 <div class="col-md-4">
-                    <ng-adsense></ng-adsense>
                     <div class="content-1">
                         <div class="section-heading">
                             <h5>Latest News</h5>
                         </div>
+                        <ng-adsense></ng-adsense>
                         <div class="fb-item" *ngIf="latestNewsData.length==0">
                             <div class="first-section-wrapper" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
                                 <div class="gravatar">

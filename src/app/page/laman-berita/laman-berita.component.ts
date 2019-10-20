@@ -57,7 +57,6 @@ export class LamanBeritaComponent implements OnInit {
     private router: Router,
     private homeService: HomeService,
     private newsService: NewsService,
-    private metaService: Meta,
     private titleService: Title,
     private readonly meta: MetaService
 
@@ -67,8 +66,9 @@ export class LamanBeritaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.meta.setTag('og:url', window.location.href);
+    this.meta.setTag('og:url', this.router.url);
     this.titleService.setTitle(this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
+    this.meta.setTag('og:title', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
     this.meta.setTag('description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
     this.meta.setTag('og:description', this.activeRoute.snapshot.paramMap.get('title').replace(/-/g, ' '));
 
